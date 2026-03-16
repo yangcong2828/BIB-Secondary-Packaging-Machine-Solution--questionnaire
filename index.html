@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VBIB Packaging Line - Customer Questionnaire</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>Customer Questionnaire</h1>
+      <p>Primary &amp; Secondary BIB (Bag in Bag) Packaging Line Solution</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+      <div class="progress-step active" data-step="1">
+        <span class="step-num">1</span>
+        <span class="step-label">Product Properties</span>
+      </div>
+      <div class="progress-step" data-step="2">
+        <span class="step-num">2</span>
+        <span class="step-label">Packaging Specs</span>
+      </div>
+      <div class="progress-step" data-step="3">
+        <span class="step-num">3</span>
+        <span class="step-label">Process Parameters</span>
+      </div>
+    </div>
+
+    <!-- Part 1: Product Properties -->
+    <div class="form-section active" id="step-1">
+      <h2 class="section-title">Product Properties</h2>
+      <p class="section-desc">Please provide the basic properties of your product.</p>
+
+      <div class="form-group">
+        <label>Product Description <span class="required">*</span></label>
+        <div class="hint">e.g. Free-flowing granular salt with good flowability</div>
+        <textarea id="productDescription" placeholder="Describe your product..." required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Average Particle Size <span class="required">*</span></label>
+        <div class="hint">e.g. 1-2 mm</div>
+        <input type="text" id="particleSize" placeholder="e.g. 1-2 mm" required>
+      </div>
+
+      <div class="form-group">
+        <label>Bulk Density (g/cm&sup3;) <span class="required">*</span></label>
+        <div class="hint">e.g. 0.8-1.2</div>
+        <input type="text" id="density" placeholder="e.g. 0.8-1.2" required>
+      </div>
+
+      <div class="form-group">
+        <label>Water Content <span class="required">*</span></label>
+        <div class="hint">e.g. &lt; 1%</div>
+        <input type="text" id="waterContent" placeholder="e.g. < 1%" required>
+      </div>
+
+      <div class="form-group">
+        <label>Corrosiveness <span class="required">*</span></label>
+        <div class="radio-group">
+          <label><input type="radio" name="corrosiveness" value="YES" required><span>YES</span></label>
+          <label><input type="radio" name="corrosiveness" value="NO"><span>NO</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part 2: Packaging Specifications -->
+    <div class="form-section" id="step-2">
+      <h2 class="section-title">Packaging Specifications</h2>
+      <p class="section-desc">Please specify the bag sizes and film specifications for both primary and secondary packaging.</p>
+
+      <!-- Primary Bag Specs -->
+      <div class="spec-table-wrapper">
+        <h3>Primary Bag Specifications</h3>
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th>Bag No.</th>
+              <th>Weight / Size</th>
+              <th>Roll Film / Wrapper</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bag-1</td>
+              <td><input type="text" id="pb1_weight" placeholder="e.g. 500g"></td>
+              <td><input type="text" id="pb1_film" placeholder="Film spec"></td>
+              <td><input type="text" id="pb1_notes" placeholder="e.g. Thickness 65 micro meter"></td>
+            </tr>
+            <tr>
+              <td>Bag-2</td>
+              <td><input type="text" id="pb2_weight" placeholder="e.g. 1000g"></td>
+              <td><input type="text" id="pb2_film" placeholder="Film spec"></td>
+              <td><input type="text" id="pb2_notes" placeholder="e.g. Thickness 65 micro meter"></td>
+            </tr>
+            <tr>
+              <td>Bag-3 <span class="optional-tag">(if applicable)</span></td>
+              <td><input type="text" id="pb3_weight" placeholder="e.g. 2000g"></td>
+              <td><input type="text" id="pb3_film" placeholder="Film spec or N/A"></td>
+              <td><input type="text" id="pb3_notes" placeholder="Thickness or N/A"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Secondary (Master) Bag Specs -->
+      <div class="spec-table-wrapper">
+        <h3>Secondary (Master) Bag Specifications</h3>
+        <table class="spec-table">
+          <thead>
+            <tr>
+              <th>Master Bag No.</th>
+              <th>Combination</th>
+              <th>Master Bag Size (L&times;W&times;H)</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Master Bag Size-1</td>
+              <td><input type="text" id="mb1_combination" placeholder="e.g. 500g x 50 pcs"></td>
+              <td><input type="text" id="mb1_size" placeholder="e.g. 400x300x200 mm"></td>
+              <td><input type="text" id="mb1_notes" placeholder="e.g. Thickness 120 micro meter"></td>
+            </tr>
+            <tr>
+              <td>Master Bag Size-2</td>
+              <td><input type="text" id="mb2_combination" placeholder="e.g. 1000g x 24 pcs"></td>
+              <td><input type="text" id="mb2_size" placeholder="Dimension"></td>
+              <td><input type="text" id="mb2_notes" placeholder="e.g. Thickness 120 micro meter"></td>
+            </tr>
+            <tr>
+              <td>Master Bag Size-3 <span class="optional-tag">(if applicable)</span></td>
+              <td><input type="text" id="mb3_combination" placeholder="e.g. 2000g x 12 pcs or N/A"></td>
+              <td><input type="text" id="mb3_size" placeholder="Dimension or N/A"></td>
+              <td><input type="text" id="mb3_notes" placeholder="Thickness or N/A"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Part 3: Production & Process Parameters -->
+    <div class="form-section" id="step-3">
+      <h2 class="section-title">Production &amp; Process Parameters</h2>
+      <p class="section-desc">Please provide the production process requirements and performance parameters.</p>
+
+      <div class="form-group">
+        <label>Packaging Process Description <span class="required">*</span></label>
+        <div class="hint">e.g. Primary Packaging by weighing &amp; filling &amp; sealing then secondary packaging (small bag in big bag) &amp; sealing</div>
+        <textarea id="packagingProcess" placeholder="e.g. Primary Packaging by weighing & filling & sealing then secondary packaging (small bag in big bag) & sealing" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Primary Packaging Speed (pouches/min/set)</label>
+        <div class="hint">e.g. 45-55</div>
+        <input type="text" id="primarySpeed" placeholder="e.g. 45-55">
+      </div>
+
+      <div class="form-group">
+        <label>Primary Metering / Weighing Accuracy</label>
+        <div class="hint">e.g. &plusmn;2% @2&sigma;</div>
+        <input type="text" id="weighingAccuracy" placeholder="e.g. ±2% @2σ">
+      </div>
+
+      <div class="form-group">
+        <label>Secondary Packaging Speed (pouches/min/set)</label>
+        <div class="hint">e.g. 90-110</div>
+        <input type="text" id="secondarySpeed" placeholder="e.g. 90-110">
+      </div>
+
+      <div class="form-group">
+        <label>Secondary Packaging / Counting Accuracy</label>
+        <div class="hint">e.g. 100%</div>
+        <input type="text" id="countingAccuracy" placeholder="e.g. 100%">
+      </div>
+
+      <div class="form-group">
+        <label>Sealing Type <span class="required">*</span></label>
+        <div class="radio-group">
+          <label><input type="radio" name="sealingType" value="Heat sealing" required><span>Heat sealing</span></label>
+          <label><input type="radio" name="sealingType" value="Stitching"><span>Stitching</span></label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Stacking Patterns <span class="required">*</span></label>
+        <div class="hint">How primary bags stack inside the secondary bag</div>
+        <div class="radio-group">
+          <label><input type="radio" name="stackingPattern" value="Side to Side" required><span>Side to Side</span></label>
+          <label><input type="radio" name="stackingPattern" value="Top to Top"><span>Top to Top</span></label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Palletizing Requirement</label>
+        <div class="hint">Leave blank or enter "-" if not required</div>
+        <textarea id="palletizing" placeholder="Describe palletizing requirements, or enter - if not required"></textarea>
+      </div>
+    </div>
+
+    <!-- Success Page -->
+    <div class="success-page" id="success-page">
+      <div class="success-icon">&#10003;</div>
+      <h2>Questionnaire Submitted Successfully!</h2>
+      <p>Thank you for completing the questionnaire. Your response has been recorded.</p>
+      <button class="btn btn-primary" onclick="downloadJSON()">Download Response (JSON)</button>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="form-actions" id="form-actions">
+      <button class="btn btn-secondary" id="btn-prev" onclick="prevStep()" disabled>&#8592; Previous</button>
+      <button class="btn btn-primary" id="btn-next" onclick="nextStep()">Next &#8594;</button>
+      <button class="btn btn-success" id="btn-submit" onclick="submitForm()" style="display:none">Submit &#10003;</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
