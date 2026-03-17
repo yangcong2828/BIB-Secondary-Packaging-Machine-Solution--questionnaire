@@ -5,6 +5,7 @@ body {
   background: #f0f4f8;
   color: #1a2332;
   line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
 }
 
 .container {
@@ -113,14 +114,14 @@ body {
 .form-group {
   margin-bottom: 20px;
 }
-.form-group label {
+.form-group > label:first-child {
   display: block;
   font-weight: 600;
   font-size: 14px;
   margin-bottom: 6px;
   color: #334155;
 }
-.form-group label .required { color: #dc2626; margin-left: 2px; }
+.form-group > label:first-child .required { color: #dc2626; margin-left: 2px; }
 .form-group .hint {
   font-size: 12px;
   color: #94a3b8;
@@ -139,6 +140,8 @@ textarea {
   font-family: inherit;
   transition: border-color 0.2s, box-shadow 0.2s;
   background: #fff;
+  -webkit-appearance: none;
+  appearance: none;
 }
 input:focus, select:focus, textarea:focus {
   outline: none;
@@ -163,6 +166,7 @@ textarea { resize: vertical; min-height: 80px; }
   border: 1px solid #d1d5db;
   border-radius: 8px;
   transition: all 0.2s;
+  font-size: 14px;
 }
 .radio-group label:hover, .checkbox-group label:hover {
   border-color: #2d5a8e;
@@ -176,7 +180,19 @@ textarea { resize: vertical; min-height: 80px; }
   background: #eff6ff;
 }
 
-/* Spec Tables */
+/* Vertical radio group for long options */
+.radio-group-vertical {
+  flex-direction: column;
+  gap: 10px;
+}
+.radio-group-vertical label {
+  width: 100%;
+}
+
+/* Spec Tables - Desktop */
+.desktop-table { display: table; }
+.mobile-cards { display: none; }
+
 .spec-table-wrapper {
   margin-bottom: 24px;
 }
@@ -211,7 +227,7 @@ textarea { resize: vertical; min-height: 80px; }
   font-weight: 600;
   color: #334155;
   white-space: nowrap;
-  width: 140px;
+  width: 100px;
 }
 .spec-table input {
   width: 100%;
@@ -225,11 +241,54 @@ textarea { resize: vertical; min-height: 80px; }
   border-color: #2d5a8e;
   box-shadow: 0 0 0 2px rgba(45, 90, 142, 0.1);
 }
-.spec-table .optional-tag {
+.spec-table .optional-tag,
+.mobile-cards .optional-tag {
   font-size: 11px;
   color: #94a3b8;
   font-weight: 400;
   font-style: italic;
+}
+
+/* Mobile card view for tables */
+.card-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  background: #fafbfc;
+}
+.card-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a365d;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.card-field {
+  margin-bottom: 8px;
+}
+.card-label {
+  display: block;
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.card-field input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+  -webkit-appearance: none;
+}
+.card-field input:focus {
+  outline: none;
+  border-color: #2d5a8e;
+  box-shadow: 0 0 0 2px rgba(45, 90, 142, 0.1);
 }
 
 /* Buttons */
@@ -249,6 +308,7 @@ textarea { resize: vertical; min-height: 80px; }
   cursor: pointer;
   border: none;
   transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
 }
 .btn-primary {
   background: #2d5a8e;
@@ -372,15 +432,114 @@ textarea { resize: vertical; min-height: 80px; }
 }
 .import-area input[type="file"] { display: none; }
 
-/* Responsive */
-@media (max-width: 640px) {
-  .container { padding: 10px; }
-  .form-section { padding: 20px 16px; }
-  .form-actions { padding: 16px; }
+/* ============================
+   Mobile Responsive
+   ============================ */
+@media (max-width: 768px) {
+  .container {
+    padding: 8px;
+  }
+
+  .header {
+    padding: 24px 16px 16px;
+    border-radius: 10px 10px 0 0;
+  }
   .header h1 { font-size: 18px; }
-  .progress-bar { padding: 16px; }
-  .progress-step .step-label { font-size: 11px; }
-  .spec-table { font-size: 12px; }
+  .header p { font-size: 12px; }
+
+  /* Progress bar */
+  .progress-bar {
+    padding: 14px 12px;
+    gap: 4px;
+  }
+  .progress-step .step-num {
+    width: 28px; height: 28px;
+    font-size: 12px;
+  }
+  .progress-step .step-label {
+    font-size: 10px;
+  }
+  .progress-step:not(:last-child)::after {
+    top: 14px;
+    left: calc(50% + 20px);
+    width: calc(100% - 40px);
+  }
+
+  /* Form sections */
+  .form-section {
+    padding: 20px 16px;
+  }
+  .section-title { font-size: 16px; }
+  .section-desc { font-size: 12px; margin-bottom: 18px; }
+
+  /* Form groups */
+  .form-group { margin-bottom: 16px; }
+  .form-group > label:first-child { font-size: 13px; }
+  .form-group .hint { font-size: 11px; }
+
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    padding: 10px 12px;
+    font-size: 16px; /* Prevent iOS zoom on focus */
+    border-radius: 8px;
+  }
+  textarea { min-height: 70px; }
+
+  /* Radio groups */
+  .radio-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .radio-group label {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  .radio-group-vertical {
+    flex-direction: column;
+  }
+
+  /* Table → Card view on mobile */
+  .desktop-table { display: none !important; }
+  .mobile-cards { display: block !important; }
+
+  /* Buttons */
+  .form-actions {
+    padding: 16px;
+    border-radius: 0 0 10px 10px;
+  }
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  /* Success page */
+  .success-page { padding: 40px 20px; }
+  .success-page h2 { font-size: 18px; }
+  .success-page p { font-size: 13px; }
+
+  /* Admin */
+  .admin-header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px 16px;
+  }
+  .admin-header h1 { font-size: 18px; }
+  .admin-card { padding: 16px; }
   .admin-card .data-grid { grid-template-columns: 1fr; }
-  .radio-group { flex-direction: column; gap: 8px; }
+  .admin-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .admin-actions .btn { width: 100%; text-align: center; }
+}
+
+/* Small phone (< 375px) */
+@media (max-width: 375px) {
+  .container { padding: 4px; }
+  .header h1 { font-size: 16px; }
+  .progress-step .step-label { font-size: 9px; }
+  .form-section { padding: 16px 12px; }
+  .btn { padding: 10px 16px; font-size: 13px; }
 }

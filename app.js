@@ -7,7 +7,31 @@ const SUBMISSIONS_KEY = 'vbib_submissions';
 document.addEventListener('DOMContentLoaded', () => {
   loadDraft();
   updateUI();
+  syncMobileDesktopInputs();
 });
+
+// Sync mobile <-> desktop duplicate inputs (for table/card views)
+function syncMobileDesktopInputs() {
+  const pairs = [
+    // Primary bags
+    ['pb1_weight', 'pb1_weight_m'], ['pb1_film', 'pb1_film_m'], ['pb1_notes', 'pb1_notes_m'],
+    ['pb2_weight', 'pb2_weight_m'], ['pb2_film', 'pb2_film_m'], ['pb2_notes', 'pb2_notes_m'],
+    ['pb3_weight', 'pb3_weight_m'], ['pb3_film', 'pb3_film_m'], ['pb3_notes', 'pb3_notes_m'],
+    // Master bags
+    ['mb1_combination', 'mb1_combination_m'], ['mb1_size', 'mb1_size_m'], ['mb1_notes', 'mb1_notes_m'],
+    ['mb2_combination', 'mb2_combination_m'], ['mb2_size', 'mb2_size_m'], ['mb2_notes', 'mb2_notes_m'],
+    ['mb3_combination', 'mb3_combination_m'], ['mb3_size', 'mb3_size_m'], ['mb3_notes', 'mb3_notes_m'],
+  ];
+
+  pairs.forEach(([desktopId, mobileId]) => {
+    const desktop = document.getElementById(desktopId);
+    const mobile = document.getElementById(mobileId);
+    if (!desktop || !mobile) return;
+
+    desktop.addEventListener('input', () => { mobile.value = desktop.value; });
+    mobile.addEventListener('input', () => { desktop.value = mobile.value; });
+  });
+}
 
 // Collect all form data
 function collectData() {
@@ -23,28 +47,39 @@ function collectData() {
     // Part 2: Packaging Specifications
     packagingSpecs: {
       primaryBags: [
-        { bag: 'Bag-1', weight: val('pb1_weight'), film: val('pb1_film'), notes: val('pb1_notes') },
-        { bag: 'Bag-2', weight: val('pb2_weight'), film: val('pb2_film'), notes: val('pb2_notes') },
-        { bag: 'Bag-3', weight: val('pb3_weight'), film: val('pb3_film'), notes: val('pb3_notes') }
+        { bag: 'Bag-1', weight: valSync('pb1_weight'), film: valSync('pb1_film'), notes: valSync('pb1_notes') },
+        { bag: 'Bag-2', weight: valSync('pb2_weight'), film: valSync('pb2_film'), notes: valSync('pb2_notes') },
+        { bag: 'Bag-3', weight: valSync('pb3_weight'), film: valSync('pb3_film'), notes: valSync('pb3_notes') }
       ],
       masterBags: [
-        { bag: 'Master Bag Size-1', combination: val('mb1_combination'), size: val('mb1_size'), notes: val('mb1_notes') },
-        { bag: 'Master Bag Size-2', combination: val('mb2_combination'), size: val('mb2_size'), notes: val('mb2_notes') },
-        { bag: 'Master Bag Size-3', combination: val('mb3_combination'), size: val('mb3_size'), notes: val('mb3_notes') }
+        { bag: 'Bag-1', combination: valSync('mb1_combination'), size: valSync('mb1_size'), notes: valSync('mb1_notes') },
+        { bag: 'Bag-2', combination: valSync('mb2_combination'), size: valSync('mb2_size'), notes: valSync('mb2_notes') },
+        { bag: 'Bag-3', combination: valSync('mb3_combination'), size: valSync('mb3_size'), notes: valSync('mb3_notes') }
       ]
     },
     // Part 3: Production & Process Parameters
     processParameters: {
       packagingProcess: val('packagingProcess'),
-      secondarySpeed: val('secondarySpeed'),
+      solutionDescription: val('solutionDescription'),
       primarySpeed: val('primarySpeed'),
       weighingAccuracy: val('weighingAccuracy'),
+      secondarySpeed: val('secondarySpeed'),
       countingAccuracy: val('countingAccuracy'),
       sealingType: getRadioValue('sealingType'),
       stackingPattern: getRadioValue('stackingPattern'),
+      machineMaterial: getRadioValue('machineMaterial'),
       palletizing: val('palletizing')
     }
   };
+}
+
+// Get value, preferring desktop but falling back to mobile
+function valSync(id) {
+  const desktop = document.getElementById(id);
+  const mobile = document.getElementById(id + '_m');
+  const dVal = desktop ? desktop.value : '';
+  const mVal = mobile ? mobile.value : '';
+  return dVal || mVal;
 }
 
 function val(id) {
@@ -80,6 +115,10 @@ function restoreData(data) {
         setVal(`pb${n}_weight`, b.weight);
         setVal(`pb${n}_film`, b.film);
         setVal(`pb${n}_notes`, b.notes);
+        // Also set mobile inputs
+        setVal(`pb${n}_weight_m`, b.weight);
+        setVal(`pb${n}_film_m`, b.film);
+        setVal(`pb${n}_notes_m`, b.notes);
       });
     }
     if (s.masterBags) {
@@ -88,6 +127,9 @@ function restoreData(data) {
         setVal(`mb${n}_combination`, b.combination);
         setVal(`mb${n}_size`, b.size);
         setVal(`mb${n}_notes`, b.notes);
+        setVal(`mb${n}_combination_m`, b.combination);
+        setVal(`mb${n}_size_m`, b.size);
+        setVal(`mb${n}_notes_m`, b.notes);
       });
     }
   }
@@ -96,12 +138,14 @@ function restoreData(data) {
   if (data.processParameters) {
     const pp = data.processParameters;
     setVal('packagingProcess', pp.packagingProcess);
-    setVal('secondarySpeed', pp.secondarySpeed);
+    setVal('solutionDescription', pp.solutionDescription);
     setVal('primarySpeed', pp.primarySpeed);
     setVal('weighingAccuracy', pp.weighingAccuracy);
+    setVal('secondarySpeed', pp.secondarySpeed);
     setVal('countingAccuracy', pp.countingAccuracy);
     setRadio('sealingType', pp.sealingType);
     setRadio('stackingPattern', pp.stackingPattern);
+    setRadio('machineMaterial', pp.machineMaterial);
     setVal('palletizing', pp.palletizing);
   }
 }
@@ -255,7 +299,7 @@ function downloadJSON() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `VBIB_Questionnaire_${data.id}.json`;
+  a.download = `BIB_Questionnaire_${data.id}.json`;
   a.click();
   URL.revokeObjectURL(url);
 }

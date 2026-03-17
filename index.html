@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VBIB Packaging Line - Customer Questionnaire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>BIB Packaging Line - Customer Questionnaire</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -42,7 +42,7 @@
       </div>
 
       <div class="form-group">
-        <label>Average Particle Size <span class="required">*</span></label>
+        <label>Particle Size Distribution / Material Size (mm) <span class="required">*</span></label>
         <div class="hint">e.g. 1-2 mm</div>
         <input type="text" id="particleSize" placeholder="e.g. 1-2 mm" required>
       </div>
@@ -76,7 +76,8 @@
       <!-- Primary Bag Specs -->
       <div class="spec-table-wrapper">
         <h3>Primary Bag Specifications</h3>
-        <table class="spec-table">
+        <!-- Desktop table -->
+        <table class="spec-table desktop-table">
           <thead>
             <tr>
               <th>Bag No.</th>
@@ -106,41 +107,84 @@
             </tr>
           </tbody>
         </table>
+        <!-- Mobile card view -->
+        <div class="mobile-cards">
+          <div class="card-item">
+            <div class="card-title">Bag-1</div>
+            <div class="card-field"><span class="card-label">Weight / Size</span><input type="text" id="pb1_weight_m" placeholder="e.g. 500g"></div>
+            <div class="card-field"><span class="card-label">Roll Film / Wrapper</span><input type="text" id="pb1_film_m" placeholder="Film spec"></div>
+            <div class="card-field"><span class="card-label">Notes</span><input type="text" id="pb1_notes_m" placeholder="e.g. Thickness 65 micro meter"></div>
+          </div>
+          <div class="card-item">
+            <div class="card-title">Bag-2</div>
+            <div class="card-field"><span class="card-label">Weight / Size</span><input type="text" id="pb2_weight_m" placeholder="e.g. 1000g"></div>
+            <div class="card-field"><span class="card-label">Roll Film / Wrapper</span><input type="text" id="pb2_film_m" placeholder="Film spec"></div>
+            <div class="card-field"><span class="card-label">Notes</span><input type="text" id="pb2_notes_m" placeholder="e.g. Thickness 65 micro meter"></div>
+          </div>
+          <div class="card-item">
+            <div class="card-title">Bag-3 <span class="optional-tag">(if applicable)</span></div>
+            <div class="card-field"><span class="card-label">Weight / Size</span><input type="text" id="pb3_weight_m" placeholder="e.g. 2000g"></div>
+            <div class="card-field"><span class="card-label">Roll Film / Wrapper</span><input type="text" id="pb3_film_m" placeholder="Film spec or N/A"></div>
+            <div class="card-field"><span class="card-label">Notes</span><input type="text" id="pb3_notes_m" placeholder="Thickness or N/A"></div>
+          </div>
+        </div>
       </div>
 
       <!-- Secondary (Master) Bag Specs -->
       <div class="spec-table-wrapper">
         <h3>Secondary (Master) Bag Specifications</h3>
-        <table class="spec-table">
+        <!-- Desktop table -->
+        <table class="spec-table desktop-table">
           <thead>
             <tr>
-              <th>Master Bag No.</th>
+              <th>Bag No.</th>
               <th>Combination</th>
-              <th>Master Bag Size (L&times;W&times;H)</th>
+              <th>Bag Size (L&times;W&times;H)</th>
               <th>Notes</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Master Bag Size-1</td>
-              <td><input type="text" id="mb1_combination" placeholder="e.g. 500g x 50 pcs"></td>
-              <td><input type="text" id="mb1_size" placeholder="e.g. 400x300x200 mm"></td>
+              <td>Bag-1</td>
+              <td><input type="text" id="mb1_combination" placeholder="e.g. 500g × 50 pcs"></td>
+              <td><input type="text" id="mb1_size" placeholder="e.g. 400×300×200 mm"></td>
               <td><input type="text" id="mb1_notes" placeholder="e.g. Thickness 120 micro meter"></td>
             </tr>
             <tr>
-              <td>Master Bag Size-2</td>
-              <td><input type="text" id="mb2_combination" placeholder="e.g. 1000g x 24 pcs"></td>
+              <td>Bag-2</td>
+              <td><input type="text" id="mb2_combination" placeholder="e.g. 1000g × 24 pcs"></td>
               <td><input type="text" id="mb2_size" placeholder="Dimension"></td>
               <td><input type="text" id="mb2_notes" placeholder="e.g. Thickness 120 micro meter"></td>
             </tr>
             <tr>
-              <td>Master Bag Size-3 <span class="optional-tag">(if applicable)</span></td>
-              <td><input type="text" id="mb3_combination" placeholder="e.g. 2000g x 12 pcs or N/A"></td>
+              <td>Bag-3 <span class="optional-tag">(if applicable)</span></td>
+              <td><input type="text" id="mb3_combination" placeholder="e.g. 2000g × 12 pcs or N/A"></td>
               <td><input type="text" id="mb3_size" placeholder="Dimension or N/A"></td>
               <td><input type="text" id="mb3_notes" placeholder="Thickness or N/A"></td>
             </tr>
           </tbody>
         </table>
+        <!-- Mobile card view -->
+        <div class="mobile-cards">
+          <div class="card-item">
+            <div class="card-title">Bag-1</div>
+            <div class="card-field"><span class="card-label">Combination</span><input type="text" id="mb1_combination_m" placeholder="e.g. 500g × 50 pcs"></div>
+            <div class="card-field"><span class="card-label">Bag Size (L×W×H)</span><input type="text" id="mb1_size_m" placeholder="e.g. 400×300×200 mm"></div>
+            <div class="card-field"><span class="card-label">Notes</span><input type="text" id="mb1_notes_m" placeholder="e.g. Thickness 120 micro meter"></div>
+          </div>
+          <div class="card-item">
+            <div class="card-title">Bag-2</div>
+            <div class="card-field"><span class="card-label">Combination</span><input type="text" id="mb2_combination_m" placeholder="e.g. 1000g × 24 pcs"></div>
+            <div class="card-field"><span class="card-label">Bag Size (L×W×H)</span><input type="text" id="mb2_size_m" placeholder="Dimension"></div>
+            <div class="card-field"><span class="card-label">Notes</span><input type="text" id="mb2_notes_m" placeholder="e.g. Thickness 120 micro meter"></div>
+          </div>
+          <div class="card-item">
+            <div class="card-title">Bag-3 <span class="optional-tag">(if applicable)</span></div>
+            <div class="card-field"><span class="card-label">Combination</span><input type="text" id="mb3_combination_m" placeholder="e.g. 2000g × 12 pcs or N/A"></div>
+            <div class="card-field"><span class="card-label">Bag Size (L×W×H)</span><input type="text" id="mb3_size_m" placeholder="Dimension or N/A"></div>
+            <div class="card-field"><span class="card-label">Notes</span><input type="text" id="mb3_notes_m" placeholder="Thickness or N/A"></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -153,6 +197,12 @@
         <label>Packaging Process Description <span class="required">*</span></label>
         <div class="hint">e.g. Primary Packaging by weighing &amp; filling &amp; sealing then secondary packaging (small bag in big bag) &amp; sealing</div>
         <textarea id="packagingProcess" placeholder="e.g. Primary Packaging by weighing & filling & sealing then secondary packaging (small bag in big bag) & sealing" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Solution Description <span class="required">*</span></label>
+        <div class="hint">What are the pain points you are currently facing? Briefly describe what equipment you need us to provide, what functions to achieve, or what problems to solve.</div>
+        <textarea id="solutionDescription" placeholder="Please describe your requirements, pain points, desired equipment and functions..." required></textarea>
       </div>
 
       <div class="form-group">
@@ -182,7 +232,7 @@
       <div class="form-group">
         <label>Sealing Type <span class="required">*</span></label>
         <div class="radio-group">
-          <label><input type="radio" name="sealingType" value="Heat sealing" required><span>Heat sealing</span></label>
+          <label><input type="radio" name="sealingType" value="Heat Sealing" required><span>Heat Sealing</span></label>
           <label><input type="radio" name="sealingType" value="Stitching"><span>Stitching</span></label>
         </div>
       </div>
@@ -193,6 +243,16 @@
         <div class="radio-group">
           <label><input type="radio" name="stackingPattern" value="Side to Side" required><span>Side to Side</span></label>
           <label><input type="radio" name="stackingPattern" value="Top to Top"><span>Top to Top</span></label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Machine Material Requirement <span class="required">*</span></label>
+        <div class="hint">Please select the material standard for the machine</div>
+        <div class="radio-group radio-group-vertical">
+          <label><input type="radio" name="machineMaterial" value="Contact parts SS304, frame carbon steel with powder coating" required><span>Contact parts SS304, frame carbon steel with powder coating</span></label>
+          <label><input type="radio" name="machineMaterial" value="Full SS304 stainless steel"><span>Full SS304 stainless steel</span></label>
+          <label><input type="radio" name="machineMaterial" value="Contact parts SS316, frame SS304 stainless steel"><span>Contact parts SS316, frame SS304 stainless steel</span></label>
         </div>
       </div>
 
