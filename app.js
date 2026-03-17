@@ -59,7 +59,6 @@ function collectData() {
     },
     // Part 3: Production & Process Parameters
     processParameters: {
-      packagingProcess: val('packagingProcess'),
       solutionDescription: val('solutionDescription'),
       primarySpeed: val('primarySpeed'),
       weighingAccuracy: val('weighingAccuracy'),
@@ -137,7 +136,6 @@ function restoreData(data) {
   // Part 3
   if (data.processParameters) {
     const pp = data.processParameters;
-    setVal('packagingProcess', pp.packagingProcess);
     setVal('solutionDescription', pp.solutionDescription);
     setVal('primarySpeed', pp.primarySpeed);
     setVal('weighingAccuracy', pp.weighingAccuracy);
