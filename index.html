@@ -4,9 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
-<meta name="description" content="Bag-in-Bag (BIB) secondary packaging line questionnaire — tell us your product and packs, get a preliminary line proposal.">
-<title>BIB Line Questionnaire v2 | 袋中袋产线需求问卷 · 景 (Leo)</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Bag-in-Bag (BIB) secondary packaging line questionnaire — tell us your material and bags, get a preliminary line proposal.">
+<title>BIB Line Questionnaire v3 | 袋中袋产线需求问卷 · 景 (Leo)</title>
+<!-- Type rule: Chinese SimSun, English and other languages Arial. SimSun ships with Windows only;
+     Noto Serif SC is the open Song face used where SimSun is missing (downloaded only for CJK glyphs). -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -23,15 +25,13 @@
     --accent-dim: #ff6b1a40;
     --accent-glow: #ff6b1a20;
     --accent-soft: #ff6b1a60;
-    --success: #4ade80;
     --danger: #f87171;
-    --sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-    --narrow: 'Archivo Narrow', 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-    --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+    --font: Arial, 'Helvetica Neue', Helvetica, SimSun, '宋体', 'Noto Serif SC', 'Songti SC', STSong, serif;
   }
 
   body {
-    font-family: var(--sans);
+    font-family: var(--font);
+    font-variant-numeric: tabular-nums;
     background: var(--bg-primary);
     color: var(--text-primary);
     min-height: 100vh;
@@ -88,16 +88,9 @@
     flex-shrink: 0;
   }
   .logo-mark::before { content: ''; position: absolute; inset: 4px; border: 1px solid var(--accent-dim); }
-  .logo-mark span { font-weight: 900; font-size: 20px; color: var(--accent); letter-spacing: -0.02em; }
-  .brand-text h1 {
-    font-family: var(--narrow);
-    font-weight: 700;
-    font-size: 18px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
+  .logo-mark span { font-weight: 700; font-size: 22px; color: var(--accent); }
+  .brand-text h1 { font-weight: 700; font-size: 17px; letter-spacing: 0.08em; text-transform: uppercase; }
   .brand-text p {
-    font-family: var(--mono);
     font-size: 11px;
     color: var(--text-dim);
     letter-spacing: 0.1em;
@@ -113,10 +106,10 @@
     background: transparent;
     border: none;
     color: var(--text-secondary);
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     cursor: pointer;
     white-space: nowrap;
     transition: all 0.2s;
@@ -133,17 +126,16 @@
     margin-bottom: 32px;
   }
   .title-main h2 {
-    font-weight: 900;
+    font-weight: 700;
     font-size: clamp(34px, 5.5vw, 52px);
-    line-height: 0.98;
-    letter-spacing: -0.03em;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
     margin-bottom: 14px;
   }
   .title-main h2 .accent { color: var(--accent); font-style: italic; }
   .title-main p { color: var(--text-secondary); font-size: 15px; max-width: 600px; }
   .title-meta {
     text-align: right;
-    font-family: var(--mono);
     font-size: 11px;
     color: var(--text-dim);
     letter-spacing: 0.1em;
@@ -151,16 +143,10 @@
     text-transform: uppercase;
     white-space: nowrap;
   }
-  .title-meta .version { color: var(--accent); font-weight: 600; }
+  .title-meta .version { color: var(--accent); font-weight: 700; }
 
   /* Step rail */
-  .steps {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-    margin-bottom: 16px;
-  }
+  .steps { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 16px; }
   .steps button {
     width: 100%;
     text-align: left;
@@ -172,13 +158,12 @@
     cursor: default;
     font: inherit;
   }
-  .steps .n { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; }
+  .steps .n { display: block; font-size: 10px; letter-spacing: 0.1em; }
   .steps .t {
     display: block;
-    font-family: var(--narrow);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 12px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden;
@@ -190,12 +175,7 @@
   .steps button[aria-current="step"] .n { color: var(--accent); }
 
   /* Panel */
-  .panel {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    padding: 32px;
-    position: relative;
-  }
+  .panel { background: var(--bg-secondary); border: 1px solid var(--border); padding: 32px; position: relative; }
   .panel::before, .panel::after { content: ''; position: absolute; width: 12px; height: 12px; }
   .panel::before { top: -1px; left: -1px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
   .panel::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
@@ -209,13 +189,12 @@
     margin-bottom: 28px;
     border-bottom: 1px dashed var(--border);
   }
-  .section-header h3 { font-weight: 800; font-size: 22px; letter-spacing: -0.01em; outline: none; }
-  .section-num { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.1em; white-space: nowrap; }
+  .section-header h3 { font-weight: 700; font-size: 22px; outline: none; }
+  .section-num { font-size: 10px; color: var(--accent); letter-spacing: 0.1em; white-space: nowrap; }
   .sub-header {
-    font-family: var(--narrow);
     font-weight: 700;
     font-size: 12px;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--text-secondary);
     margin: 36px 0 16px;
@@ -231,10 +210,9 @@
   .field:last-child { margin-bottom: 0; }
   .label, .field > legend {
     display: block;
-    font-family: var(--narrow);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 12px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--text-primary);
     margin-bottom: 8px;
@@ -257,7 +235,7 @@
     background: var(--bg-primary);
     border: 1px solid var(--border);
     color: var(--text-primary);
-    font-family: var(--sans);
+    font-family: var(--font);
     font-size: 15px;
     padding: 11px 12px;
     border-radius: 0;
@@ -266,32 +244,22 @@
     appearance: none;
   }
   textarea { min-height: 96px; resize: vertical; line-height: 1.5; }
-  select {
-    background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%), linear-gradient(135deg, var(--accent) 50%, transparent 50%);
-    background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%;
-    background-size: 5px 5px;
-    background-repeat: no-repeat;
-    padding-right: 32px;
-  }
   ::placeholder { color: var(--text-dim); opacity: 1; }
   input:hover, select:hover, textarea:hover { border-color: var(--border-bright); }
   input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
   .invalid input, .invalid select, .invalid textarea { border-color: var(--danger); }
 
   .unit-input { position: relative; }
-  .unit-input input { padding-right: 52px; font-family: var(--mono); }
+  .unit-input input { padding-right: 64px; }
   .unit-input .unit {
     position: absolute;
     right: 12px; top: 50%;
     transform: translateY(-50%);
-    font-family: var(--mono);
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--accent);
     pointer-events: none;
   }
-  .combo { display: grid; grid-template-columns: 1fr 150px; }
-  .combo input { border-right: none; font-family: var(--mono); }
 
   /* Chips (radio / checkbox) */
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -312,6 +280,8 @@
   .chip input[type="checkbox"]:checked + span::before { content: '✓ '; color: var(--accent); }
   .chip input:focus-visible + span, .card input:focus-visible + .card-body { outline: 2px solid var(--accent); outline-offset: 2px; }
   .invalid .chip span, .invalid .card-body { border-color: var(--danger); }
+  .chip.wide { display: block; }
+  .chip.wide span { border-style: dashed; line-height: 1.45; }
 
   /* Selector cards */
   .cards { display: grid; gap: 8px; }
@@ -331,12 +301,12 @@
   .card:hover .card-body { border-color: var(--border-bright); }
   .card input:checked + .card-body { border-color: var(--accent); background: var(--accent-glow); box-shadow: inset 0 0 0 1px var(--accent-dim); }
   .card .nm { font-weight: 700; font-size: 15px; }
-  .card .mt { font-family: var(--mono); font-size: 11px; color: var(--text-secondary); letter-spacing: 0.02em; }
+  .card .mt { font-size: 12px; color: var(--text-secondary); }
   .card input:checked + .card-body .mt { color: var(--accent); }
   .card .badge {
     align-self: flex-start;
-    font-family: var(--mono);
     font-size: 10px;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #000;
@@ -355,43 +325,43 @@
   .d-seal { fill: var(--accent-dim); stroke: var(--accent-soft); stroke-width: 1; }
   .d-bag { fill: none; stroke: var(--text-dim); stroke-width: 1; stroke-dasharray: 4 3; }
   .d-dim { stroke: var(--text-secondary); stroke-width: 1; fill: none; }
-  .d-txt { fill: var(--accent); font-family: var(--mono); font-size: 11px; font-weight: 600; }
+  .d-txt { fill: var(--accent); font-family: var(--font); font-size: 12px; font-weight: 700; }
 
-  /* Pouch variants */
-  .variant {
-    border: 1px solid var(--border);
-    background: rgba(10, 14, 20, 0.5);
-    padding: 18px;
-    margin-bottom: 12px;
-  }
+  /* Pouch-size cards */
+  .variant { border: 1px solid var(--border); background: rgba(10, 14, 20, 0.5); padding: 18px; margin-bottom: 12px; }
   .variant-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-  .variant-head .tag { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; }
-  .variant .row + .row { margin-top: 12px; }
+  .variant-head .tag { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; }
+  .variant .vsub {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin: 18px 0 10px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border);
+  }
+  .variant .vsub.first { margin-top: 0; padding-top: 0; border-top: none; }
+  .variant .row + .row, .variant .row + .field, .variant .field + .row { margin-top: 12px; }
   .variant .field { margin-bottom: 0; }
   .variant .label { font-size: 11px; color: var(--text-secondary); }
+  .variant .hint { font-size: 12px; }
   .preview {
     margin-top: 14px;
     padding-top: 12px;
     border-top: 1px dashed var(--border);
-    font-family: var(--mono);
     font-size: 12px;
     color: var(--text-secondary);
     display: flex;
     flex-wrap: wrap;
     gap: 4px 16px;
   }
-  .preview b { color: var(--accent); font-weight: 600; }
+  .preview b { color: var(--accent); }
   .preview:empty { display: none; }
 
-  .match {
-    margin-top: 28px;
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    padding: 14px 16px;
-    background: var(--bg-primary);
-  }
-  .match .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
-  .match .model { font-weight: 800; font-size: 18px; color: var(--accent); margin: 2px 0; letter-spacing: 0.01em; }
+  .match { margin-top: 28px; border: 1px solid var(--border); border-left: 3px solid var(--accent); padding: 14px 16px; background: var(--bg-primary); }
+  .match .k { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+  .match .model { font-weight: 700; font-size: 18px; color: var(--accent); margin: 2px 0; }
   .match .v { font-size: 13px; color: var(--text-secondary); }
   .match .note { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
 
@@ -402,10 +372,10 @@
     justify-content: center;
     gap: 8px;
     padding: 12px 22px;
-    font-family: var(--narrow);
+    font-family: var(--font);
     font-weight: 700;
     font-size: 13px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     border: 1px solid var(--border-bright);
     background: transparent;
@@ -424,8 +394,9 @@
     background: none;
     border: none;
     color: var(--text-secondary);
-    font-family: var(--mono);
+    font-family: var(--font);
     font-size: 11px;
+    font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
@@ -438,9 +409,8 @@
     border: 1px dashed var(--border-bright);
     background: none;
     color: var(--text-secondary);
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.06em;
+    font-family: var(--font);
+    font-size: 13px;
     cursor: pointer;
     transition: all 0.2s;
   }
@@ -458,14 +428,14 @@
     padding: 14px 0 20px;
     background: linear-gradient(180deg, rgba(10,14,20,0) 0%, rgba(10,14,20,0.94) 30%);
   }
-  .nav .status { flex: 1; font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.04em; text-align: center; }
+  .nav .status { flex: 1; font-size: 11px; color: var(--text-dim); text-align: center; }
   .nav .btn-primary { min-width: 200px; }
 
   /* Review */
   .review section { border-top: 1px solid var(--border); padding: 16px 0; }
   .review section:first-child { border-top: none; padding-top: 0; }
   .review .rh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-  .review .rh h4 { font-family: var(--narrow); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); }
+  .review .rh h4 { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
   .review dl { display: grid; grid-template-columns: minmax(140px, 34%) 1fr; gap: 6px 16px; font-size: 14px; }
   .review dt { color: var(--text-secondary); }
   .review dd { color: var(--text-primary); overflow-wrap: anywhere; white-space: pre-line; }
@@ -481,23 +451,23 @@
     display: flex; align-items: center; justify-content: center;
     color: var(--accent);
     font-size: 28px;
-    font-weight: 900;
+    font-weight: 700;
   }
-  .done-view h3 { font-weight: 900; font-size: 32px; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .done-view h3 { font-weight: 700; font-size: 32px; margin-bottom: 10px; }
   .done-view p { color: var(--text-secondary); max-width: 480px; margin: 0 auto; }
-  .done-ref { font-family: var(--mono); font-size: 13px; color: var(--text-secondary); margin: 18px 0 28px; letter-spacing: 0.06em; }
-  .done-ref b { color: var(--accent); font-weight: 600; }
+  .done-ref { font-size: 13px; color: var(--text-secondary); margin: 18px 0 28px; letter-spacing: 0.06em; }
+  .done-ref b { color: var(--accent); }
   .done-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
   .done-again { margin-top: 28px; }
 
   /* Admin */
   .admin-bar { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; margin-bottom: 12px; }
   .admin-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; align-items: center; }
-  .admin-tools .status { font-family: var(--mono); font-size: 11px; color: var(--text-secondary); margin-left: auto; }
+  .admin-tools .status { font-size: 12px; color: var(--text-secondary); margin-left: auto; }
   .inq { border: 1px solid var(--border); background: var(--bg-primary); padding: 16px 18px; margin-bottom: 10px; }
   .inq-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
-  .inq h4 { font-size: 16px; font-weight: 800; }
-  .inq .meta { font-family: var(--mono); font-size: 11px; color: var(--text-secondary); margin-top: 4px; letter-spacing: 0.03em; }
+  .inq h4 { font-size: 16px; font-weight: 700; }
+  .inq .meta { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
   .inq .meta .todo { color: var(--accent); }
   .inq .acts { display: flex; gap: 6px; flex-wrap: wrap; }
   .inq .acts .btn { padding: 7px 12px; font-size: 11px; }
@@ -506,7 +476,7 @@
     padding: 14px;
     background: var(--bg-secondary);
     border: 1px solid var(--border);
-    font-family: var(--mono);
+    font-family: var(--font);
     font-size: 12px;
     line-height: 1.6;
     color: var(--text-secondary);
@@ -523,7 +493,6 @@
     padding: 20px 0 32px;
     display: flex;
     justify-content: space-between;
-    font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 0.1em;
     color: var(--text-dim);
@@ -561,17 +530,18 @@
     .title-section { grid-template-columns: 1fr; gap: 0; margin-bottom: 24px; }
     .title-meta { display: none; }
     .title-main p { font-size: 14px; }
-    .steps .t { font-size: 10px; letter-spacing: 0.06em; }
+    .steps .t { font-size: 10px; letter-spacing: 0.04em; }
     .panel { padding: 22px 16px; }
     .section-header h3 { font-size: 19px; }
     .row-2, .row-3.stack-sm, .cards.cols-3 { grid-template-columns: 1fr; }
     .row-3.stack-sm { gap: 24px; }
     .row-3 { gap: 8px; }
+    .row-3:not(.stack-sm) .unit-input input { padding-right: 38px; }
+    .row-3:not(.stack-sm) .unit-input .unit { right: 8px; }
     .variant { padding: 14px 12px; }
     .fig-pouch { flex-direction: column; align-items: flex-start; gap: 10px; }
     .fig-pouch svg { max-width: 100%; }
     input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select, textarea { font-size: 16px; }
-    .combo { grid-template-columns: 1fr 120px; }
     .nav .status { display: none; }
     .nav .btn-primary { flex: 1; min-width: 0; }
     .review dl { grid-template-columns: 1fr; gap: 0; }
@@ -588,14 +558,14 @@
   @media print {
     body { background: #fff; color: #000; }
     body::before, .container > *:not(#print-sheet) { display: none !important; }
-    #print-sheet { display: block; color: #000; font-family: var(--sans); }
+    #print-sheet { display: block; color: #000; }
     #print-sheet h2 { font-size: 20px; margin-bottom: 4px; }
-    #print-sheet .ref { font-family: var(--mono); font-size: 12px; margin-bottom: 16px; }
+    #print-sheet .ref { font-size: 12px; margin-bottom: 16px; }
     #print-sheet .review section { border-top: 1px solid #ccc; break-inside: avoid; }
     #print-sheet .review .rh h4 { color: #000; }
     #print-sheet .review dt { color: #555; }
     #print-sheet .review dd, #print-sheet .review dd.none { color: #000; }
-    #print-sheet .btn-text { display: none; }
+    #print-sheet .btn-text, .toast { display: none !important; }
   }
 </style>
 </head>
@@ -608,7 +578,7 @@
       <div class="logo-mark"><span>景</span></div>
       <div class="brand-text">
         <h1 data-i18n="brand.name">Leo</h1>
-        <p>BIB Line Questionnaire · v2.0</p>
+        <p>BIB Line Questionnaire · v3.0</p>
       </div>
     </div>
     <div class="lang-toggle" role="group" aria-label="Language">
@@ -632,9 +602,9 @@
     </div>
 
     <ol class="steps" id="steps">
-      <li><button type="button" data-go="1"><span class="n">01</span><span class="t" data-i18n="step.1">Product</span></button></li>
-      <li><button type="button" data-go="2"><span class="n">02</span><span class="t" data-i18n="step.2">Packaging</span></button></li>
-      <li><button type="button" data-go="3"><span class="n">03</span><span class="t" data-i18n="step.3">Line &amp; site</span></button></li>
+      <li><button type="button" data-go="1"><span class="n">01</span><span class="t" data-i18n="step.1">Material</span></button></li>
+      <li><button type="button" data-go="2"><span class="n">02</span><span class="t" data-i18n="step.2">Bags</span></button></li>
+      <li><button type="button" data-go="3"><span class="n">03</span><span class="t" data-i18n="step.3">Process &amp; supply</span></button></li>
       <li><button type="button" data-go="4"><span class="n">04</span><span class="t" data-i18n="step.4">Contact</span></button></li>
     </ol>
 
@@ -642,15 +612,15 @@
       <!-- Honeypot: humans never see or fill this -->
       <div class="sr-only" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 
-      <!-- STEP 1 · PRODUCT -->
+      <!-- STEP 1 · MATERIAL CHARACTERISTICS -->
       <section class="panel step-panel" data-step="1" aria-labelledby="h-step-1">
         <div class="section-header">
-          <h3 id="h-step-1" tabindex="-1" data-i18n="step.1">Product</h3>
-          <span class="section-num">01 / PRODUCT</span>
+          <h3 id="h-step-1" tabindex="-1" data-i18n="step.1">Material</h3>
+          <span class="section-num">01 / MATERIAL</span>
         </div>
 
         <fieldset class="field" data-for="category">
-          <legend><span data-i18n="f.category">Product category</span><span class="req">*</span></legend>
+          <legend><span data-i18n="f.category">Material</span><span class="req">*</span></legend>
           <div class="chips">
             <label class="chip"><input type="radio" name="category" value="salt"><span data-i18n="o.category.salt">Salt</span></label>
             <label class="chip"><input type="radio" name="category" value="sugar"><span data-i18n="o.category.sugar">Sugar</span></label>
@@ -663,107 +633,102 @@
         </fieldset>
 
         <div class="field">
-          <label class="label" for="description" data-i18n="f.description">Product name &amp; description</label>
-          <input type="text" id="description" name="description" data-i18n-ph="ph.description" placeholder="e.g. Refined iodized salt, dry crystals">
+          <label class="label" for="material_name" data-i18n="f.name_desc">Material name &amp; description</label>
+          <input type="text" id="material_name" name="material_name" data-i18n-ph="ph.name_desc" placeholder="e.g. Refined iodized salt, dry crystals">
         </div>
-
-        <fieldset class="field">
-          <legend data-i18n="f.form">Physical form</legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="form" value="granule"><span data-i18n="o.form.granule">Granule</span></label>
-            <label class="chip"><input type="radio" name="form" value="crystal"><span data-i18n="o.form.crystal">Crystal</span></label>
-            <label class="chip"><input type="radio" name="form" value="powder"><span data-i18n="o.form.powder">Powder</span></label>
-            <label class="chip"><input type="radio" name="form" value="flake"><span data-i18n="o.form.flake">Flake</span></label>
-            <label class="chip"><input type="radio" name="form" value="other"><span data-i18n="o.form.other">Other</span></label>
-          </div>
-        </fieldset>
-
-        <fieldset class="field">
-          <legend data-i18n="f.traits">Characteristics</legend>
-          <p class="hint" data-i18n="h.multi">Select all that apply.</p>
-          <div class="chips">
-            <label class="chip"><input type="checkbox" name="traits" value="free_flowing"><span data-i18n="o.traits.free_flowing">Free-flowing</span></label>
-            <label class="chip"><input type="checkbox" name="traits" value="dusty"><span data-i18n="o.traits.dusty">Dusty</span></label>
-            <label class="chip"><input type="checkbox" name="traits" value="sticky"><span data-i18n="o.traits.sticky">Sticky / caking</span></label>
-            <label class="chip"><input type="checkbox" name="traits" value="hygroscopic"><span data-i18n="o.traits.hygroscopic">Hygroscopic</span></label>
-            <label class="chip"><input type="checkbox" name="traits" value="corrosive"><span data-i18n="o.traits.corrosive">Corrosive</span></label>
-            <label class="chip"><input type="checkbox" name="traits" value="fragile"><span data-i18n="o.traits.fragile">Fragile</span></label>
-          </div>
-        </fieldset>
 
         <div class="row row-3 stack-sm">
           <div class="field">
-            <label class="label" for="particle_size_mm" data-i18n="f.particle">Particle size</label>
-            <div class="unit-input"><input type="text" id="particle_size_mm" name="particle_size_mm" placeholder="0.3–0.8"><span class="unit">mm</span></div>
+            <label class="label" for="particle_size" data-i18n="f.particle">Particle size (PSD)</label>
+            <div class="unit-input"><input type="text" id="particle_size" name="particle_size" placeholder="0.3–0.8"><span class="unit">mm</span></div>
           </div>
           <div class="field">
             <label class="label" for="bulk_density_g_cm3" data-i18n="f.density">Bulk density</label>
             <div class="unit-input"><input type="text" inputmode="decimal" id="bulk_density_g_cm3" name="bulk_density_g_cm3" placeholder="1.2" data-num><span class="unit">g/cm³</span></div>
           </div>
           <div class="field">
-            <label class="label" for="moisture_pct" data-i18n="f.moisture">Moisture</label>
+            <label class="label" for="moisture_pct" data-i18n="f.moisture">Water content</label>
             <div class="unit-input"><input type="text" inputmode="decimal" id="moisture_pct" name="moisture_pct" placeholder="0.5" data-num data-min="0"><span class="unit">%</span></div>
           </div>
         </div>
         <p class="hint" data-i18n="h.density">Typical bulk density: salt ≈ 1.2 · sugar ≈ 0.85 · rice ≈ 0.8 · flour ≈ 0.55 g/cm³.</p>
+
+        <fieldset class="field" style="margin-top:24px">
+          <legend data-i18n="f.flow">Flowability</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="flowability" value="good"><span data-i18n="o.flowability.good">Good</span></label>
+            <label class="chip"><input type="radio" name="flowability" value="fair"><span data-i18n="o.flowability.fair">Fair</span></label>
+            <label class="chip"><input type="radio" name="flowability" value="poor"><span data-i18n="o.flowability.poor">Poor</span></label>
+            <label class="chip"><input type="radio" name="flowability" value="not_sure"><span data-i18n="o.not_sure">Not sure</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend data-i18n="f.traits">Other characteristics</legend>
+          <p class="hint" data-i18n="h.multi">Select all that apply.</p>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="traits" value="corrosive"><span data-i18n="o.traits.corrosive">Corrosive</span></label>
+            <label class="chip"><input type="checkbox" name="traits" value="toxic"><span data-i18n="o.traits.toxic">Toxic</span></label>
+            <label class="chip"><input type="checkbox" name="traits" value="abrasive"><span data-i18n="o.traits.abrasive">Abrasive</span></label>
+            <label class="chip"><input type="checkbox" name="traits" value="static"><span data-i18n="o.traits.static">Static-prone</span></label>
+            <label class="chip"><input type="checkbox" name="traits" value="leaky"><span data-i18n="o.traits.leaky">Leak-prone (fine, seeps)</span></label>
+            <label class="chip"><input type="checkbox" name="traits" value="hygroscopic"><span data-i18n="o.traits.hygroscopic">Hygroscopic</span></label>
+            <label class="chip"><input type="checkbox" name="traits" value="dusty"><span data-i18n="o.traits.dusty">Dusty when metered</span></label>
+          </div>
+        </fieldset>
       </section>
 
-      <!-- STEP 2 · PACKAGING -->
+      <!-- STEP 2 · PRIMARY & MASTER BAGS -->
       <section class="panel step-panel" data-step="2" aria-labelledby="h-step-2" hidden>
         <div class="section-header">
-          <h3 id="h-step-2" tabindex="-1" data-i18n="step.2">Packaging</h3>
-          <span class="section-num">02 / PACKAGING</span>
+          <h3 id="h-step-2" tabindex="-1" data-i18n="step.2">Bags</h3>
+          <span class="section-num">02 / BAGS</span>
         </div>
 
-        <div class="sub-header" style="margin-top:0" data-i18n="sub.pouches">Primary pouches</div>
+        <fieldset class="field" data-for="line">
+          <legend><span data-i18n="f.line">Line type</span><span class="req">*</span></legend>
+          <div class="cards cols-3">
+            <label class="card"><input type="radio" name="line" value="roll_film"><span class="card-body"><span class="nm" data-i18n="o.line.roll_film">Roll-film line</span><span class="mt" data-i18n="m.roll_film">PE master bag formed from roll film · heat seal · up to 120 pouches/min</span></span></label>
+            <label class="card"><input type="radio" name="line" value="woven_bag"><span class="card-body"><span class="nm" data-i18n="o.line.woven_bag">Woven-bag line</span><span class="mt" data-i18n="m.woven_bag">Pre-made PP woven master bag · sewing · up to 90 pouches/min</span></span></label>
+            <label class="card plain"><input type="radio" name="line" value="not_sure"><span class="card-body"><span class="nm" data-i18n="o.not_sure">Not sure</span><span class="mt" data-i18n="m.advise">We will advise</span></span></label>
+          </div>
+        </fieldset>
+
+        <div class="sub-header" data-i18n="sub.skus">Primary &amp; master bags</div>
         <div class="fig-pouch">
           <svg viewBox="0 0 280 112" aria-hidden="true">
             <rect class="d-body" x="22" y="14" width="160" height="66" rx="12"/>
             <rect class="d-seal" x="22" y="14" width="13" height="66"/>
             <rect class="d-seal" x="169" y="14" width="13" height="66"/>
             <path class="d-dim" d="M22 96 H182 M22 91 V101 M182 91 V101"/>
-            <text class="d-txt" x="102" y="109" text-anchor="middle">L</text>
+            <text class="d-txt" x="102" y="110" text-anchor="middle">L</text>
             <path class="d-dim" d="M8 14 V80 M3 14 H13 M3 80 H13"/>
-            <text class="d-txt" x="0" y="51">W</text>
+            <text class="d-txt" x="0" y="52">W</text>
             <rect class="d-body" x="208" y="34" width="56" height="26" rx="13"/>
             <path class="d-dim" d="M274 34 V60 M269 34 H279 M269 60 H279"/>
-            <text class="d-txt" x="236" y="80" text-anchor="middle">T</text>
+            <text class="d-txt" x="236" y="80" text-anchor="middle">H</text>
           </svg>
-          <p class="hint" data-i18n="h.pouches">Measure a filled pouch lying flat. Add one row for each pouch size you pack.</p>
+          <p class="hint" data-i18n="h.pouches">Measure a real filled pouch lying flat (L × W × H). One card for each pouch size.</p>
+        </div>
+        <div class="field">
+          <label class="chip wide"><input type="checkbox" name="pouch_estimate" value="estimate_requested"><span data-i18n="f.estimate">I don't have a sample pouch yet. Please prepare a reference proposal on industry estimates — I will measure real pouches to confirm.</span></label>
         </div>
 
         <div id="variants"></div>
         <button type="button" class="btn-add" id="add-variant" data-i18n="a.add">+ Add another pouch size</button>
 
-        <div class="field" style="margin-top:24px">
-          <label class="label" for="pouch_film" data-i18n="f.film">Pouch film</label>
-          <p class="hint" data-i18n="h.film">Laminate structure and total thickness, if known.</p>
-          <input type="text" id="pouch_film" name="pouch_film" data-i18n-ph="ph.film" placeholder="e.g. PET12/PE53, 65 µm">
-        </div>
-
-        <div class="sub-header" data-i18n="sub.master">Master bag</div>
-
-        <fieldset class="field" data-for="master_bag_material">
-          <legend><span data-i18n="f.material">Master bag type</span><span class="req">*</span></legend>
+        <fieldset class="field" style="margin-top:28px">
+          <legend data-i18n="f.stacking">Stacking pattern</legend>
           <div class="cards cols-3">
-            <label class="card"><input type="radio" name="master_bag_material" value="pe_film"><span class="card-body"><span class="nm" data-i18n="o.master_bag_material.pe_film">PE roll film</span><span class="mt" data-i18n="m.pe_film">Heat seal · up to 120 pouches/min</span></span></label>
-            <label class="card"><input type="radio" name="master_bag_material" value="pp_woven"><span class="card-body"><span class="nm" data-i18n="o.master_bag_material.pp_woven">PP woven bag</span><span class="mt" data-i18n="m.pp_woven">Sewing · up to 90 pouches/min</span></span></label>
-            <label class="card"><input type="radio" name="master_bag_material" value="not_sure"><span class="card-body"><span class="nm" data-i18n="o.not_sure">Not sure</span><span class="mt" data-i18n="m.advise">We will advise</span></span></label>
-          </div>
-        </fieldset>
-
-        <fieldset class="field">
-          <legend data-i18n="f.arrangement">How pouches lie in the master bag</legend>
-          <div class="cards cols-3">
-            <label class="card"><input type="radio" name="arrangement" value="top_to_top"><span class="card-body">
+            <label class="card"><input type="radio" name="stacking" value="top_to_top"><span class="card-body">
               <svg viewBox="0 0 200 64" aria-hidden="true">
                 <rect class="d-bag" x="2" y="2" width="196" height="60"/>
                 <rect class="d-body" x="10" y="16" width="62" height="32" rx="7"/><rect class="d-seal" x="10" y="16" width="7" height="32"/><rect class="d-seal" x="65" y="16" width="7" height="32"/>
                 <rect class="d-body" x="69" y="16" width="62" height="32" rx="7"/><rect class="d-seal" x="69" y="16" width="7" height="32"/><rect class="d-seal" x="124" y="16" width="7" height="32"/>
                 <rect class="d-body" x="128" y="16" width="62" height="32" rx="7"/><rect class="d-seal" x="128" y="16" width="7" height="32"/><rect class="d-seal" x="183" y="16" width="7" height="32"/>
               </svg>
-              <span class="nm" data-i18n="o.arrangement.top_to_top">Top-to-top</span><span class="mt" data-i18n="m.top_to_top">Seal ends face each other</span></span></label>
-            <label class="card"><input type="radio" name="arrangement" value="side_to_side"><span class="card-body">
+              <span class="nm" data-i18n="o.stacking.top_to_top">Top-to-Top</span><span class="mt" data-i18n="m.top_to_top">Seal ends face each other</span></span></label>
+            <label class="card"><input type="radio" name="stacking" value="side_to_side"><span class="card-body">
               <svg viewBox="0 0 200 64" aria-hidden="true">
                 <rect class="d-bag" x="2" y="2" width="196" height="60"/>
                 <g><rect class="d-body" x="22" y="8" width="30" height="48" rx="6"/><rect class="d-seal" x="22" y="8" width="30" height="6"/><rect class="d-seal" x="22" y="50" width="30" height="6"/></g>
@@ -771,25 +736,19 @@
                 <g><rect class="d-body" x="100" y="8" width="30" height="48" rx="6"/><rect class="d-seal" x="100" y="8" width="30" height="6"/><rect class="d-seal" x="100" y="50" width="30" height="6"/></g>
                 <g><rect class="d-body" x="139" y="8" width="30" height="48" rx="6"/><rect class="d-seal" x="139" y="8" width="30" height="6"/><rect class="d-seal" x="139" y="50" width="30" height="6"/></g>
               </svg>
-              <span class="nm" data-i18n="o.arrangement.side_to_side">Side-to-side</span><span class="mt" data-i18n="m.side_to_side">Long sides touch</span></span></label>
-            <label class="card plain"><input type="radio" name="arrangement" value="not_sure"><span class="card-body"><span class="nm" data-i18n="o.not_sure">Not sure</span><span class="mt" data-i18n="m.advise">We will advise</span></span></label>
+              <span class="nm" data-i18n="o.stacking.side_to_side">Side-to-Side</span><span class="mt" data-i18n="m.side_to_side">Long sides touch</span></span></label>
+            <label class="card plain"><input type="radio" name="stacking" value="not_sure"><span class="card-body"><span class="nm" data-i18n="o.not_sure">Not sure</span><span class="mt" data-i18n="m.advise">We will advise</span></span></label>
           </div>
         </fieldset>
-
-        <div class="field">
-          <label class="label" for="existing_master_bag" data-i18n="f.existing">Existing master bag size</label>
-          <p class="hint" data-i18n="h.existing">Only if you already use one — otherwise we size it for you.</p>
-          <input type="text" id="existing_master_bag" name="existing_master_bag" data-i18n-ph="ph.existing" placeholder="e.g. 600 × 400 mm, no gusset">
-        </div>
 
         <div class="match" id="match" aria-live="polite"></div>
       </section>
 
-      <!-- STEP 3 · LINE & SITE -->
+      <!-- STEP 3 · PROCESS & SCOPE OF SUPPLY -->
       <section class="panel step-panel" data-step="3" aria-labelledby="h-step-3" hidden>
         <div class="section-header">
-          <h3 id="h-step-3" tabindex="-1" data-i18n="step.3">Line &amp; site</h3>
-          <span class="section-num">03 / LINE</span>
+          <h3 id="h-step-3" tabindex="-1" data-i18n="step.3">Process &amp; supply</h3>
+          <span class="section-num">03 / PROCESS</span>
         </div>
 
         <div class="field">
@@ -798,34 +757,26 @@
           <textarea id="pain_points" name="pain_points" rows="4"></textarea>
         </div>
 
-        <fieldset class="field" data-for="scope">
-          <legend><span data-i18n="f.scope">What do you need from us?</span><span class="req">*</span></legend>
-          <p class="hint" data-i18n="h.multi">Select all that apply.</p>
-          <div class="chips">
-            <label class="chip"><input type="checkbox" name="scope" value="primary_packing"><span data-i18n="o.scope.primary_packing">Primary packing (VFFS + weigher)</span></label>
-            <label class="chip"><input type="checkbox" name="scope" value="secondary_bib"><span data-i18n="o.scope.secondary_bib">Secondary BIB packing</span></label>
-            <label class="chip"><input type="checkbox" name="scope" value="conveying"><span data-i18n="o.scope.conveying">Conveying &amp; pouch turning</span></label>
-            <label class="chip"><input type="checkbox" name="scope" value="inspection"><span data-i18n="o.scope.inspection">Checkweigher / metal detector</span></label>
-            <label class="chip"><input type="checkbox" name="scope" value="palletizing"><span data-i18n="o.scope.palletizing">Palletizing</span></label>
-            <label class="chip"><input type="checkbox" name="scope" value="turnkey"><span data-i18n="o.scope.turnkey">Complete turnkey line</span></label>
-          </div>
-        </fieldset>
-
+        <div class="sub-header" data-i18n="sub.speed">Speed &amp; accuracy</div>
         <div class="row row-2">
           <div class="field">
-            <label class="label" for="capacity_value" data-i18n="f.capacity">Target capacity</label>
-            <div class="combo">
-              <input type="text" inputmode="decimal" id="capacity_value" name="capacity_value" placeholder="6" data-num>
-              <select name="capacity_unit" aria-label="Unit">
-                <option value="t_per_hour" data-i18n="o.capacity_unit.t_per_hour">t/h</option>
-                <option value="t_per_day" data-i18n="o.capacity_unit.t_per_day">t/day</option>
-                <option value="pouches_per_min" data-i18n="o.capacity_unit.pouches_per_min">pouches/min</option>
-              </select>
-            </div>
+            <label class="label" for="primary_speed_ppm" data-i18n="f.pspeed">Primary speed</label>
+            <div class="unit-input"><input type="text" inputmode="decimal" id="primary_speed_ppm" name="primary_speed_ppm" placeholder="110" data-num><span class="unit">pcs/min</span></div>
           </div>
           <div class="field">
-            <label class="label" for="weighing_accuracy" data-i18n="f.accuracy">Weighing accuracy</label>
-            <input type="text" id="weighing_accuracy" name="weighing_accuracy" data-i18n-ph="ph.accuracy" placeholder="e.g. ±1 g or ±0.5 %">
+            <label class="label" for="secondary_speed_bpm" data-i18n="f.sspeed">Secondary speed</label>
+            <div class="unit-input"><input type="text" inputmode="decimal" id="secondary_speed_bpm" name="secondary_speed_bpm" placeholder="2.2" data-num><span class="unit">bags/min</span></div>
+          </div>
+        </div>
+        <p class="hint" data-i18n="h.speed">Primary = small pouches per minute; secondary = master bags per minute.</p>
+        <div class="row row-2" style="margin-top:20px">
+          <div class="field">
+            <label class="label" for="metering_accuracy" data-i18n="f.maccuracy">Metering accuracy</label>
+            <input type="text" id="metering_accuracy" name="metering_accuracy" data-i18n-ph="ph.maccuracy" placeholder="e.g. ±2% @2σ">
+          </div>
+          <div class="field">
+            <label class="label" for="counting_accuracy" data-i18n="f.caccuracy">Counting accuracy</label>
+            <input type="text" id="counting_accuracy" name="counting_accuracy" data-i18n-ph="ph.caccuracy" placeholder="e.g. 99.9%">
           </div>
         </div>
 
@@ -834,7 +785,7 @@
           <div class="cards cols-2">
             <label class="card"><input type="radio" name="machine_material" value="ss304_contact"><span class="card-body"><span class="nm" data-i18n="o.machine_material.ss304_contact">SS304 contact parts</span><span class="mt" data-i18n="m.ss304_contact">Powder-coated carbon-steel frame</span></span></label>
             <label class="card"><input type="radio" name="machine_material" value="ss304_full"><span class="card-body"><span class="nm" data-i18n="o.machine_material.ss304_full">Full SS304</span><span class="mt" data-i18n="m.ss304_full">Food grade, easy wash-down</span></span></label>
-            <label class="card" id="opt-ss316"><input type="radio" name="machine_material" value="ss316_contact"><span class="card-body"><span class="badge" data-i18n="badge.rec" hidden>Recommended</span><span class="nm" data-i18n="o.machine_material.ss316_contact">SS316 contact parts</span><span class="mt" data-i18n="m.ss316_contact">SS304 frame — for salt and corrosive products</span></span></label>
+            <label class="card" id="opt-ss316"><input type="radio" name="machine_material" value="ss316_contact"><span class="card-body"><span class="badge" data-i18n="badge.rec" hidden>Recommended</span><span class="nm" data-i18n="o.machine_material.ss316_contact">SS316L contact parts</span><span class="mt" data-i18n="m.ss316_contact">SS304 frame — for salt and corrosive products</span></span></label>
             <label class="card plain"><input type="radio" name="machine_material" value="not_sure"><span class="card-body"><span class="nm" data-i18n="o.not_sure">Not sure</span><span class="mt" data-i18n="m.advise">We will advise</span></span></label>
           </div>
         </fieldset>
@@ -849,8 +800,23 @@
           </div>
         </fieldset>
 
-        <div class="sub-header" data-i18n="sub.site">Site utilities</div>
+        <div class="sub-header" data-i18n="sub.scope">Scope of supply</div>
+        <fieldset class="field" data-for="scope">
+          <legend><span data-i18n="f.scope">What should we supply?</span><span class="req">*</span></legend>
+          <p class="hint" data-i18n="h.multi">Select all that apply.</p>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="scope" value="feeding_elevator"><span data-i18n="o.scope.feeding_elevator">Feeding elevator</span></label>
+            <label class="chip"><input type="checkbox" name="scope" value="metering_scale"><span data-i18n="o.scope.metering_scale">Metering scale / filler</span></label>
+            <label class="chip"><input type="checkbox" name="scope" value="primary_packer"><span data-i18n="o.scope.primary_packer">Primary packing machine</span></label>
+            <label class="chip"><input type="checkbox" name="scope" value="secondary_packer"><span data-i18n="o.scope.secondary_packer">Secondary (BIB) packing machine</span></label>
+            <label class="chip"><input type="checkbox" name="scope" value="checkweigher"><span data-i18n="o.scope.checkweigher">Checkweigher</span></label>
+            <label class="chip"><input type="checkbox" name="scope" value="metal_detector"><span data-i18n="o.scope.metal_detector">Metal detector</span></label>
+            <label class="chip"><input type="checkbox" name="scope" value="palletizer"><span data-i18n="o.scope.palletizer">Palletizer</span></label>
+            <label class="chip"><input type="checkbox" name="scope" value="other"><span data-i18n="o.scope.other">Other</span></label>
+          </div>
+        </fieldset>
 
+        <div class="sub-header" data-i18n="sub.site">Site</div>
         <div class="row row-3 stack-sm">
           <div class="field">
             <label class="label" for="voltage_v" data-i18n="f.voltage">Voltage</label>
@@ -879,6 +845,17 @@
             <label class="chip"><input type="radio" name="compressed_air" value="yes"><span data-i18n="o.compressed_air.yes">Available</span></label>
             <label class="chip"><input type="radio" name="compressed_air" value="no"><span data-i18n="o.compressed_air.no">Not available</span></label>
             <label class="chip"><input type="radio" name="compressed_air" value="not_sure"><span data-i18n="o.not_sure">Not sure</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend data-i18n="f.conditions">Site conditions</legend>
+          <p class="hint" data-i18n="h.multi">Select all that apply.</p>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="conditions" value="hot"><span data-i18n="o.conditions.hot">Ambient above 40 °C</span></label>
+            <label class="chip"><input type="checkbox" name="conditions" value="humid_coastal"><span data-i18n="o.conditions.humid_coastal">Humid / coastal</span></label>
+            <label class="chip"><input type="checkbox" name="conditions" value="power_cuts"><span data-i18n="o.conditions.power_cuts">Frequent power cuts</span></label>
+            <label class="chip"><input type="checkbox" name="conditions" value="multi_floor"><span data-i18n="o.conditions.multi_floor">Line spans several floors</span></label>
           </div>
         </fieldset>
 
@@ -973,7 +950,7 @@
     <div class="title-section">
       <div class="title-main">
         <h2>Inquiry<br><span class="accent">Inbox</span></h2>
-        <p>Submissions from Google Sheet, this browser, or imported JSON. Copy any inquiry straight into Claude to draft the proposal and the follow-up.</p>
+        <p>Submissions from Google Sheet, this browser, or imported JSON. Copy any inquiry into Claude to draft the URD and the follow-up.</p>
       </div>
       <div class="title-meta"><div><span class="version">SYS 003</span> / ADMIN</div></div>
     </div>
@@ -1004,9 +981,10 @@
 <template id="tpl-variant">
   <div class="variant">
     <div class="variant-head">
-      <span class="tag"><span data-i18n="c.pouch">Pouch</span> <span class="vn">1</span></span>
+      <span class="tag"><span data-i18n="c.bag">Bag</span>-<span class="vn">1</span></span>
       <button type="button" class="btn-text v-remove" data-i18n="a.remove">Remove</button>
     </div>
+    <div class="vsub first" data-i18n="sub.primary">Primary bag</div>
     <div class="row row-2">
       <div class="field">
         <label class="label"><span data-i18n="f.weight">Weight</span><span class="req">*</span></label>
@@ -1014,24 +992,58 @@
       </div>
       <div class="field">
         <label class="label"><span data-i18n="f.count">Pouches per master bag</span><span class="req">*</span></label>
-        <div class="unit-input"><input type="text" inputmode="numeric" data-k="pouches_per_bag" placeholder="50"><span class="unit">pcs</span></div>
+        <div class="unit-input"><input type="text" inputmode="numeric" data-k="pouches_per_master" placeholder="50"><span class="unit">pcs</span></div>
       </div>
     </div>
     <div class="row row-3">
       <div class="field">
-        <label class="label" data-i18n="f.length">Length L</label>
+        <label class="label"><span data-i18n="f.length">Length L</span><span class="req size-req">*</span></label>
         <div class="unit-input"><input type="text" inputmode="decimal" data-k="length_mm" placeholder="220"><span class="unit">mm</span></div>
       </div>
       <div class="field">
-        <label class="label" data-i18n="f.width">Width W</label>
+        <label class="label"><span data-i18n="f.width">Width W</span><span class="req size-req">*</span></label>
         <div class="unit-input"><input type="text" inputmode="decimal" data-k="width_mm" placeholder="130"><span class="unit">mm</span></div>
       </div>
       <div class="field">
-        <label class="label" data-i18n="f.thickness">Thickness T</label>
-        <div class="unit-input"><input type="text" inputmode="decimal" data-k="thickness_mm" placeholder="55"><span class="unit">mm</span></div>
+        <label class="label"><span data-i18n="f.height">Height H</span><span class="req size-req">*</span></label>
+        <div class="unit-input"><input type="text" inputmode="decimal" data-k="height_mm" placeholder="55"><span class="unit">mm</span></div>
       </div>
     </div>
     <div class="row row-2">
+      <div class="field">
+        <label class="label" data-i18n="f.film">Film material / thickness</label>
+        <input type="text" data-k="film" data-i18n-ph="ph.film" placeholder="e.g. PET12 + LDPE50, 62 µm">
+      </div>
+      <fieldset class="field">
+        <legend class="label" data-i18n="f.sealing">Sealing</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" data-k="sealing" value="heat_seal"><span data-i18n="o.sealing.heat_seal">Heat sealing</span></label>
+          <label class="chip"><input type="radio" data-k="sealing" value="stitching"><span data-i18n="o.sealing.stitching">Stitching</span></label>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="vsub" data-i18n="sub.master">Master bag</div>
+    <p class="hint" style="margin:-4px 0 10px" data-i18n="h.master">Only if you already use a master bag (H = gusset depth, 0 if none). Otherwise we size it for you.</p>
+    <div class="row row-3">
+      <div class="field">
+        <label class="label" data-i18n="f.length">Length L</label>
+        <div class="unit-input"><input type="text" inputmode="decimal" data-k="master_length_mm"><span class="unit">mm</span></div>
+      </div>
+      <div class="field">
+        <label class="label" data-i18n="f.width">Width W</label>
+        <div class="unit-input"><input type="text" inputmode="decimal" data-k="master_width_mm"><span class="unit">mm</span></div>
+      </div>
+      <div class="field">
+        <label class="label" data-i18n="f.gusset">Gusset H</label>
+        <div class="unit-input"><input type="text" inputmode="decimal" data-k="master_gusset_mm" data-min="0"><span class="unit">mm</span></div>
+      </div>
+    </div>
+    <div class="row row-2">
+      <div class="field">
+        <label class="label" data-i18n="f.mmaterial">Master bag material / thickness</label>
+        <input type="text" data-k="master_material" data-i18n-ph="ph.mmaterial" placeholder="e.g. PE 120 µm">
+      </div>
       <div class="field">
         <label class="label" data-i18n="f.perlayer">Pouches per layer</label>
         <div class="unit-input"><input type="text" inputmode="numeric" data-k="per_layer" data-i18n-ph="ph.ifknown" placeholder="if known"><span class="unit">pcs</span></div>
@@ -1042,12 +1054,13 @@
 </template>
 
 <script>
-// core.js — the data contract shared by the form (app.js), the admin page and
-// the Apps Script backend docs. Everything a person or an AI reads downstream
-// (JSON, Markdown brief, follow-up list, engineering estimate) is built here,
-// always in English with fixed enum codes, whatever language the form was in.
+// core.js — the data contract shared by the form, the #admin inbox and the
+// Apps Script backend. Sections mirror the BIB URD / TCP master
+// (Material → Primary bag → Master bag → Process → Scope of supply), so an
+// inquiry maps onto a URD without re-typing. Output is always English with
+// fixed enum codes, whatever language the form was filled in.
 (function (root) {
-  const SCHEMA = 'bib-questionnaire/v2';
+  const SCHEMA = 'bib-questionnaire/v3';
 
   // Enum code -> English label. Codes never change; labels may.
   const ENUMS = {
@@ -1055,37 +1068,49 @@
       salt: 'Salt', sugar: 'Sugar', rice: 'Rice', seeds: 'Seeds',
       detergent: 'Detergent powder', flour: 'Flour', other: 'Other',
     },
-    form: { granule: 'Granule', crystal: 'Crystal', powder: 'Powder', flake: 'Flake', other: 'Other' },
+    flowability: { good: 'Good', fair: 'Fair', poor: 'Poor', not_sure: 'Not sure' },
     traits: {
-      free_flowing: 'Free-flowing', dusty: 'Dusty', sticky: 'Sticky / caking',
-      hygroscopic: 'Hygroscopic', corrosive: 'Corrosive', fragile: 'Fragile',
+      corrosive: 'Corrosive', toxic: 'Toxic', abrasive: 'Abrasive', static: 'Static-prone',
+      leaky: 'Leak-prone (fine, seeps)', hygroscopic: 'Hygroscopic', dusty: 'Dusty when metered',
     },
-    master_bag_material: { pe_film: 'PE roll film (heat seal)', pp_woven: 'PP woven bag (sewing)', not_sure: 'Not sure' },
-    arrangement: { top_to_top: 'Top-to-top', side_to_side: 'Side-to-side', not_sure: 'Not sure' },
-    scope: {
-      primary_packing: 'Primary packing (VFFS + weigher)', secondary_bib: 'Secondary BIB packing',
-      conveying: 'Conveying & pouch turning', inspection: 'Checkweigher / metal detector',
-      palletizing: 'Palletizing', turnkey: 'Complete turnkey line',
+    line: {
+      roll_film: 'Roll-film line (PE master bag, heat seal)',
+      woven_bag: 'Woven-bag line (PP woven master bag, sewing)',
+      not_sure: 'Not sure',
     },
-    capacity_unit: { pouches_per_min: 'pouches/min', t_per_hour: 't/h', t_per_day: 't/day' },
+    pouch_size_status: {
+      measured: 'Measured by customer',
+      estimate_requested: 'No sample yet — customer asked for a reference proposal on estimates, will measure to confirm',
+    },
+    sealing: { heat_seal: 'Heat sealing', stitching: 'Stitching' },
+    stacking: { top_to_top: 'Top-to-Top', side_to_side: 'Side-to-Side', not_sure: 'Not sure' },
     machine_material: {
       ss304_contact: 'SS304 contact parts, powder-coated carbon-steel frame',
-      ss304_full: 'Full SS304', ss316_contact: 'SS316 contact parts, SS304 frame', not_sure: 'Not sure',
+      ss304_full: 'Full SS304', ss316_contact: 'SS316L contact parts, SS304 frame', not_sure: 'Not sure',
     },
     current_method: { manual: 'Manual', semi_auto: 'Semi-automatic', automatic: 'Automatic (upgrading)', new_project: 'New project' },
-    frequency_hz: { 50: '50 Hz', 60: '60 Hz', not_sure: 'Not sure' },
+    scope: {
+      feeding_elevator: 'Feeding elevator', metering_scale: 'Metering scale / filler',
+      primary_packer: 'Primary packing machine', secondary_packer: 'Secondary (BIB) packing machine',
+      checkweigher: 'Checkweigher', metal_detector: 'Metal detector', palletizer: 'Palletizer', other: 'Other',
+    },
+    frequency_hz: { 50: '50 Hz', 60: '60 Hz' },
     phase: { 3: '3-phase', 1: '1-phase' },
     compressed_air: { yes: 'Available', no: 'Not available', not_sure: 'Not sure' },
+    conditions: {
+      hot: 'Ambient above 40 °C', humid_coastal: 'Humid / coastal',
+      power_cuts: 'Frequent power cuts', multi_floor: 'Line spans several floors',
+    },
     timeline: { within_3m: 'Within 3 months', '3_6m': '3–6 months', '6_12m': '6–12 months', exploring: 'Exploring / budgeting' },
   };
 
-  // Mirrors bib-calculator (calculate / recommendMachine) so estimates match.
+  // Mirrors bib-calculator (calculate / recommendMachine) — the authoritative formulas.
   const MACHINES = {
-    pe_film: {
+    roll_film: {
       model: 'ZR-VBIB-120', name: 'Vertical roll-film BIB machine', seal: 'Heat seal',
       max_pouches_per_min: 120, max_bags_per_min: null, bag_height_allowance_mm: 100,
     },
-    pp_woven: {
+    woven_bag: {
       model: 'ZR-WBIB-90', name: 'Woven-bag BIB machine', seal: 'Thread sewing',
       max_pouches_per_min: 90, max_bags_per_min: 6, bag_height_allowance_mm: 50,
     },
@@ -1093,10 +1118,11 @@
   const TOP_OVERLAP_MM = 18;          // calculator default seal overlap, top-to-top
   const TOP_OVERLAP_MAX_RATIO = 0.4;  // capped at 40 % of pouch length
   const SIDE_OVERLAP_RATIO = 0.1;     // side-to-side: crimp fins overlap ≈ 0.1 × width
-  const HOURS_PER_DAY = 16;           // t/day targets assume two 8 h shifts
+  const RECOMMENDATION_TAG = '【我方推荐值，待技术部凭客户实测小袋尺寸做工程设计确认】';
 
   const round = (v, d = 0) => Math.round(v * 10 ** d) / 10 ** d;
   const label = (group, v) => (v == null ? null : (ENUMS[group] && ENUMS[group][v]) || String(v));
+  const hasSize = p => !!(p.length_mm && p.width_mm && p.height_mm);
 
   function newId(date = new Date()) {
     const ymd = date.toISOString().slice(2, 10).replace(/-/g, '');
@@ -1104,33 +1130,24 @@
     return `BIB-${ymd}-${rand}`;
   }
 
-  function targetPouchesPerMin(cap, weightG) {
-    if (!cap || !cap.value) return null;
-    if (cap.unit === 'pouches_per_min') return cap.value;
-    if (!weightG) return null;
-    const tPerHour = cap.unit === 't_per_day' ? cap.value / HOURS_PER_DAY : cap.value;
-    return (tPerHour * 1e6) / weightG / 60;
-  }
-
-  // Preliminary engineering figures. Each value appears only when every input
-  // it depends on is present, so an absent key always means "not enough data".
+  // Preliminary engineering figures per pouch size. A key is present only when
+  // every input it depends on is present, so an absent key means "not enough data".
   function derive(s) {
-    const mat = MACHINES[s.packaging.master_bag_material] || null;
-    const arr = s.packaging.arrangement;
-    const variants = s.pouches.map((p, i) => {
-      const d = { pouch: i + 1 };
-      const count = p.pouches_per_bag;
+    const k = s.packaging, pr = s.process;
+    const mat = MACHINES[k.line] || null;
+    const arr = k.stacking;
+    const variants = k.skus.map((p, i) => {
+      const d = { bag: i + 1 };
+      const count = p.pouches_per_master;
       if (p.weight_g && count) d.master_bag_weight_kg = round((p.weight_g * count) / 1000, 2);
 
-      const stackable = p.length_mm && p.width_mm && p.thickness_mm && p.per_layer && count
-        && (arr === 'top_to_top' || arr === 'side_to_side');
-      if (stackable) {
+      if (hasSize(p) && p.per_layer && count && (arr === 'top_to_top' || arr === 'side_to_side')) {
         const n = Math.min(p.per_layer, count);
         const layers = Math.ceil(count / n);
         const top = arr === 'top_to_top';
         const A = n * (top ? p.length_mm : p.width_mm);
         const B = top ? p.width_mm : p.length_mm;
-        const H = layers * p.thickness_mm;
+        const H = layers * p.height_mm;
         const ov = top ? Math.min(TOP_OVERLAP_MM, TOP_OVERLAP_MAX_RATIO * p.length_mm) : SIDE_OVERLAP_RATIO * p.width_mm;
         const A1 = Math.round(A - (n - 1) * ov);
         d.layers = layers;
@@ -1143,128 +1160,153 @@
         d.max_pouches_per_min = round(ppm, 1);
         d.max_bags_per_min = round(ppm / count, 2);
         if (p.weight_g) d.max_t_per_hour = round((ppm * 60 * p.weight_g) / 1e6, 2);
-        const target = targetPouchesPerMin(s.line.target_capacity, p.weight_g);
-        if (target) {
-          d.target_pouches_per_min = round(target, 1);
-          d.bib_machines_needed = Math.ceil(target / ppm - 1e-9);
-        }
-      } else {
-        const target = targetPouchesPerMin(s.line.target_capacity, p.weight_g);
-        if (target) d.target_pouches_per_min = round(target, 1);
+        if (pr.primary_speed_ppm) d.bib_machines_needed = Math.ceil(pr.primary_speed_ppm / ppm - 1e-9);
+        if (pr.secondary_speed_bpm) d.secondary_speed_within_machine = pr.secondary_speed_bpm <= d.max_bags_per_min + 1e-9;
       }
       return d;
     });
     return {
-      basis: 'bib-calculator formulas; top-to-top seal overlap 18 mm; t/day assumes 16 h/day; target capacity is applied to each pouch size on its own. Preliminary — engineer to confirm.',
+      basis: `bib-calculator formulas (authoritative); top-to-top seal overlap 18 mm; machines needed = primary speed ÷ machine speed. `
+        + `Customer-provided master bag sizes take precedence. ${RECOMMENDATION_TAG}`,
+      pouch_size_status: k.pouch_size_status,
       machine: mat ? { model: mat.model, name: mat.name, seal: mat.seal, max_pouches_per_min: mat.max_pouches_per_min } : null,
       variants,
     };
   }
 
-  // Inputs that matter for a proposal but were left blank or "not sure".
-  // This list is what turns into the follow-up message to the customer.
+  // Inputs a URD needs that were left blank or "not sure" — the follow-up list.
   function unknowns(s) {
     const out = [];
     const miss = (cond, field, text) => { if (cond) out.push({ field, label: text }); };
     const blank = v => v == null || v === '' || v === 'not_sure';
-    miss(blank(s.product.particle_size_mm), 'product.particle_size_mm', 'Particle size');
-    miss(blank(s.product.bulk_density_g_cm3), 'product.bulk_density_g_cm3', 'Bulk density');
-    miss(blank(s.product.moisture_pct), 'product.moisture_pct', 'Moisture content');
-    s.pouches.forEach((p, i) => {
-      const tag = s.pouches.length > 1 ? `Pouch ${i + 1}: ` : '';
-      miss(!(p.length_mm && p.width_mm && p.thickness_mm), `pouches[${i}].dimensions`, `${tag}filled pouch size (L × W × T)`);
-      miss(!p.per_layer, `pouches[${i}].per_layer`, `${tag}pouches per layer in the master bag`);
+    const m = s.material, k = s.packaging, pr = s.process, site = s.site;
+    miss(blank(m.particle_size), 'material.particle_size', 'Particle size (PSD)');
+    miss(blank(m.bulk_density_g_cm3), 'material.bulk_density_g_cm3', 'Bulk density');
+    miss(blank(m.moisture_pct), 'material.moisture_pct', 'Water content');
+    miss(blank(m.flowability), 'material.flowability', 'Flowability');
+    miss(blank(k.line), 'packaging.line', 'Line type (roll-film or woven-bag)');
+    miss(k.pouch_size_status === 'estimate_requested', 'packaging.pouch_size_status',
+      'Real filled pouch size L × W × H — customer to measure a sample (proposal uses estimates until then)');
+    k.skus.forEach((p, i) => {
+      const bag = `Bag-${i + 1}: `, master = `Master-${i + 1}: `;
+      miss(!hasSize(p) && k.pouch_size_status !== 'estimate_requested', `packaging.skus[${i}].size`, `${bag}filled pouch size L × W × H`);
+      miss(blank(p.film), `packaging.skus[${i}].film`, `${bag}pouch film material / thickness (incl. heat-seal layer)`);
+      miss(blank(p.sealing), `packaging.skus[${i}].sealing`, `${bag}pouch sealing`);
+      miss(!p.per_layer, `packaging.skus[${i}].per_layer`, `${master}pouches per layer`);
+      miss(blank(p.master_material), `packaging.skus[${i}].master_material`, `${master}master bag material / thickness`);
     });
-    miss(blank(s.packaging.pouch_film), 'packaging.pouch_film', 'Pouch film structure / thickness');
-    miss(blank(s.packaging.master_bag_material), 'packaging.master_bag_material', 'Master bag material (PE film or PP woven)');
-    miss(blank(s.packaging.arrangement), 'packaging.arrangement', 'Stacking arrangement (top-to-top or side-to-side)');
-    miss(!s.line.target_capacity, 'line.target_capacity', 'Target capacity');
-    miss(blank(s.line.machine_material), 'line.machine_material', 'Machine material standard');
-    miss(blank(s.site.voltage_v), 'site.voltage_v', 'Supply voltage');
-    miss(blank(s.site.frequency_hz), 'site.frequency_hz', 'Supply frequency (50/60 Hz)');
-    miss(blank(s.site.compressed_air), 'site.compressed_air', 'Compressed air availability');
-    miss(blank(s.site.space), 'site.space', 'Available floor space');
+    miss(blank(k.stacking), 'packaging.stacking', 'Stacking pattern');
+    miss(!pr.primary_speed_ppm, 'process.primary_speed_ppm', 'Primary speed (pouches/min)');
+    miss(!pr.secondary_speed_bpm, 'process.secondary_speed_bpm', 'Secondary speed (master bags/min)');
+    miss(blank(pr.metering_accuracy), 'process.metering_accuracy', 'Metering accuracy');
+    miss(blank(pr.counting_accuracy), 'process.counting_accuracy', 'Counting accuracy');
+    miss(blank(pr.machine_material), 'process.machine_material', 'Machine material standard');
+    miss(blank(site.voltage_v), 'site.voltage_v', 'Supply voltage');
+    miss(blank(site.frequency_hz), 'site.frequency_hz', 'Supply frequency (50/60 Hz)');
+    miss(blank(site.compressed_air), 'site.compressed_air', 'Compressed air availability');
+    miss(blank(site.space), 'site.space', 'Available floor space');
     miss(blank(s.project.timeline), 'project.timeline', 'Project timeline');
     return out;
   }
 
-  // Human- and LLM-readable brief. English labels, customer's free text verbatim.
+  // Human- and LLM-readable brief, in URD section order. English labels with
+  // Chinese section names; the customer's free text stays verbatim.
   function toMarkdown(s) {
     const v = (x, unit = '') => (x == null || x === '' ? '—' : `${x}${unit ? ' ' + unit : ''}`);
     const list = (group, arr) => (arr && arr.length ? arr.map(x => label(group, x)).join(', ') : '—');
     const mm = d => (d ? `${d.length} × ${d.width} × ${d.height} mm` : '—');
-    const c = s.contact, p = s.product, k = s.packaging, l = s.line, site = s.site;
+    const c = s.contact, m = s.material, k = s.packaging, pr = s.process, site = s.site;
+    const estimate = k.pouch_size_status === 'estimate_requested';
     const L = [];
 
     L.push(`# BIB inquiry ${s.id || '(draft)'}`);
     L.push(`Submitted: ${s.submitted_at || '—'} · Form language: ${s.form_language}${s.source ? ` · Source: ${s.source}` : ''}`);
-    L.push('', '## Customer');
+    L.push(`Line / 线别: ${v(label('line', k.line))}`);
+
+    L.push('', '## Customer / 客户');
     L.push(`- Company: ${v(c.company)}`);
     L.push(`- Contact: ${v(c.name)}${c.role ? ` (${c.role})` : ''}`);
     L.push(`- Country: ${v(c.country)}`);
     L.push(`- Email: ${v(c.email)} · WhatsApp: ${v(c.whatsapp)}`);
 
-    L.push('', '## Product');
-    L.push(`- Category: ${v(label('category', p.category))}${p.description ? ` — ${p.description}` : ''}`);
-    L.push(`- Form: ${v(label('form', p.form))} · Traits: ${list('traits', p.traits)}`);
-    L.push(`- Particle size: ${v(p.particle_size_mm, 'mm')} · Bulk density: ${v(p.bulk_density_g_cm3, 'g/cm³')} · Moisture: ${v(p.moisture_pct, '%')}`);
+    L.push('', '## 1. Material Characteristics / 物料特性');
+    L.push(`- Material: ${v(label('category', m.category))}${m.name ? ` — ${m.name}` : ''}`);
+    L.push(`- Particle size (PSD): ${v(m.particle_size, 'mm')} · Bulk density: ${v(m.bulk_density_g_cm3, 'g/cm³')} · Water content: ${v(m.moisture_pct, '%')}`);
+    L.push(`- Flowability: ${v(label('flowability', m.flowability))} · Others: ${list('traits', m.traits)}`);
 
-    L.push('', '## Packaging');
-    L.push('| # | Pouch weight | Filled pouch L × W × T | Pouches / master bag | Per layer | Master bag weight |');
-    L.push('|---|---|---|---|---|---|');
-    s.pouches.forEach((x, i) => {
-      const dv = s.derived && s.derived.variants[i];
-      const dims = x.length_mm && x.width_mm && x.thickness_mm ? `${x.length_mm} × ${x.width_mm} × ${x.thickness_mm} mm` : '—';
-      L.push(`| ${i + 1} | ${v(x.weight_g, 'g')} | ${dims} | ${v(x.pouches_per_bag)} | ${v(x.per_layer)} | ${dv && dv.master_bag_weight_kg ? dv.master_bag_weight_kg + ' kg' : '—'} |`);
+    L.push('', '## 2. Primary Bag Specifications / 小袋规格');
+    L.push(`Filled pouch size: ${estimate ? `⚠️ ${label('pouch_size_status', k.pouch_size_status)}` : 'Measured by customer'}`);
+    L.push('| Bag No. | Weight | Filled size L × W × H | Material / thickness | Sealing |');
+    L.push('|---|---|---|---|---|');
+    k.skus.forEach((p, i) => {
+      const size = hasSize(p) ? `${p.length_mm} × ${p.width_mm} × ${p.height_mm} mm${estimate ? ' (estimate)' : ''}` : (estimate ? 'TBD — to measure' : '—');
+      L.push(`| Bag-${i + 1} | ${v(p.weight_g, 'g')} | ${size} | ${v(p.film)} | ${v(label('sealing', p.sealing))} |`);
     });
-    L.push(`- Pouch film: ${v(k.pouch_film)}`);
-    L.push(`- Master bag: ${v(label('master_bag_material', k.master_bag_material))} · Arrangement: ${v(label('arrangement', k.arrangement))}`);
-    L.push(`- Existing master bag size: ${v(k.existing_master_bag)}`);
 
-    L.push('', '## Line & site');
-    L.push(`- Scope: ${list('scope', l.scope)}`);
-    L.push(`- Target capacity: ${l.target_capacity ? `${l.target_capacity.value} ${label('capacity_unit', l.target_capacity.unit)}` : '—'}`);
-    L.push(`- Weighing accuracy: ${v(l.weighing_accuracy)}`);
-    L.push(`- Machine material: ${v(label('machine_material', l.machine_material))}`);
-    L.push(`- Current packing method: ${v(label('current_method', l.current_method))}`);
+    L.push('', '## 3. Secondary (Master) Bag Specifications / 大袋规格');
+    L.push('| Master No. | Combination | Master bag weight | Size L × W × H (H = gusset) | Material / thickness | Pouches per layer |');
+    L.push('|---|---|---|---|---|---|');
+    k.skus.forEach((p, i) => {
+      const dv = s.derived && s.derived.variants[i];
+      const given = p.master_length_mm && p.master_width_mm ? `${p.master_length_mm} × ${p.master_width_mm} × ${p.master_gusset_mm ?? 0} mm (customer)` : '—';
+      L.push(`| Master-${i + 1} | ${v(p.weight_g, 'g')} × ${v(p.pouches_per_master, 'pcs')} | ${dv && dv.master_bag_weight_kg != null ? dv.master_bag_weight_kg + ' kg' : '—'} | ${given} | ${v(p.master_material)} | ${v(p.per_layer)} |`);
+    });
+    L.push(`- Stacking pattern: ${v(label('stacking', k.stacking))}`);
+
+    L.push('', '## 4. Production & Process Parameters / 生产与工艺参数');
+    L.push(`- Primary speed: ${v(pr.primary_speed_ppm, 'pouches/min')} · Secondary speed: ${v(pr.secondary_speed_bpm, 'master bags/min')}`);
+    L.push(`- Metering accuracy: ${v(pr.metering_accuracy)} · Counting accuracy: ${v(pr.counting_accuracy)}`);
+    L.push(`- Sealing type (master bag): ${s.derived && s.derived.machine ? s.derived.machine.seal : '—'} · Stacking: ${v(label('stacking', k.stacking))}`);
+    L.push(`- Palletizing: ${(s.scope || []).includes('palletizer') ? 'Required' : '—'}`);
+    L.push(`- Machine material: ${v(label('machine_material', pr.machine_material))} · Current packing method: ${v(label('current_method', pr.current_method))}`);
+
+    L.push('', '## 5. Scope of Supply / 供货范围');
+    L.push(Object.keys(ENUMS.scope).map(x => `- ${(s.scope || []).includes(x) ? '✅' : '—'} ${label('scope', x)}`).join('\n'));
+
+    L.push('', '## Site / 现场条件');
     L.push(`- Power: ${v(site.voltage_v, 'V')} · ${v(label('frequency_hz', site.frequency_hz))} · ${v(label('phase', site.phase))} · Compressed air: ${v(label('compressed_air', site.compressed_air))}`);
-    L.push(`- Available space: ${v(site.space)}`);
+    L.push(`- Conditions: ${list('conditions', site.conditions)} · Available space: ${v(site.space)}`);
     L.push(`- Timeline: ${v(label('timeline', s.project.timeline))}`);
 
-    L.push('', "## In the customer's words");
-    L.push(l.pain_points ? l.pain_points.split('\n').map(x => `> ${x}`).join('\n') : '—');
+    L.push('', "## In the customer's words / 客户原话");
+    L.push(pr.pain_points ? pr.pain_points.split('\n').map(x => `> ${x}`).join('\n') : '—');
 
     if (s.derived) {
       const d = s.derived;
-      L.push('', '## Preliminary engineering (derived)');
+      L.push('', '## Preliminary engineering / 我方推荐值');
       L.push(`_${d.basis}_`);
-      L.push(`- Machine match: ${d.machine ? `${d.machine.model} — ${d.machine.name}, ${d.machine.seal}, up to ${d.machine.max_pouches_per_min} pouches/min` : '— (master bag material unknown)'}`);
+      L.push(`- Machine match: ${d.machine ? `${d.machine.model} — ${d.machine.name}, ${d.machine.seal}, up to ${d.machine.max_pouches_per_min} pouches/min` : '— (line type unknown)'}`);
       d.variants.forEach(x => {
         const parts = [];
         if (x.stack_mm) parts.push(`stack ${mm(x.stack_mm)} in ${x.layers} layers`);
-        if (x.empty_bag_mm) parts.push(`empty bag ≈ ${mm(x.empty_bag_mm)}`);
+        if (x.empty_bag_mm) parts.push(`empty bag ≈ ${mm(x.empty_bag_mm)}${estimate ? ' (from estimated pouch size)' : ''}`);
         if (x.max_bags_per_min != null) parts.push(`max ${x.max_bags_per_min} bags/min${x.max_t_per_hour != null ? ` (${x.max_t_per_hour} t/h)` : ''}`);
-        if (x.target_pouches_per_min != null) parts.push(`target ≈ ${x.target_pouches_per_min} pouches/min${x.bib_machines_needed ? ` → ${x.bib_machines_needed} BIB machine(s)` : ''}`);
-        L.push(`- Pouch ${x.pouch}: ${parts.length ? parts.join('; ') : 'not enough data'}`);
+        if (x.bib_machines_needed) parts.push(`primary speed → ${x.bib_machines_needed} BIB machine(s)`);
+        if (x.secondary_speed_within_machine === false) parts.push('⚠️ requested secondary speed exceeds one machine');
+        L.push(`- Master-${x.bag}: ${parts.length ? parts.join('; ') : 'not enough data'}`);
       });
     }
 
     const u = s.unknowns || unknowns(s);
-    L.push('', '## To confirm with customer');
+    L.push('', '## Pending from client / 待客户确认');
     L.push(u.length ? u.map(x => `- ${x.label}`).join('\n') : '- Nothing — all key inputs provided.');
     return L.join('\n');
   }
 
-  // Prompt for Claude: turns one inquiry into a proposal outline + follow-up message.
+  // Prompt for Claude: inquiry → URD (via the urd-bib skill) + follow-up message.
   function aiPrompt(s, md) {
     return [
-      "You are the sales-engineering assistant of Leo, a Bag-in-Bag (BIB) secondary packaging line specialist.",
-      `Below is one customer inquiry from the BIB questionnaire (schema ${SCHEMA}): a Markdown brief, then the raw JSON.`,
+      'You are the sales-engineering assistant of Leo, a Bag-in-Bag (BIB) secondary packaging line specialist.',
+      `Below is one customer inquiry from the BIB web questionnaire (schema ${SCHEMA}): a Markdown brief, then the raw JSON.`,
+      'It is structured form input, so there are no extraction assumptions.',
       '',
       'Do three things:',
-      "1. Summarise the customer's need in three lines.",
-      '2. Propose a line configuration (primary packing, BIB machine model and quantity, conveying, inspection, palletizing) using the derived engineering figures. Flag every figure that rests on a missing or estimated input.',
-      `3. Turn the "To confirm with customer" list into a short, friendly WhatsApp follow-up in the customer's form language (${s.form_language}).`,
+      '1. If the urd-bib skill is available, use it to turn this inquiry into the standard BIB URD. '
+        + 'Rule 0: pouch_size_status "measured" means the customer supplied real filled-pouch sizes; '
+        + '"estimate_requested" is the customer\'s explicit request for a reference proposal on estimates (rule 0, exception 4).',
+      '2. Otherwise summarise the need in three lines and propose a line configuration from the derived figures. '
+        + 'The derived figures follow bib-calculator, which is authoritative; flag every figure that rests on a missing or estimated input.',
+      `3. Turn "Pending from client" into a short, friendly WhatsApp follow-up in the customer's form language (${s.form_language}).`,
       'Never invent specifications the customer did not give.',
       '',
       md,
@@ -1284,14 +1326,14 @@
 
   // ======== Config — see README.md › Setup ========
   const CONFIG = {
-    endpoint: '',   // Google Apps Script web-app URL. Empty: answers stay in the browser and the customer sends them by WhatsApp / email.
+    endpoint: '',   // Google Apps Script web-app URL. Empty: answers stay in the browser and the customer sends them by WhatsApp / email / PDF.
     whatsapp: '',   // Your WhatsApp number, digits only with country code, e.g. '8613800000000'. Empty hides the button.
     email: '',      // Your inbox for the "Send by email" fallback. Empty hides the button.
   };
 
   const Core = window.BIBCore;
   const MAX_VARIANTS = 4;
-  const KEY = { draft: 'bibq.v2.draft', sent: 'bibq.v2.sent', inbox: 'bibq.v2.inbox', lang: 'bibq.lang', admin: 'bibq.admin' };
+  const KEY = { draft: 'bibq.v3.draft', sent: 'bibq.v3.sent', inbox: 'bibq.v3.inbox', lang: 'bibq.lang', admin: 'bibq.admin' };
   const store = {
     get(k, fallback) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; } catch (_) { return fallback; } },
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) { /* private mode */ } },
@@ -1308,56 +1350,64 @@
       'brand.name': 'Leo',
       'title': 'Пакет-в-пакете<br><span class="accent">Опросный лист</span>',
       'lead': 'Четыре коротких шага, около 5 минут. Обязательны только поля со знаком <span class="req">*</span> — если не уверены в значении, оставьте поле пустым, мы уточним его вместе с вами.',
-      'step.1': 'Продукт', 'step.2': 'Упаковка', 'step.3': 'Линия и цех', 'step.4': 'Контакты',
-      'f.category': 'Категория продукта',
+      'step.1': 'Материал', 'step.2': 'Пакеты и мешки', 'step.3': 'Процесс и поставка', 'step.4': 'Контакты',
+      'f.category': 'Материал',
       'o.category.salt': 'Соль', 'o.category.sugar': 'Сахар', 'o.category.rice': 'Рис', 'o.category.seeds': 'Семена',
       'o.category.detergent': 'Стиральный порошок', 'o.category.flour': 'Мука', 'o.category.other': 'Другое',
-      'f.description': 'Название и описание продукта',
-      'ph.description': 'напр. соль йодированная, сухие кристаллы',
-      'f.form': 'Форма продукта',
-      'o.form.granule': 'Гранулы', 'o.form.crystal': 'Кристаллы', 'o.form.powder': 'Порошок', 'o.form.flake': 'Хлопья', 'o.form.other': 'Другое',
-      'f.traits': 'Свойства', 'h.multi': 'Можно выбрать несколько.',
-      'o.traits.free_flowing': 'Сыпучий', 'o.traits.dusty': 'Пылящий', 'o.traits.sticky': 'Липкий, слёживается',
-      'o.traits.hygroscopic': 'Гигроскопичный', 'o.traits.corrosive': 'Коррозионный', 'o.traits.fragile': 'Хрупкий',
-      'f.particle': 'Размер частиц', 'f.density': 'Насыпная плотность', 'f.moisture': 'Влажность',
+      'f.name_desc': 'Название и описание материала', 'ph.name_desc': 'напр. соль йодированная, сухие кристаллы',
+      'f.particle': 'Размер частиц (фракция)', 'f.density': 'Насыпная плотность', 'f.moisture': 'Влажность',
       'h.density': 'Ориентиры насыпной плотности: соль ≈ 1,2 · сахар ≈ 0,85 · рис ≈ 0,8 · мука ≈ 0,55 г/см³.',
-      'sub.pouches': 'Первичные пакеты',
-      'h.pouches': 'Измерьте заполненный пакет, лежащий плашмя. Для каждого размера пакета — отдельная строка.',
-      'c.pouch': 'Пакет', 'a.remove': 'Удалить',
-      'f.weight': 'Масса', 'f.count': 'Пакетов в мешке', 'f.length': 'Длина L', 'f.width': 'Ширина W', 'f.thickness': 'Толщина T',
+      'f.flow': 'Сыпучесть',
+      'o.flowability.good': 'Хорошая', 'o.flowability.fair': 'Средняя', 'o.flowability.poor': 'Плохая',
+      'f.traits': 'Другие свойства', 'h.multi': 'Можно выбрать несколько.',
+      'o.traits.corrosive': 'Коррозионный', 'o.traits.toxic': 'Токсичный', 'o.traits.abrasive': 'Абразивный',
+      'o.traits.static': 'Электризуется', 'o.traits.leaky': 'Просыпается (мелкий)', 'o.traits.hygroscopic': 'Гигроскопичный',
+      'o.traits.dusty': 'Пылит при дозировании',
+      'f.line': 'Тип линии',
+      'o.line.roll_film': 'Линия с рулонной плёнкой', 'm.roll_film': 'Мешок из рулонной ПЭ-плёнки · термосварка · до 120 пакетов/мин',
+      'o.line.woven_bag': 'Линия с тканым мешком', 'm.woven_bag': 'Готовый мешок из ПП-ткани · зашивка · до 90 пакетов/мин',
+      'o.not_sure': 'Не знаю', 'm.advise': 'Мы подскажем',
+      'sub.skus': 'Пакеты и мешки',
+      'h.pouches': 'Измерьте реальный заполненный пакет, лежащий плашмя (L × W × H). Одна карточка на каждый размер пакета.',
+      'f.estimate': 'У меня пока нет образца пакета. Подготовьте предварительное предложение по отраслевым оценкам — я измерю реальные пакеты для подтверждения.',
+      'c.bag': 'Пакет', 'a.remove': 'Удалить',
+      'sub.primary': 'Пакет (первичный)', 'sub.master': 'Мешок (вторичный)',
+      'f.weight': 'Масса', 'f.count': 'Пакетов в мешке', 'f.length': 'Длина L', 'f.width': 'Ширина W', 'f.height': 'Высота H',
+      'f.film': 'Плёнка: материал / толщина', 'ph.film': 'напр. PET12 + LDPE50, 62 мкм',
+      'f.sealing': 'Шов', 'o.sealing.heat_seal': 'Термосварка', 'o.sealing.stitching': 'Зашивка',
+      'h.master': 'Только если мешок уже есть (H — глубина фальца, 0 если нет). Иначе мы рассчитаем его сами.',
+      'f.gusset': 'Фальц H', 'f.mmaterial': 'Мешок: материал / толщина', 'ph.mmaterial': 'напр. ПЭ 120 мкм',
       'f.perlayer': 'Пакетов в слое', 'ph.ifknown': 'если известно',
       'a.add': '+ Добавить размер пакета',
-      'f.film': 'Плёнка пакета', 'h.film': 'Структура ламината и общая толщина, если известны.', 'ph.film': 'напр. PET12/PE53, 65 мкм',
-      'sub.master': 'Транспортный мешок',
-      'f.material': 'Тип мешка',
-      'o.master_bag_material.pe_film': 'Рулонная ПЭ-плёнка', 'm.pe_film': 'Термосварка · до 120 пакетов/мин',
-      'o.master_bag_material.pp_woven': 'Мешок из ПП-ткани', 'm.pp_woven': 'Зашивка нитью · до 90 пакетов/мин',
-      'o.not_sure': 'Не знаю', 'm.advise': 'Мы подскажем',
-      'f.arrangement': 'Как пакеты лежат в мешке',
-      'o.arrangement.top_to_top': 'Торец к торцу', 'm.top_to_top': 'Швы пакетов обращены друг к другу',
-      'o.arrangement.side_to_side': 'Бок к боку', 'm.side_to_side': 'Пакеты касаются длинными сторонами',
-      'f.existing': 'Размер текущего мешка', 'h.existing': 'Только если мешок уже есть — иначе мы рассчитаем его сами.',
-      'ph.existing': 'напр. 600 × 400 мм, без фальца',
+      'f.stacking': 'Укладка пакетов',
+      'o.stacking.top_to_top': 'Торец к торцу', 'm.top_to_top': 'Швы пакетов обращены друг к другу',
+      'o.stacking.side_to_side': 'Бок к боку', 'm.side_to_side': 'Пакеты касаются длинными сторонами',
       'f.pain': 'Какую задачу должна решить линия?',
       'h.pain': 'Текущие проблемы, персонал, скорость, качество упаковки — своими словами, на любом языке.',
-      'f.scope': 'Что вам нужно от нас?',
-      'o.scope.primary_packing': 'Первичная фасовка (VFFS + дозатор)', 'o.scope.secondary_bib': 'Вторичная упаковка BIB',
-      'o.scope.conveying': 'Транспортёры и разворот пакетов', 'o.scope.inspection': 'Контрольные весы / металлодетектор',
-      'o.scope.palletizing': 'Паллетирование', 'o.scope.turnkey': 'Линия «под ключ»',
-      'f.capacity': 'Требуемая производительность',
-      'o.capacity_unit.t_per_hour': 'т/ч', 'o.capacity_unit.t_per_day': 'т/сутки', 'o.capacity_unit.pouches_per_min': 'пакетов/мин',
-      'f.accuracy': 'Точность дозирования', 'ph.accuracy': 'напр. ±1 г или ±0,5 %',
+      'sub.speed': 'Скорость и точность',
+      'f.pspeed': 'Скорость первичной упаковки', 'f.sspeed': 'Скорость вторичной упаковки',
+      'h.speed': 'Первичная — пакетов в минуту; вторичная — мешков в минуту.',
+      'f.maccuracy': 'Точность дозирования', 'ph.maccuracy': 'напр. ±2 % @2σ',
+      'f.caccuracy': 'Точность счёта', 'ph.caccuracy': 'напр. 99,9 %',
       'f.machine_material': 'Материал машины',
       'o.machine_material.ss304_contact': 'Контактные части SS304', 'm.ss304_contact': 'Рама из углеродистой стали с порошковой окраской',
       'o.machine_material.ss304_full': 'Полностью SS304', 'm.ss304_full': 'Пищевое исполнение, легко моется',
-      'o.machine_material.ss316_contact': 'Контактные части SS316', 'm.ss316_contact': 'Рама SS304 — для соли и коррозионных продуктов',
+      'o.machine_material.ss316_contact': 'Контактные части SS316L', 'm.ss316_contact': 'Рама SS304 — для соли и коррозионных продуктов',
       'badge.rec': 'Рекомендуем',
       'f.method': 'Как фасуете сейчас',
       'o.current_method.manual': 'Вручную', 'o.current_method.semi_auto': 'Полуавтомат',
       'o.current_method.automatic': 'Автомат (модернизация)', 'o.current_method.new_project': 'Новый проект',
-      'sub.site': 'Энергоносители', 'f.voltage': 'Напряжение', 'f.frequency': 'Частота', 'f.phase': 'Фазы',
+      'sub.scope': 'Объём поставки', 'f.scope': 'Что мы должны поставить?',
+      'o.scope.feeding_elevator': 'Подъёмник подачи', 'o.scope.metering_scale': 'Дозатор',
+      'o.scope.primary_packer': 'Машина первичной фасовки', 'o.scope.secondary_packer': 'Машина вторичной упаковки (BIB)',
+      'o.scope.checkweigher': 'Контрольные весы', 'o.scope.metal_detector': 'Металлодетектор',
+      'o.scope.palletizer': 'Паллетайзер', 'o.scope.other': 'Другое',
+      'sub.site': 'Площадка', 'f.voltage': 'Напряжение', 'f.frequency': 'Частота', 'f.phase': 'Фазы',
       'o.frequency_hz.50': '50 Гц', 'o.frequency_hz.60': '60 Гц', 'o.phase.3': '3 фазы', 'o.phase.1': '1 фаза',
       'f.air': 'Сжатый воздух', 'o.compressed_air.yes': 'Есть', 'o.compressed_air.no': 'Нет',
+      'f.conditions': 'Условия на площадке',
+      'o.conditions.hot': 'Температура выше 40 °C', 'o.conditions.humid_coastal': 'Влажно / у моря',
+      'o.conditions.power_cuts': 'Частые отключения электричества', 'o.conditions.multi_floor': 'Линия на нескольких этажах',
       'f.space': 'Свободная площадь', 'ph.space': 'напр. 20 × 8 м, потолок 5 м',
       'h.contact': 'Куда отправить предварительное предложение?',
       'f.name': 'Ваше имя', 'f.company': 'Компания', 'f.country': 'Страна', 'f.role': 'Должность', 'ph.role': 'напр. директор завода',
@@ -1374,67 +1424,78 @@
       'manual.body': 'Ответы готовы. Отправьте их нам через WhatsApp или по email — так мы их получим.',
       'manual.pdf': 'Ответы готовы. Сохраните их в PDF и отправьте тому, кто прислал вам эту ссылку.',
       'a.wa': 'Отправить в WhatsApp', 'a.mail': 'Отправить по email', 'a.pdf': 'Сохранить PDF', 'a.new': 'Заполнить новый опрос',
-      'err.required': 'Обязательное поле', 'err.number': 'Введите число больше 0', 'err.nonneg': 'Введите число (0 или больше)', 'err.integer': 'Введите целое число больше 0',
+      'err.required': 'Обязательное поле', 'err.number': 'Введите число больше 0', 'err.nonneg': 'Введите число (0 или больше)',
+      'err.integer': 'Введите целое число больше 0', 'err.size': 'Укажите размер заполненного пакета — или отметьте «нет образца» выше',
       'err.reach': 'Укажите email или WhatsApp', 'err.email': 'Проверьте адрес email', 'err.pick': 'Выберите хотя бы один вариант',
       'err.fix': 'Проверьте отмеченные поля.', 'err.send': 'Не удалось отправить. Отправьте ответы через WhatsApp или email ниже.',
-      'match.k': 'Предварительный подбор машины', 'match.none': 'Выберите тип мешка — покажем подходящую машину.',
-      'match.note': 'Предварительная оценка — инженер уточнит.',
+      'match.k': 'Предварительный подбор машины', 'match.none': 'Выберите тип линии — покажем подходящую машину.',
+      'match.note': 'Предварительная оценка — инженер уточнит по реальным размерам пакетов.',
       'pv.weight': '≈ {kg} кг в мешке', 'pv.bag': 'пустой мешок ≈ {l} × {w} × {h} мм', 'pv.speed': 'до {bpm} мешков/мин',
-      'pv.need': 'цель {ppm} пакетов/мин → машин BIB: {n}',
-      'r.dims': 'L × W × T', 'r.pcs': 'шт.',
+      'pv.need': 'машин BIB для вашей скорости: {n}',
+      'r.size': 'L × W × H', 'r.est': 'оценка', 'r.layer': 'в слое', 'r.master': 'Мешок',
     },
     zh: {
       'brand.name': '景',
       'title': '袋中袋<br>产线<span class="accent">需求问卷</span>',
       'lead': '四个简短步骤，约 5 分钟。只有标 <span class="req">*</span> 的为必填——不确定的数值可以留空，我们会和您一起确认。',
-      'step.1': '产品', 'step.2': '包装', 'step.3': '产线与现场', 'step.4': '联系方式',
-      'f.category': '产品类别',
+      'step.1': '物料', 'step.2': '小袋与大袋', 'step.3': '工艺与供货', 'step.4': '联系方式',
+      'f.category': '物料',
       'o.category.salt': '盐', 'o.category.sugar': '糖', 'o.category.rice': '大米', 'o.category.seeds': '种子',
       'o.category.detergent': '洗衣粉', 'o.category.flour': '面粉', 'o.category.other': '其他',
-      'f.description': '产品名称与描述', 'ph.description': '例：精制加碘盐，干燥晶体',
-      'f.form': '物料形态',
-      'o.form.granule': '颗粒', 'o.form.crystal': '晶体', 'o.form.powder': '粉末', 'o.form.flake': '片状', 'o.form.other': '其他',
-      'f.traits': '物料特性', 'h.multi': '可多选。',
-      'o.traits.free_flowing': '流动性好', 'o.traits.dusty': '易起粉尘', 'o.traits.sticky': '易粘结 / 结块',
-      'o.traits.hygroscopic': '易吸潮', 'o.traits.corrosive': '有腐蚀性', 'o.traits.fragile': '易碎',
-      'f.particle': '粒径', 'f.density': '堆积密度', 'f.moisture': '含水率',
+      'f.name_desc': '物料名称与描述', 'ph.name_desc': '例：精制加碘盐，干燥晶体',
+      'f.particle': '粒径分布 PSD', 'f.density': '堆积密度', 'f.moisture': '含水率',
       'h.density': '堆积密度参考：盐 ≈ 1.2 · 糖 ≈ 0.85 · 大米 ≈ 0.8 · 面粉 ≈ 0.55 g/cm³。',
-      'sub.pouches': '小袋（一次包装）',
-      'h.pouches': '测量平放的满袋尺寸。每种小袋规格各填一行。',
-      'c.pouch': '小袋', 'a.remove': '删除',
-      'f.weight': '重量', 'f.count': '每大袋小袋数', 'f.length': '长 L', 'f.width': '宽 W', 'f.thickness': '厚 T',
+      'f.flow': '流动性',
+      'o.flowability.good': '好', 'o.flowability.fair': '一般', 'o.flowability.poor': '差',
+      'f.traits': '其他特性', 'h.multi': '可多选。',
+      'o.traits.corrosive': '腐蚀性', 'o.traits.toxic': '毒性', 'o.traits.abrasive': '磨蚀性',
+      'o.traits.static': '易产生静电', 'o.traits.leaky': '易渗漏（细粉）', 'o.traits.hygroscopic': '吸湿',
+      'o.traits.dusty': '计量时产尘',
+      'f.line': '线别',
+      'o.line.roll_film': '卷膜线', 'm.roll_film': 'PE 卷膜成型大袋 · 热合 · 最高 120 包/分',
+      'o.line.woven_bag': '编织袋线', 'm.woven_bag': 'PP 编织大袋 · 缝线 · 最高 90 包/分',
+      'o.not_sure': '不确定', 'm.advise': '由我们建议',
+      'sub.skus': '小袋与大袋',
+      'h.pouches': '测量真实满袋小袋平放的长 × 宽 × 高。每种规格一张卡片。',
+      'f.estimate': '我暂时没有小袋样品。请先按行业参考值出一版参考方案，我之后会实测确认。',
+      'c.bag': '规格', 'a.remove': '删除',
+      'sub.primary': '小袋 Primary', 'sub.master': '大袋 Master',
+      'f.weight': '克重', 'f.count': '每大袋小袋数', 'f.length': '长 L', 'f.width': '宽 W', 'f.height': '高 H',
+      'f.film': '膜材 / 厚度', 'ph.film': '例：PET12 + LDPE50，62 µm',
+      'f.sealing': '封口', 'o.sealing.heat_seal': '热合', 'o.sealing.stitching': '线缝',
+      'h.master': '仅在已有大袋时填写（H 为 M 边深度，无 M 边填 0），否则由我们计算。',
+      'f.gusset': 'M 边 H', 'f.mmaterial': '大袋材质 / 厚度', 'ph.mmaterial': '例：PE 120 µm',
       'f.perlayer': '每层小袋数', 'ph.ifknown': '如已知',
       'a.add': '+ 添加另一种规格',
-      'f.film': '小袋膜材', 'h.film': '复合结构与总厚度（如已知）。', 'ph.film': '例：PET12/PE53，65 µm',
-      'sub.master': '外包装大袋',
-      'f.material': '大袋类型',
-      'o.master_bag_material.pe_film': 'PE卷膜袋', 'm.pe_film': '热合封口 · 最高 120 包/分',
-      'o.master_bag_material.pp_woven': 'PP编织袋', 'm.pp_woven': '缝线封口 · 最高 90 包/分',
-      'o.not_sure': '不确定', 'm.advise': '由我们建议',
-      'f.arrangement': '小袋在大袋中的排列',
-      'o.arrangement.top_to_top': '头对头', 'm.top_to_top': '封口端相对',
-      'o.arrangement.side_to_side': '肩靠肩', 'm.side_to_side': '长边相靠',
-      'f.existing': '现有大袋尺寸', 'h.existing': '仅在已有大袋时填写，否则由我们计算。', 'ph.existing': '例：600 × 400 mm，无折边',
+      'f.stacking': '堆叠方式',
+      'o.stacking.top_to_top': '头对头', 'm.top_to_top': '封口端相对',
+      'o.stacking.side_to_side': '肩靠肩', 'm.side_to_side': '长边相靠',
       'f.pain': '这条产线要为您解决什么问题？',
       'h.pain': '现有痛点、人工、速度、包装质量——用您自己的话，任何语言均可。',
-      'f.scope': '需要我们提供什么？',
-      'o.scope.primary_packing': '一次包装（立式包装机 + 称重）', 'o.scope.secondary_bib': '二次袋中袋包装',
-      'o.scope.conveying': '输送与理袋', 'o.scope.inspection': '复检秤 / 金属检测',
-      'o.scope.palletizing': '码垛', 'o.scope.turnkey': '整线交钥匙',
-      'f.capacity': '目标产能',
-      'o.capacity_unit.t_per_hour': '吨/时', 'o.capacity_unit.t_per_day': '吨/天', 'o.capacity_unit.pouches_per_min': '包/分',
-      'f.accuracy': '称重精度', 'ph.accuracy': '例：±1 g 或 ±0.5%',
+      'sub.speed': '速度与精度',
+      'f.pspeed': '小袋速度', 'f.sspeed': '大袋速度',
+      'h.speed': '小袋速度 = 每分钟小袋数；大袋速度 = 每分钟大袋数。',
+      'f.maccuracy': '计量精度', 'ph.maccuracy': '例：±2% @2σ',
+      'f.caccuracy': '计数精度', 'ph.caccuracy': '例：99.9%',
       'f.machine_material': '设备材质',
       'o.machine_material.ss304_contact': '接触件 SS304', 'm.ss304_contact': '碳钢喷塑机架',
       'o.machine_material.ss304_full': '全 SS304 不锈钢', 'm.ss304_full': '食品级，易清洗',
-      'o.machine_material.ss316_contact': '接触件 SS316', 'm.ss316_contact': 'SS304 机架——适合盐及腐蚀性物料',
+      'o.machine_material.ss316_contact': '接触件 SS316L', 'm.ss316_contact': 'SS304 机架——适合盐及腐蚀性物料',
       'badge.rec': '推荐',
       'f.method': '当前包装方式',
       'o.current_method.manual': '人工', 'o.current_method.semi_auto': '半自动',
       'o.current_method.automatic': '自动（升级）', 'o.current_method.new_project': '新项目',
-      'sub.site': '现场公用条件', 'f.voltage': '电压', 'f.frequency': '频率', 'f.phase': '相数',
+      'sub.scope': '供货范围', 'f.scope': '需要我们供应哪些设备？',
+      'o.scope.feeding_elevator': '供料提升机', 'o.scope.metering_scale': '计量秤',
+      'o.scope.primary_packer': '一次包装机', 'o.scope.secondary_packer': '二次包装机（BIB）',
+      'o.scope.checkweigher': '检重秤', 'o.scope.metal_detector': '金属检测机',
+      'o.scope.palletizer': '码垛机', 'o.scope.other': '其他',
+      'sub.site': '现场条件', 'f.voltage': '电压', 'f.frequency': '频率', 'f.phase': '相数',
       'o.phase.3': '三相', 'o.phase.1': '单相',
       'f.air': '压缩空气', 'o.compressed_air.yes': '有', 'o.compressed_air.no': '无',
+      'f.conditions': '现场环境',
+      'o.conditions.hot': '环境温度超过 40 °C', 'o.conditions.humid_coastal': '潮湿 / 沿海',
+      'o.conditions.power_cuts': '经常停电', 'o.conditions.multi_floor': '产线跨楼层',
       'f.space': '可用场地', 'ph.space': '例：20 × 8 m，层高 5 m',
       'h.contact': '初步方案发送给谁？',
       'f.name': '您的姓名', 'f.company': '公司', 'f.country': '国家', 'f.role': '职位', 'ph.role': '例：厂长',
@@ -1451,14 +1512,15 @@
       'manual.body': '您的回答已整理好，请通过 WhatsApp 或邮件发送给我们，我们才能收到。',
       'manual.pdf': '您的回答已整理好，请保存为 PDF，发给向您发送此链接的人。',
       'a.wa': '通过 WhatsApp 发送', 'a.mail': '通过邮件发送', 'a.pdf': '保存为 PDF', 'a.new': '填写新问卷',
-      'err.required': '必填', 'err.number': '请输入大于 0 的数字', 'err.nonneg': '请输入数字（0 或以上）', 'err.integer': '请输入大于 0 的整数',
+      'err.required': '必填', 'err.number': '请输入大于 0 的数字', 'err.nonneg': '请输入数字（0 或以上）',
+      'err.integer': '请输入大于 0 的整数', 'err.size': '请填写满袋尺寸——或在上方勾选"暂无样品"',
       'err.reach': '请填写邮箱或 WhatsApp', 'err.email': '请检查邮箱格式', 'err.pick': '请至少选择一项',
       'err.fix': '请检查标出的字段。', 'err.send': '提交失败，请用下方 WhatsApp 或邮件发送。',
-      'match.k': '初步机型匹配', 'match.none': '选择大袋类型后，这里显示匹配机型。',
-      'match.note': '初步估算，工程师将确认。',
+      'match.k': '初步机型匹配', 'match.none': '选择线别后，这里显示匹配机型。',
+      'match.note': '初步估算，工程师将凭实测小袋尺寸确认。',
       'pv.weight': '每大袋 ≈ {kg} kg', 'pv.bag': '空袋 ≈ {l} × {w} × {h} mm', 'pv.speed': '最高 {bpm} 袋/分',
-      'pv.need': '目标 {ppm} 包/分 → 需 {n} 台 BIB',
-      'r.dims': '长 × 宽 × 厚', 'r.pcs': '包',
+      'pv.need': '按您的速度需 {n} 台 BIB',
+      'r.size': '长 × 宽 × 高', 'r.est': '估算', 'r.layer': '每层', 'r.master': '大袋',
     },
   };
   // English strings that exist only in script (everything else is read from the markup).
@@ -1468,14 +1530,15 @@
     'ok.title': 'Received', 'ok.body': 'Thank you, {name}. We will review your line and come back with a preliminary proposal.',
     'manual.title': 'One last step', 'manual.body': 'Your answers are ready. Send them to us on WhatsApp or by email so we receive them.',
     'manual.pdf': 'Your answers are ready. Save them as a PDF and send it to the person who shared this link with you.',
-    'err.required': 'This field is required', 'err.number': 'Enter a number greater than 0', 'err.nonneg': 'Enter a number (0 or more)', 'err.integer': 'Enter a whole number greater than 0',
+    'err.required': 'This field is required', 'err.number': 'Enter a number greater than 0', 'err.nonneg': 'Enter a number (0 or more)',
+    'err.integer': 'Enter a whole number greater than 0', 'err.size': 'Enter the filled pouch size — or tick "no sample yet" above',
     'err.reach': 'Enter an email or a WhatsApp number', 'err.email': 'Check this email address', 'err.pick': 'Select at least one option',
     'err.fix': 'Please check the highlighted fields.', 'err.send': 'Could not send. Please use WhatsApp or email below.',
-    'match.k': 'Preliminary machine match', 'match.none': 'Choose a master bag type to see the matching machine.',
-    'match.note': 'Preliminary estimate — our engineer will confirm.',
+    'match.k': 'Preliminary machine match', 'match.none': 'Choose a line type to see the matching machine.',
+    'match.note': 'Preliminary estimate — our engineer will confirm from measured pouch sizes.',
     'pv.weight': '≈ {kg} kg per master bag', 'pv.bag': 'empty bag ≈ {l} × {w} × {h} mm', 'pv.speed': 'up to {bpm} bags/min',
-    'pv.need': 'target {ppm} pouches/min → {n} BIB machine(s)',
-    'r.dims': 'L × W × T', 'r.pcs': 'pcs',
+    'pv.need': '{n} BIB machine(s) for your primary speed',
+    'r.size': 'L × W × H', 'r.est': 'estimate', 'r.layer': 'per layer', 'r.master': 'Master',
   };
   const EN = {};
   let lang = 'en';
@@ -1517,7 +1580,7 @@
   const SOURCE = new URLSearchParams(location.search).get('src') || null;
   const parseNum = v => {
     if (v == null) return null;
-    let s = String(v).trim().replace(/[\s\u00a0]/g, '');
+    let s = String(v).trim().replace(/[\s ]/g, '');
     if (!s) return null;
     // "1,000" is a thousands separator in EN/ZH; Russian writes decimals with a comma ("1,2").
     if (lang !== 'ru' && /^\d{1,3}(,\d{3})+(\.\d+)?$/.test(s)) s = s.replace(/,/g, '');
@@ -1533,9 +1596,11 @@
   const numCode = v => (v != null && /^\d+$/.test(v) ? Number(v) : v);
   const vInput = (card, k) => $(`[data-k="${k}"]`, card);
   const vNum = (card, k) => parseNum(vInput(card, k).value);
+  const vText = (card, k) => vInput(card, k).value.trim() || null;
+  const vRadio = (card, k) => { const el = $(`[data-k="${k}"]:checked`, card); return el ? el.value : null; };
+  const estimateRequested = () => F.elements.pouch_estimate.checked;
 
   function collect() {
-    const capValue = num('capacity_value');
     return {
       schema: Core.SCHEMA,
       id: null,
@@ -1546,30 +1611,40 @@
         name: text('name'), company: text('company'), country: text('country'),
         role: text('role'), email: text('email'), whatsapp: text('whatsapp'),
       },
-      product: {
-        category: radio('category'), description: text('description'), form: radio('form'), traits: checks('traits'),
-        particle_size_mm: text('particle_size_mm'), bulk_density_g_cm3: num('bulk_density_g_cm3'), moisture_pct: num('moisture_pct'),
+      material: {
+        category: radio('category'), name: text('material_name'), particle_size: text('particle_size'),
+        bulk_density_g_cm3: num('bulk_density_g_cm3'), moisture_pct: num('moisture_pct'),
+        flowability: radio('flowability'), traits: checks('traits'),
       },
-      pouches: $$('.variant', variantsEl).map(card => ({
-        weight_g: finite(vNum(card, 'weight_g')),
-        length_mm: finite(vNum(card, 'length_mm')),
-        width_mm: finite(vNum(card, 'width_mm')),
-        thickness_mm: finite(vNum(card, 'thickness_mm')),
-        pouches_per_bag: finite(vNum(card, 'pouches_per_bag')),
-        per_layer: finite(vNum(card, 'per_layer')),
-      })),
       packaging: {
-        pouch_film: text('pouch_film'), master_bag_material: radio('master_bag_material'),
-        arrangement: radio('arrangement'), existing_master_bag: text('existing_master_bag'),
+        line: radio('line'),
+        stacking: radio('stacking'),
+        pouch_size_status: estimateRequested() ? 'estimate_requested' : 'measured',
+        skus: $$('.variant', variantsEl).map(card => ({
+          weight_g: finite(vNum(card, 'weight_g')),
+          length_mm: finite(vNum(card, 'length_mm')),
+          width_mm: finite(vNum(card, 'width_mm')),
+          height_mm: finite(vNum(card, 'height_mm')),
+          film: vText(card, 'film'),
+          sealing: vRadio(card, 'sealing'),
+          pouches_per_master: finite(vNum(card, 'pouches_per_master')),
+          per_layer: finite(vNum(card, 'per_layer')),
+          master_length_mm: finite(vNum(card, 'master_length_mm')),
+          master_width_mm: finite(vNum(card, 'master_width_mm')),
+          master_gusset_mm: finite(vNum(card, 'master_gusset_mm')),
+          master_material: vText(card, 'master_material'),
+        })),
       },
-      line: {
-        pain_points: text('pain_points'), scope: checks('scope'),
-        target_capacity: capValue ? { value: capValue, unit: F.elements.capacity_unit.value } : null,
-        weighing_accuracy: text('weighing_accuracy'), machine_material: radio('machine_material'), current_method: radio('current_method'),
+      process: {
+        pain_points: text('pain_points'),
+        primary_speed_ppm: num('primary_speed_ppm'), secondary_speed_bpm: num('secondary_speed_bpm'),
+        metering_accuracy: text('metering_accuracy'), counting_accuracy: text('counting_accuracy'),
+        machine_material: radio('machine_material'), current_method: radio('current_method'),
       },
+      scope: checks('scope'),
       site: {
         voltage_v: num('voltage_v'), frequency_hz: numCode(radio('frequency_hz')), phase: numCode(radio('phase')),
-        compressed_air: radio('compressed_air'), space: text('space'),
+        compressed_air: radio('compressed_air'), conditions: checks('conditions'), space: text('space'),
       },
       project: { timeline: radio('timeline') },
     };
@@ -1579,32 +1654,43 @@
     const setText = (n, v) => { const el = F.elements[n]; if (el && v != null) el.value = v; };
     const setRadio = (n, v) => { if (v == null) return; const el = F.querySelector(`input[name="${n}"][value="${v}"]`); if (el) el.checked = true; };
     const setChecks = (n, arr) => (arr || []).forEach(v => setRadio(n, v));
-    const c = s.contact || {}, p = s.product || {}, k = s.packaging || {}, l = s.line || {}, site = s.site || {};
+    const c = s.contact || {}, m = s.material || {}, k = s.packaging || {}, pr = s.process || {}, site = s.site || {};
     ['name', 'company', 'country', 'role', 'email', 'whatsapp'].forEach(n => setText(n, c[n]));
-    setRadio('category', p.category); setText('description', p.description); setRadio('form', p.form); setChecks('traits', p.traits);
-    setText('particle_size_mm', p.particle_size_mm); setText('bulk_density_g_cm3', p.bulk_density_g_cm3); setText('moisture_pct', p.moisture_pct);
-    setText('pouch_film', k.pouch_film); setRadio('master_bag_material', k.master_bag_material);
-    setRadio('arrangement', k.arrangement); setText('existing_master_bag', k.existing_master_bag);
-    setText('pain_points', l.pain_points); setChecks('scope', l.scope);
-    if (l.target_capacity) { setText('capacity_value', l.target_capacity.value); F.elements.capacity_unit.value = l.target_capacity.unit; }
-    setText('weighing_accuracy', l.weighing_accuracy); setRadio('machine_material', l.machine_material); setRadio('current_method', l.current_method);
+    setRadio('category', m.category); setText('material_name', m.name); setText('particle_size', m.particle_size);
+    setText('bulk_density_g_cm3', m.bulk_density_g_cm3); setText('moisture_pct', m.moisture_pct);
+    setRadio('flowability', m.flowability); setChecks('traits', m.traits);
+    setRadio('line', k.line); setRadio('stacking', k.stacking);
+    F.elements.pouch_estimate.checked = k.pouch_size_status === 'estimate_requested';
+    setText('pain_points', pr.pain_points); setText('primary_speed_ppm', pr.primary_speed_ppm); setText('secondary_speed_bpm', pr.secondary_speed_bpm);
+    setText('metering_accuracy', pr.metering_accuracy); setText('counting_accuracy', pr.counting_accuracy);
+    setRadio('machine_material', pr.machine_material); setRadio('current_method', pr.current_method);
+    setChecks('scope', s.scope);
     setText('voltage_v', site.voltage_v); setRadio('frequency_hz', site.frequency_hz); setRadio('phase', site.phase);
-    setRadio('compressed_air', site.compressed_air); setText('space', site.space);
+    setRadio('compressed_air', site.compressed_air); setChecks('conditions', site.conditions); setText('space', site.space);
     setRadio('timeline', (s.project || {}).timeline);
     variantsEl.innerHTML = '';
-    const list = s.pouches && s.pouches.length ? s.pouches : [{}];
+    const list = k.skus && k.skus.length ? k.skus : [{}];
     list.slice(0, MAX_VARIANTS).forEach(v => addVariant(v));
+    refreshSizeRequired();
   }
 
-  // ======== Pouch variants ========
+  // ======== Pouch-size cards (Bag-n / Master-n) ========
   const variantsEl = $('#variants');
   const tpl = $('#tpl-variant');
   function addVariant(values) {
     const node = tpl.content.firstElementChild.cloneNode(true);
     applyI18n(node);
-    if (values) Object.entries(values).forEach(([k, v]) => { const el = vInput(node, k); if (el && v != null) el.value = v; });
+    if (values) {
+      Object.entries(values).forEach(([k, v]) => {
+        if (v == null) return;
+        if (k === 'sealing') { const r = $(`[data-k="sealing"][value="${v}"]`, node); if (r) r.checked = true; return; }
+        const el = vInput(node, k);
+        if (el) el.value = v;
+      });
+    }
     variantsEl.appendChild(node);
     renumberVariants();
+    refreshSizeRequired();
     return node;
   }
   function renumberVariants() {
@@ -1613,15 +1699,21 @@
       $('.vn', card).textContent = i + 1;
       $('.v-remove', card).hidden = cards.length === 1;
       $$('[data-k]', card).forEach(inp => {
-        inp.name = `pouches[${i}][${inp.dataset.k}]`;
-        inp.id = `p${i}_${inp.dataset.k}`;
+        inp.name = `skus[${i}][${inp.dataset.k}]`;
+        if (inp.type === 'radio') return;
+        inp.id = `s${i}_${inp.dataset.k}`;
+        const lab = inp.closest('.field').querySelector('label.label');
+        if (lab) lab.htmlFor = inp.id;
         if (!('example' in inp.dataset)) inp.dataset.example = inp.getAttribute('placeholder') || '';
         if (!inp.dataset.i18nPh) inp.setAttribute('placeholder', i === 0 ? inp.dataset.example : '');
-        const lab = inp.closest('.field').querySelector('label');
-        if (lab) lab.htmlFor = inp.id;
       });
     });
     $('#add-variant').hidden = cards.length >= MAX_VARIANTS;
+  }
+  // Pouch size is required (URD rule 0) unless the customer explicitly asks for an estimate-based proposal.
+  function refreshSizeRequired() {
+    const optional = estimateRequested();
+    $$('.size-req', variantsEl).forEach(el => { el.hidden = optional; });
   }
   $('#add-variant').addEventListener('click', () => {
     const node = addVariant();
@@ -1647,16 +1739,15 @@
       if (x.master_bag_weight_kg != null) parts.push(t('pv.weight', { kg: `<b>${x.master_bag_weight_kg}</b>` }));
       if (x.empty_bag_mm) parts.push(t('pv.bag', { l: x.empty_bag_mm.length, w: x.empty_bag_mm.width, h: x.empty_bag_mm.height }));
       if (x.max_bags_per_min != null) parts.push(t('pv.speed', { bpm: x.max_bags_per_min }));
-      if (x.bib_machines_needed) parts.push(t('pv.need', { ppm: x.target_pouches_per_min, n: `<b>${x.bib_machines_needed}</b>` }));
+      if (x.bib_machines_needed) parts.push(t('pv.need', { n: `<b>${x.bib_machines_needed}</b>` }));
       $('.preview', card).innerHTML = parts.map(p => `<span>${p}</span>`).join('');
     });
-    const m = d.machine;
-    const mat = s.packaging.master_bag_material;
-    $('#match').innerHTML = m
-      ? `<div class="k">${t('match.k')}</div><div class="model">${m.model}</div>
-         <div class="v">${t('o.master_bag_material.' + mat)} · ${t('m.' + mat)}</div><div class="note">${t('match.note')}</div>`
+    const line = s.packaging.line;
+    $('#match').innerHTML = d.machine
+      ? `<div class="k">${t('match.k')}</div><div class="model">${d.machine.model}</div>
+         <div class="v">${t('o.line.' + line)} · ${t('m.' + line)}</div><div class="note">${t('match.note')}</div>`
       : `<div class="k">${t('match.k')}</div><div class="v">${t('match.none')}</div>`;
-    const corrosive = s.product.traits.includes('corrosive') || s.product.category === 'salt';
+    const corrosive = s.material.traits.includes('corrosive') || s.material.category === 'salt';
     $('#opt-ss316 .badge').hidden = !corrosive;
   }
 
@@ -1733,16 +1824,22 @@
       $$('[data-num]', panel).forEach(optionalNumber);
     }
     if (n === 2) {
+      need(radio('line'), group('line'), 'err.required');
+      const sizeOptional = estimateRequested();
       $$('.variant', variantsEl).forEach(card => {
         const w = vNum(card, 'weight_g');
         need(w > 0, fieldOf(vInput(card, 'weight_g')), w === null ? 'err.required' : 'err.number');
-        const c = vNum(card, 'pouches_per_bag');
-        need(Number.isInteger(c) && c > 0, fieldOf(vInput(card, 'pouches_per_bag')), c === null ? 'err.required' : 'err.integer');
-        ['length_mm', 'width_mm', 'thickness_mm'].forEach(k => optionalNumber(vInput(card, k)));
+        const c = vNum(card, 'pouches_per_master');
+        need(Number.isInteger(c) && c > 0, fieldOf(vInput(card, 'pouches_per_master')), c === null ? 'err.required' : 'err.integer');
+        ['length_mm', 'width_mm', 'height_mm'].forEach(k => {
+          const v = vNum(card, k);
+          if (v === null) need(sizeOptional, fieldOf(vInput(card, k)), 'err.size');
+          else need(v > 0, fieldOf(vInput(card, k)), 'err.number');
+        });
+        ['master_length_mm', 'master_width_mm', 'master_gusset_mm'].forEach(k => optionalNumber(vInput(card, k)));
         const pl = vNum(card, 'per_layer');
         need(pl === null || (Number.isInteger(pl) && pl > 0), fieldOf(vInput(card, 'per_layer')), 'err.integer');
       });
-      need(radio('master_bag_material'), group('master_bag_material'), 'err.required');
     }
     if (n === 3) {
       need(checks('scope').length > 0, group('scope'), 'err.pick');
@@ -1774,39 +1871,44 @@
   });
 
   // ======== Review ========
-  const enumT = (group, v) => {
+  const enumT = (grp, v) => {
     if (v == null) return null;
-    const key = `o.${group}.${v}`;
+    const key = `o.${grp}.${v}`;
     return plain(has(key) ? t(key) : t(`o.${v}`));
   };
-  const multiT = (group, arr) => (arr && arr.length ? arr.map(v => enumT(group, v)).join(', ') : null);
+  const multiT = (grp, arr) => (arr && arr.length ? arr.map(v => enumT(grp, v)).join(', ') : null);
   const unit = (v, u) => (v == null || v === '' ? null : `${v} ${u}`);
+  const L = key => plain(t(key));
 
   function reviewHTML(s) {
-    const p = s.product, k = s.packaging, l = s.line, site = s.site, c = s.contact;
-    const pouchRows = s.pouches.map((x, i) => {
-      const dims = x.length_mm && x.width_mm && x.thickness_mm ? `${t('r.dims')} ${x.length_mm} × ${x.width_mm} × ${x.thickness_mm} mm` : null;
-      const val = [unit(x.weight_g, 'g'), dims, x.pouches_per_bag ? `${plain(t('f.count'))}: ${x.pouches_per_bag}` : null,
-        x.per_layer ? `${plain(t('f.perlayer'))}: ${x.per_layer}` : null].filter(Boolean).join(' · ');
-      return [`${plain(t('c.pouch'))} ${i + 1}`, val];
+    const m = s.material, k = s.packaging, pr = s.process, site = s.site, c = s.contact;
+    const estimate = k.pouch_size_status === 'estimate_requested';
+    const bagRows = k.skus.flatMap((x, i) => {
+      const size = x.length_mm && x.width_mm && x.height_mm
+        ? `${t('r.size')} ${x.length_mm} × ${x.width_mm} × ${x.height_mm} mm${estimate ? ` (${t('r.est')})` : ''}` : null;
+      const primary = [unit(x.weight_g, 'g'), size, x.film, enumT('sealing', x.sealing)].filter(Boolean).join(' · ');
+      const msize = x.master_length_mm && x.master_width_mm ? `${x.master_length_mm} × ${x.master_width_mm} × ${x.master_gusset_mm ?? 0} mm` : null;
+      const master = [x.pouches_per_master ? `${L('f.count')}: ${x.pouches_per_master}` : null, msize, x.master_material,
+        x.per_layer ? `${t('r.layer')} ${x.per_layer}` : null].filter(Boolean).join(' · ');
+      return [[`${L('c.bag')}-${i + 1}`, primary], [`${t('r.master')}-${i + 1}`, master]];
     });
     const power = [unit(site.voltage_v, 'V'), enumT('frequency_hz', site.frequency_hz), enumT('phase', site.phase)].filter(Boolean).join(' · ') || null;
     const sections = [
       [1, [
-        ['f.category', enumT('category', p.category)], ['f.description', p.description], ['f.form', enumT('form', p.form)],
-        ['f.traits', multiT('traits', p.traits)], ['f.particle', unit(p.particle_size_mm, 'mm')],
-        ['f.density', unit(p.bulk_density_g_cm3, 'g/cm³')], ['f.moisture', unit(p.moisture_pct, '%')],
+        ['f.category', enumT('category', m.category)], ['f.name_desc', m.name], ['f.particle', unit(m.particle_size, 'mm')],
+        ['f.density', unit(m.bulk_density_g_cm3, 'g/cm³')], ['f.moisture', unit(m.moisture_pct, '%')],
+        ['f.flow', enumT('flowability', m.flowability)], ['f.traits', multiT('traits', m.traits)],
       ]],
       [2, [
-        ...pouchRows, ['f.film', k.pouch_film], ['f.material', enumT('master_bag_material', k.master_bag_material)],
-        ['f.arrangement', enumT('arrangement', k.arrangement)], ['f.existing', k.existing_master_bag],
+        ['f.line', enumT('line', k.line)], ...(estimate ? [['f.estimate', '✓']] : []), ...bagRows,
+        ['f.stacking', enumT('stacking', k.stacking)],
       ]],
       [3, [
-        ['f.pain', l.pain_points], ['f.scope', multiT('scope', l.scope)],
-        ['f.capacity', l.target_capacity ? `${l.target_capacity.value} ${enumT('capacity_unit', l.target_capacity.unit)}` : null],
-        ['f.accuracy', l.weighing_accuracy], ['f.machine_material', enumT('machine_material', l.machine_material)],
-        ['f.method', enumT('current_method', l.current_method)], ['sub.site', power],
-        ['f.air', enumT('compressed_air', site.compressed_air)], ['f.space', site.space],
+        ['f.pain', pr.pain_points], ['f.pspeed', unit(pr.primary_speed_ppm, 'pcs/min')], ['f.sspeed', unit(pr.secondary_speed_bpm, 'bags/min')],
+        ['f.maccuracy', pr.metering_accuracy], ['f.caccuracy', pr.counting_accuracy],
+        ['f.machine_material', enumT('machine_material', pr.machine_material)], ['f.method', enumT('current_method', pr.current_method)],
+        ['f.scope', multiT('scope', s.scope)], ['sub.site', power], ['f.air', enumT('compressed_air', site.compressed_air)],
+        ['f.conditions', multiT('conditions', site.conditions)], ['f.space', site.space],
       ]],
       [4, [
         ['f.name', c.name], ['f.company', c.company], ['f.country', c.country], ['f.role', c.role],
@@ -1815,10 +1917,10 @@
     ];
     return sections.map(([n, rows]) => `
       <section>
-        <div class="rh"><h4>${String(n).padStart(2, '0')} · ${esc(plain(t('step.' + n)))}</h4>
+        <div class="rh"><h4>${String(n).padStart(2, '0')} · ${esc(L('step.' + n))}</h4>
           <button type="button" class="btn-text" data-edit="${n}">${esc(t('a.edit'))}</button></div>
         <dl>${rows.map(([lab, val]) => {
-          const name = has(lab) ? plain(t(lab)) : lab;
+          const name = has(lab) ? L(lab) : lab;
           return `<dt>${esc(name)}</dt><dd${val ? '' : ' class="none"'}>${val ? esc(val) : '—'}</dd>`;
         }).join('')}</dl>
       </section>`).join('');
@@ -1838,7 +1940,12 @@
       $('#status').textContent = t('s.saved');
     }, 400);
   }
-  const onEdit = () => { refreshDerived(); if (step === TOTAL) renderReview(); saveDraftSoon(); };
+  const onEdit = e => {
+    if (e && e.target && e.target.name === 'pouch_estimate') refreshSizeRequired();
+    refreshDerived();
+    if (step === TOTAL) renderReview();
+    saveDraftSoon();
+  };
   F.addEventListener('input', onEdit);
   F.addEventListener('change', onEdit);
 
@@ -1890,8 +1997,8 @@
     $('#nav').hidden = true;
     $('#steps').hidden = true;
     $('#done').hidden = false;
-    $('#done-title').textContent = delivered ? t('ok.title') : t('manual.title');
     const channel = CONFIG.whatsapp || CONFIG.email;
+    $('#done-title').textContent = delivered ? t('ok.title') : t('manual.title');
     $('#done-body').textContent = delivered ? t('ok.body', { name: s.contact.name }) : t(channel ? 'manual.body' : 'manual.pdf');
     $('#done-ref').textContent = s.id;
 
@@ -1958,14 +2065,14 @@
         return;
       }
       el.innerHTML = list.map((s, i) => {
-        const c = s.contact || {}, p = s.product || {};
-        const sizes = (s.pouches || []).map(x => `${x.weight_g ?? '?'} g × ${x.pouches_per_bag ?? '?'}`).join(', ');
+        const c = s.contact || {}, m = s.material || {}, k = s.packaging || {};
+        const sizes = (k.skus || []).map(x => `${x.weight_g ?? '?'} g × ${x.pouches_per_master ?? '?'}`).join(', ');
         const todo = (s.unknowns || []).length;
         return `<article class="inq">
           <div class="inq-head">
             <div>
               <h4>${esc(c.company || 'Unknown company')} · ${esc(c.country || '—')}</h4>
-              <div class="meta">${esc(s.id)} · ${esc(String(s.submitted_at || '').slice(0, 16).replace('T', ' '))} · ${esc(Core.label('category', p.category) || '—')} · ${esc(sizes)} · ${esc(s.form_language || '')}${todo ? ` · <span class="todo">${todo} to confirm</span>` : ''}</div>
+              <div class="meta">${esc(s.id)} · ${esc(String(s.submitted_at || '').slice(0, 16).replace('T', ' '))} · ${esc(Core.label('category', m.category) || '—')} · ${esc(Core.label('line', k.line) || '—')} · ${esc(sizes)} · ${esc(s.form_language || '')}${k.pouch_size_status === 'estimate_requested' ? ' · <span class="todo">size estimate</span>' : ''}${todo ? ` · <span class="todo">${todo} pending</span>` : ''}</div>
             </div>
             <div class="acts">
               <button type="button" class="btn btn-primary" data-act="claude" data-i="${i}">Copy for Claude</button>
@@ -2009,7 +2116,7 @@
         const res = await fetch(`${endpoint}?token=${encodeURIComponent(token)}`);
         const data = await res.json();
         if (!data.ok) throw new Error(data.error || 'failed');
-        remote = data.submissions || [];
+        remote = (data.submissions || []).filter(x => x && x.schema === Core.SCHEMA);
         status(`Loaded ${remote.length} from sheet.`);
         render();
       } catch (err) {
@@ -2035,14 +2142,16 @@
       download(`BIB_inquiries_${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify(all(), null, 2), 'application/json');
     });
     $('#adm-export-csv').addEventListener('click', () => {
-      const cols = ['id', 'submitted_at', 'company', 'name', 'country', 'email', 'whatsapp', 'category', 'pouches', 'master_bag', 'scope', 'capacity', 'timeline', 'to_confirm', 'form_language'];
+      const cols = ['id', 'submitted_at', 'company', 'name', 'country', 'email', 'whatsapp', 'material', 'line', 'pouch_size_status',
+        'skus', 'stacking', 'primary_speed_ppm', 'secondary_speed_bpm', 'counting_accuracy', 'scope', 'timeline', 'pending', 'form_language'];
+      // Neutralise spreadsheet formulas (=, +, -, @) from customer text.
       const cell = v => { const x = String(v ?? ''); return `"${(/^[=+\-@]/.test(x) ? "'" : '') + x.replace(/"/g, '""')}"`; };
       const rows = all().map(s => {
-        const c = s.contact || {}, cap = s.line && s.line.target_capacity;
-        return [s.id, s.submitted_at, c.company, c.name, c.country, c.email, c.whatsapp, s.product && s.product.category,
-          (s.pouches || []).map(x => `${x.weight_g} g x ${x.pouches_per_bag}`).join('; '),
-          s.packaging && s.packaging.master_bag_material, ((s.line && s.line.scope) || []).join(', '),
-          cap ? `${cap.value} ${cap.unit}` : '', s.project && s.project.timeline, (s.unknowns || []).length, s.form_language].map(cell).join(',');
+        const c = s.contact || {}, m = s.material || {}, k = s.packaging || {}, pr = s.process || {};
+        return [s.id, s.submitted_at, c.company, c.name, c.country, c.email, c.whatsapp, m.category, k.line, k.pouch_size_status,
+          (k.skus || []).map(x => `${x.weight_g} g x ${x.pouches_per_master}`).join('; '), k.stacking,
+          pr.primary_speed_ppm, pr.secondary_speed_bpm, pr.counting_accuracy, (s.scope || []).join(', '),
+          s.project && s.project.timeline, (s.unknowns || []).length, s.form_language].map(cell).join(',');
       });
       download(`BIB_inquiries_${new Date().toISOString().slice(0, 10)}.csv`, '﻿' + [cols.join(','), ...rows].join('\n'), 'text/csv');
     });
