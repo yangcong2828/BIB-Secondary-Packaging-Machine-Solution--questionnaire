@@ -1,278 +1,2059 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>BIB Packaging Line - Customer Questionnaire</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="Bag-in-Bag (BIB) secondary packaging line questionnaire — tell us your product and packs, get a preliminary line proposal.">
+<title>BIB Line Questionnaire v2 | 袋中袋产线需求问卷 · 景 (Leo)</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg-primary: #0a0e14;
+    --bg-secondary: #11161f;
+    --bg-tertiary: #1a2130;
+    --border: #2a3444;
+    --border-bright: #3a4657;
+    --text-primary: #e8ecf2;
+    --text-secondary: #8a95a8;
+    --text-dim: #5c6578;
+    --accent: #ff6b1a;
+    --accent-dim: #ff6b1a40;
+    --accent-glow: #ff6b1a20;
+    --accent-soft: #ff6b1a60;
+    --success: #4ade80;
+    --danger: #f87171;
+    --sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --narrow: 'Archivo Narrow', 'Archivo', system-ui, -apple-system, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.5;
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(255, 107, 26, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(255, 107, 26, 0.05) 0%, transparent 40%),
+      linear-gradient(180deg, #0a0e14 0%, #0d1218 100%);
+    background-attachment: fixed;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 40px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  [hidden] { display: none !important; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+  .brand { display: flex; align-items: center; gap: 16px; min-width: 0; }
+  .brand-text { min-width: 0; }
+  .logo-mark {
+    width: 48px; height: 48px;
+    border: 2px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    background: var(--bg-secondary);
+    flex-shrink: 0;
+  }
+  .logo-mark::before { content: ''; position: absolute; inset: 4px; border: 1px solid var(--accent-dim); }
+  .logo-mark span { font-weight: 900; font-size: 20px; color: var(--accent); letter-spacing: -0.02em; }
+  .brand-text h1 {
+    font-family: var(--narrow);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .brand-text p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    margin-top: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lang-toggle { display: flex; border: 1px solid var(--border); background: var(--bg-secondary); }
+  .lang-toggle button {
+    padding: 8px 14px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .lang-toggle button[aria-pressed="true"] { background: var(--accent); color: #000; }
+  .lang-toggle button:not([aria-pressed="true"]):hover { color: var(--text-primary); }
+
+  /* Title */
+  .title-section {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+    margin-bottom: 32px;
+  }
+  .title-main h2 {
+    font-weight: 900;
+    font-size: clamp(34px, 5.5vw, 52px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin-bottom: 14px;
+  }
+  .title-main h2 .accent { color: var(--accent); font-style: italic; }
+  .title-main p { color: var(--text-secondary); font-size: 15px; max-width: 600px; }
+  .title-meta {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    line-height: 1.8;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .title-meta .version { color: var(--accent); font-weight: 600; }
+
+  /* Step rail */
+  .steps {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .steps button {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-top: 2px solid var(--border);
+    padding: 10px 2px 0;
+    color: var(--text-dim);
+    cursor: default;
+    font: inherit;
+  }
+  .steps .n { display: block; font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; }
+  .steps .t {
+    display: block;
+    font-family: var(--narrow);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .steps button.done { border-top-color: var(--accent-soft); color: var(--text-secondary); cursor: pointer; }
+  .steps button.done:hover { color: var(--text-primary); }
+  .steps button[aria-current="step"] { border-top-color: var(--accent); color: var(--text-primary); }
+  .steps button[aria-current="step"] .n { color: var(--accent); }
+
+  /* Panel */
+  .panel {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    padding: 32px;
+    position: relative;
+  }
+  .panel::before, .panel::after { content: ''; position: absolute; width: 12px; height: 12px; }
+  .panel::before { top: -1px; left: -1px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+  .panel::after { bottom: -1px; right: -1px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 16px;
+    margin-bottom: 28px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .section-header h3 { font-weight: 800; font-size: 22px; letter-spacing: -0.01em; outline: none; }
+  .section-num { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.1em; white-space: nowrap; }
+  .sub-header {
+    font-family: var(--narrow);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin: 36px 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sub-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .lede { color: var(--text-secondary); font-size: 14px; margin: -12px 0 24px; }
+
+  /* Fields */
+  .field { margin-bottom: 24px; border: none; min-width: 0; }
+  .field:last-child { margin-bottom: 0; }
+  .label, .field > legend {
+    display: block;
+    font-family: var(--narrow);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    padding: 0;
+  }
+  .req { color: var(--accent); margin-left: 3px; }
+  .hint { font-size: 13px; color: var(--text-secondary); margin-top: 6px; }
+  .field > legend + .hint, .label + .hint { margin: -2px 0 10px; }
+  .error { font-size: 13px; color: var(--danger); margin-top: 6px; }
+  .error::before { content: '— '; }
+
+  .row { display: grid; gap: 12px; align-items: end; }
+  .row-2 { grid-template-columns: 1fr 1fr; }
+  .row-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .row > .field { margin-bottom: 0; }
+  .row + .field, .row + .row, .field + .row { margin-top: 24px; }
+
+  input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select, textarea {
+    width: 100%;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    font-family: var(--sans);
+    font-size: 15px;
+    padding: 11px 12px;
+    border-radius: 0;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  textarea { min-height: 96px; resize: vertical; line-height: 1.5; }
+  select {
+    background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%), linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+    background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%;
+    background-size: 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 32px;
+  }
+  ::placeholder { color: var(--text-dim); opacity: 1; }
+  input:hover, select:hover, textarea:hover { border-color: var(--border-bright); }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .invalid input, .invalid select, .invalid textarea { border-color: var(--danger); }
+
+  .unit-input { position: relative; }
+  .unit-input input { padding-right: 52px; font-family: var(--mono); }
+  .unit-input .unit {
+    position: absolute;
+    right: 12px; top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    pointer-events: none;
+  }
+  .combo { display: grid; grid-template-columns: 1fr 150px; }
+  .combo input { border-right: none; font-family: var(--mono); }
+
+  /* Chips (radio / checkbox) */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { position: relative; cursor: pointer; }
+  .chip input, .card input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .chip span {
+    display: block;
+    padding: 9px 14px;
+    border: 1px solid var(--border);
+    background: var(--bg-primary);
+    font-size: 14px;
+    color: var(--text-secondary);
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .chip:hover span { border-color: var(--border-bright); color: var(--text-primary); }
+  .chip input:checked + span { border-color: var(--accent); color: var(--text-primary); background: var(--accent-glow); }
+  .chip input[type="checkbox"]:checked + span::before { content: '✓ '; color: var(--accent); }
+  .chip input:focus-visible + span, .card input:focus-visible + .card-body { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .invalid .chip span, .invalid .card-body { border-color: var(--danger); }
+
+  /* Selector cards */
+  .cards { display: grid; gap: 8px; }
+  .cards.cols-2 { grid-template-columns: 1fr 1fr; }
+  .cards.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .card { position: relative; cursor: pointer; display: flex; }
+  .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 13px 14px;
+    border: 1px solid var(--border);
+    background: var(--bg-primary);
+    transition: all 0.2s;
+  }
+  .card:hover .card-body { border-color: var(--border-bright); }
+  .card input:checked + .card-body { border-color: var(--accent); background: var(--accent-glow); box-shadow: inset 0 0 0 1px var(--accent-dim); }
+  .card .nm { font-weight: 700; font-size: 15px; }
+  .card .mt { font-family: var(--mono); font-size: 11px; color: var(--text-secondary); letter-spacing: 0.02em; }
+  .card input:checked + .card-body .mt { color: var(--accent); }
+  .card .badge {
+    align-self: flex-start;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #000;
+    background: var(--accent);
+    padding: 1px 6px;
+    margin-bottom: 4px;
+  }
+  .card svg { width: 100%; height: auto; margin: 4px 0 8px; }
+  .card.plain .card-body { justify-content: center; }
+
+  /* Diagrams */
+  .fig-pouch { display: flex; align-items: center; gap: 20px; margin-bottom: 16px; }
+  .fig-pouch svg { width: 260px; max-width: 55%; height: auto; flex-shrink: 0; }
+  .fig-pouch .hint { margin: 0; }
+  .d-body { fill: var(--bg-tertiary); stroke: var(--border-bright); stroke-width: 1.2; }
+  .d-seal { fill: var(--accent-dim); stroke: var(--accent-soft); stroke-width: 1; }
+  .d-bag { fill: none; stroke: var(--text-dim); stroke-width: 1; stroke-dasharray: 4 3; }
+  .d-dim { stroke: var(--text-secondary); stroke-width: 1; fill: none; }
+  .d-txt { fill: var(--accent); font-family: var(--mono); font-size: 11px; font-weight: 600; }
+
+  /* Pouch variants */
+  .variant {
+    border: 1px solid var(--border);
+    background: rgba(10, 14, 20, 0.5);
+    padding: 18px;
+    margin-bottom: 12px;
+  }
+  .variant-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .variant-head .tag { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; }
+  .variant .row + .row { margin-top: 12px; }
+  .variant .field { margin-bottom: 0; }
+  .variant .label { font-size: 11px; color: var(--text-secondary); }
+  .preview {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+  }
+  .preview b { color: var(--accent); font-weight: 600; }
+  .preview:empty { display: none; }
+
+  .match {
+    margin-top: 28px;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    padding: 14px 16px;
+    background: var(--bg-primary);
+  }
+  .match .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+  .match .model { font-weight: 800; font-size: 18px; color: var(--accent); margin: 2px 0; letter-spacing: 0.01em; }
+  .match .v { font-size: 13px; color: var(--text-secondary); }
+  .match .note { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    font-family: var(--narrow);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid var(--border-bright);
+    background: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn:hover { border-color: var(--text-secondary); }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: #000; }
+  .btn-primary:hover { background: #ff7f3a; border-color: #ff7f3a; }
+  .btn:disabled { opacity: 0.5; cursor: wait; }
+  .btn-text {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  .btn-text:hover { color: var(--accent); }
+  .btn-add {
+    width: 100%;
+    padding: 12px;
+    border: 1px dashed var(--border-bright);
+    background: none;
+    color: var(--text-secondary);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-add:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Nav bar */
+  .nav {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 14px 0 20px;
+    background: linear-gradient(180deg, rgba(10,14,20,0) 0%, rgba(10,14,20,0.94) 30%);
+  }
+  .nav .status { flex: 1; font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.04em; text-align: center; }
+  .nav .btn-primary { min-width: 200px; }
+
+  /* Review */
+  .review section { border-top: 1px solid var(--border); padding: 16px 0; }
+  .review section:first-child { border-top: none; padding-top: 0; }
+  .review .rh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .review .rh h4 { font-family: var(--narrow); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); }
+  .review dl { display: grid; grid-template-columns: minmax(140px, 34%) 1fr; gap: 6px 16px; font-size: 14px; }
+  .review dt { color: var(--text-secondary); }
+  .review dd { color: var(--text-primary); overflow-wrap: anywhere; white-space: pre-line; }
+  .review dd.none { color: var(--text-dim); }
+  .privacy { font-size: 12px; color: var(--text-dim); margin-top: 20px; }
+
+  /* Done */
+  .done-view { text-align: center; padding: 56px 32px; }
+  .done-mark {
+    width: 64px; height: 64px;
+    margin: 0 auto 24px;
+    border: 2px solid var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    font-size: 28px;
+    font-weight: 900;
+  }
+  .done-view h3 { font-weight: 900; font-size: 32px; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .done-view p { color: var(--text-secondary); max-width: 480px; margin: 0 auto; }
+  .done-ref { font-family: var(--mono); font-size: 13px; color: var(--text-secondary); margin: 18px 0 28px; letter-spacing: 0.06em; }
+  .done-ref b { color: var(--accent); font-weight: 600; }
+  .done-actions { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .done-again { margin-top: 28px; }
+
+  /* Admin */
+  .admin-bar { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; margin-bottom: 12px; }
+  .admin-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; align-items: center; }
+  .admin-tools .status { font-family: var(--mono); font-size: 11px; color: var(--text-secondary); margin-left: auto; }
+  .inq { border: 1px solid var(--border); background: var(--bg-primary); padding: 16px 18px; margin-bottom: 10px; }
+  .inq-head { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; flex-wrap: wrap; }
+  .inq h4 { font-size: 16px; font-weight: 800; }
+  .inq .meta { font-family: var(--mono); font-size: 11px; color: var(--text-secondary); margin-top: 4px; letter-spacing: 0.03em; }
+  .inq .meta .todo { color: var(--accent); }
+  .inq .acts { display: flex; gap: 6px; flex-wrap: wrap; }
+  .inq .acts .btn { padding: 7px 12px; font-size: 11px; }
+  .inq pre {
+    margin-top: 14px;
+    padding: 14px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-height: 480px;
+    overflow: auto;
+  }
+  .empty { text-align: center; color: var(--text-secondary); padding: 48px 16px; font-size: 14px; }
+
+  .footer {
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    padding: 20px 0 32px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+  .footer a { color: inherit; text-decoration: none; }
+  .footer a:hover { color: var(--accent); }
+
+  .toast {
+    position: fixed;
+    left: 50%; bottom: 96px;
+    transform: translateX(-50%);
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-bright);
+    border-left: 3px solid var(--accent);
+    padding: 10px 16px;
+    font-size: 13px;
+    z-index: 20;
+    max-width: calc(100% - 32px);
+  }
+
+  .step-panel { animation: rise 0.25s ease; }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .step-panel { animation: none; } * { transition: none !important; } }
+
+  #print-sheet { display: none; }
+
+  @media (max-width: 720px) {
+    .container { padding: 20px 16px 0; }
+    .header { margin-bottom: 28px; padding-bottom: 18px; }
+    .logo-mark { width: 40px; height: 40px; }
+    .brand { gap: 12px; }
+    .brand-text p { font-size: 10px; letter-spacing: 0.06em; }
+    .lang-toggle button { padding: 7px 10px; }
+    .title-section { grid-template-columns: 1fr; gap: 0; margin-bottom: 24px; }
+    .title-meta { display: none; }
+    .title-main p { font-size: 14px; }
+    .steps .t { font-size: 10px; letter-spacing: 0.06em; }
+    .panel { padding: 22px 16px; }
+    .section-header h3 { font-size: 19px; }
+    .row-2, .row-3.stack-sm, .cards.cols-3 { grid-template-columns: 1fr; }
+    .row-3.stack-sm { gap: 24px; }
+    .row-3 { gap: 8px; }
+    .variant { padding: 14px 12px; }
+    .fig-pouch { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .fig-pouch svg { max-width: 100%; }
+    input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select, textarea { font-size: 16px; }
+    .combo { grid-template-columns: 1fr 120px; }
+    .nav .status { display: none; }
+    .nav .btn-primary { flex: 1; min-width: 0; }
+    .review dl { grid-template-columns: 1fr; gap: 0; }
+    .review dd { margin-bottom: 8px; }
+    .done-view { padding: 40px 8px; }
+    .admin-bar { grid-template-columns: 1fr; }
+    .footer { flex-direction: column; gap: 6px; }
+  }
+  @media (max-width: 380px) {
+    .cards.cols-2 { grid-template-columns: 1fr; }
+    .row-3 { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media print {
+    body { background: #fff; color: #000; }
+    body::before, .container > *:not(#print-sheet) { display: none !important; }
+    #print-sheet { display: block; color: #000; font-family: var(--sans); }
+    #print-sheet h2 { font-size: 20px; margin-bottom: 4px; }
+    #print-sheet .ref { font-family: var(--mono); font-size: 12px; margin-bottom: 16px; }
+    #print-sheet .review section { border-top: 1px solid #ccc; break-inside: avoid; }
+    #print-sheet .review .rh h4 { color: #000; }
+    #print-sheet .review dt { color: #555; }
+    #print-sheet .review dd, #print-sheet .review dd.none { color: #000; }
+    #print-sheet .btn-text { display: none; }
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <h1>Customer Questionnaire</h1>
-      <p>Primary &amp; Secondary BIB (Bag in Bag) Packaging Line Solution</p>
-    </div>
+<div class="container">
 
-    <!-- Progress Bar -->
-    <div class="progress-bar">
-      <div class="progress-step active" data-step="1">
-        <span class="step-num">1</span>
-        <span class="step-label">Product Properties</span>
-      </div>
-      <div class="progress-step" data-step="2">
-        <span class="step-num">2</span>
-        <span class="step-label">Packaging Specs</span>
-      </div>
-      <div class="progress-step" data-step="3">
-        <span class="step-num">3</span>
-        <span class="step-label">Process Parameters</span>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand">
+      <div class="logo-mark"><span>景</span></div>
+      <div class="brand-text">
+        <h1 data-i18n="brand.name">Leo</h1>
+        <p>BIB Line Questionnaire · v2.0</p>
       </div>
     </div>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+      <button type="button" data-lang="zh" aria-pressed="false">中文</button>
+    </div>
+  </header>
 
-    <!-- Part 1: Product Properties -->
-    <div class="form-section active" id="step-1">
-      <h2 class="section-title">Product Properties</h2>
-      <p class="section-desc">Please provide the basic properties of your product.</p>
-
-      <div class="form-group">
-        <label>Product Description <span class="required">*</span></label>
-        <div class="hint">e.g. Free-flowing granular salt with good flowability</div>
-        <textarea id="productDescription" placeholder="Describe your product..." required></textarea>
+  <!-- ===================== QUESTIONNAIRE ===================== -->
+  <main id="app">
+    <div class="title-section">
+      <div class="title-main">
+        <h2 data-i18n="title">Bag-in-Bag<br>Line <span class="accent">Questionnaire</span></h2>
+        <p data-i18n="lead">Four short steps, about 5 minutes. Only fields marked <span class="req">*</span> are required — not sure about a value? Leave it blank and we will confirm it with you.</p>
       </div>
-
-      <div class="form-group">
-        <label>Particle Size Distribution / Material Size (mm) <span class="required">*</span></label>
-        <div class="hint">e.g. 1-2 mm</div>
-        <input type="text" id="particleSize" placeholder="e.g. 1-2 mm" required>
+      <div class="title-meta">
+        <div><span class="version">SYS 003</span> / INQUIRY</div>
+        <div>4 STEPS · ~5 MIN</div>
       </div>
+    </div>
 
-      <div class="form-group">
-        <label>Bulk Density (g/cm&sup3;) <span class="required">*</span></label>
-        <div class="hint">e.g. 0.8-1.2</div>
-        <input type="text" id="density" placeholder="e.g. 0.8-1.2" required>
-      </div>
+    <ol class="steps" id="steps">
+      <li><button type="button" data-go="1"><span class="n">01</span><span class="t" data-i18n="step.1">Product</span></button></li>
+      <li><button type="button" data-go="2"><span class="n">02</span><span class="t" data-i18n="step.2">Packaging</span></button></li>
+      <li><button type="button" data-go="3"><span class="n">03</span><span class="t" data-i18n="step.3">Line &amp; site</span></button></li>
+      <li><button type="button" data-go="4"><span class="n">04</span><span class="t" data-i18n="step.4">Contact</span></button></li>
+    </ol>
 
-      <div class="form-group">
-        <label>Water Content <span class="required">*</span></label>
-        <div class="hint">e.g. &lt; 1%</div>
-        <input type="text" id="waterContent" placeholder="e.g. < 1%" required>
-      </div>
+    <form id="form" novalidate autocomplete="on">
+      <!-- Honeypot: humans never see or fill this -->
+      <div class="sr-only" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 
-      <div class="form-group">
-        <label>Corrosiveness <span class="required">*</span></label>
-        <div class="radio-group">
-          <label><input type="radio" name="corrosiveness" value="YES" required><span>YES</span></label>
-          <label><input type="radio" name="corrosiveness" value="NO"><span>NO</span></label>
+      <!-- STEP 1 · PRODUCT -->
+      <section class="panel step-panel" data-step="1" aria-labelledby="h-step-1">
+        <div class="section-header">
+          <h3 id="h-step-1" tabindex="-1" data-i18n="step.1">Product</h3>
+          <span class="section-num">01 / PRODUCT</span>
         </div>
-      </div>
-    </div>
 
-    <!-- Part 2: Packaging Specifications -->
-    <div class="form-section" id="step-2">
-      <h2 class="section-title">Packaging Specifications</h2>
-      <p class="section-desc">Please specify the bag sizes and film specifications for both primary and secondary packaging.</p>
+        <fieldset class="field" data-for="category">
+          <legend><span data-i18n="f.category">Product category</span><span class="req">*</span></legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="category" value="salt"><span data-i18n="o.category.salt">Salt</span></label>
+            <label class="chip"><input type="radio" name="category" value="sugar"><span data-i18n="o.category.sugar">Sugar</span></label>
+            <label class="chip"><input type="radio" name="category" value="rice"><span data-i18n="o.category.rice">Rice</span></label>
+            <label class="chip"><input type="radio" name="category" value="seeds"><span data-i18n="o.category.seeds">Seeds</span></label>
+            <label class="chip"><input type="radio" name="category" value="detergent"><span data-i18n="o.category.detergent">Detergent powder</span></label>
+            <label class="chip"><input type="radio" name="category" value="flour"><span data-i18n="o.category.flour">Flour</span></label>
+            <label class="chip"><input type="radio" name="category" value="other"><span data-i18n="o.category.other">Other</span></label>
+          </div>
+        </fieldset>
 
-      <!-- Primary Bag Specs -->
-      <div class="spec-table-wrapper">
-        <h3>Primary Bag Specifications</h3>
-        <!-- Desktop table -->
-        <table class="spec-table desktop-table">
-          <thead>
-            <tr>
-              <th>Bag No.</th>
-              <th>Weight / Size</th>
-              <th>Roll Film / Wrapper</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Bag-1</td>
-              <td><input type="text" id="pb1_weight" placeholder="e.g. 500g"></td>
-              <td><input type="text" id="pb1_film" placeholder="Film spec"></td>
-              <td><input type="text" id="pb1_notes" placeholder="PET+PE = 65µm"></td>
-            </tr>
-            <tr>
-              <td>Bag-2</td>
-              <td><input type="text" id="pb2_weight" placeholder="e.g. 1000g"></td>
-              <td><input type="text" id="pb2_film" placeholder="Film spec"></td>
-              <td><input type="text" id="pb2_notes" placeholder="PET+PE = 65µm"></td>
-            </tr>
-            <tr>
-              <td>Bag-3 <span class="optional-tag">(if applicable)</span></td>
-              <td><input type="text" id="pb3_weight" placeholder="e.g. 2000g"></td>
-              <td><input type="text" id="pb3_film" placeholder="Film spec or N/A"></td>
-              <td><input type="text" id="pb3_notes" placeholder="PET+PE = 65µm"></td>
-            </tr>
-          </tbody>
-        </table>
-        <!-- Mobile card view -->
-        <div class="mobile-cards">
-          <div class="card-item">
-            <div class="card-title">Bag-1</div>
-            <div class="card-field"><span class="card-label">Weight / Size</span><input type="text" id="pb1_weight_m" placeholder="e.g. 500g"></div>
-            <div class="card-field"><span class="card-label">Roll Film / Wrapper</span><input type="text" id="pb1_film_m" placeholder="Film spec"></div>
-            <div class="card-field"><span class="card-label">Notes</span><input type="text" id="pb1_notes_m" placeholder="PET+PE = 65µm"></div>
+        <div class="field">
+          <label class="label" for="description" data-i18n="f.description">Product name &amp; description</label>
+          <input type="text" id="description" name="description" data-i18n-ph="ph.description" placeholder="e.g. Refined iodized salt, dry crystals">
+        </div>
+
+        <fieldset class="field">
+          <legend data-i18n="f.form">Physical form</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="form" value="granule"><span data-i18n="o.form.granule">Granule</span></label>
+            <label class="chip"><input type="radio" name="form" value="crystal"><span data-i18n="o.form.crystal">Crystal</span></label>
+            <label class="chip"><input type="radio" name="form" value="powder"><span data-i18n="o.form.powder">Powder</span></label>
+            <label class="chip"><input type="radio" name="form" value="flake"><span data-i18n="o.form.flake">Flake</span></label>
+            <label class="chip"><input type="radio" name="form" value="other"><span data-i18n="o.form.other">Other</span></label>
           </div>
-          <div class="card-item">
-            <div class="card-title">Bag-2</div>
-            <div class="card-field"><span class="card-label">Weight / Size</span><input type="text" id="pb2_weight_m" placeholder="e.g. 1000g"></div>
-            <div class="card-field"><span class="card-label">Roll Film / Wrapper</span><input type="text" id="pb2_film_m" placeholder="Film spec"></div>
-            <div class="card-field"><span class="card-label">Notes</span><input type="text" id="pb2_notes_m" placeholder="PET+PE = 65µm"></div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend data-i18n="f.traits">Characteristics</legend>
+          <p class="hint" data-i18n="h.multi">Select all that apply.</p>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="traits" value="free_flowing"><span data-i18n="o.traits.free_flowing">Free-flowing</span></label>
+            <label class="chip"><input type="checkbox" name="traits" value="dusty"><span data-i18n="o.traits.dusty">Dusty</span></label>
+            <label class="chip"><input type="checkbox" name="traits" value="sticky"><span data-i18n="o.traits.sticky">Sticky / caking</span></label>
+            <label class="chip"><input type="checkbox" name="traits" value="hygroscopic"><span data-i18n="o.traits.hygroscopic">Hygroscopic</span></label>
+            <label class="chip"><input type="checkbox" name="traits" value="corrosive"><span data-i18n="o.traits.corrosive">Corrosive</span></label>
+            <label class="chip"><input type="checkbox" name="traits" value="fragile"><span data-i18n="o.traits.fragile">Fragile</span></label>
           </div>
-          <div class="card-item">
-            <div class="card-title">Bag-3 <span class="optional-tag">(if applicable)</span></div>
-            <div class="card-field"><span class="card-label">Weight / Size</span><input type="text" id="pb3_weight_m" placeholder="e.g. 2000g"></div>
-            <div class="card-field"><span class="card-label">Roll Film / Wrapper</span><input type="text" id="pb3_film_m" placeholder="Film spec or N/A"></div>
-            <div class="card-field"><span class="card-label">Notes</span><input type="text" id="pb3_notes_m" placeholder="Thickness or N/A"></div>
+        </fieldset>
+
+        <div class="row row-3 stack-sm">
+          <div class="field">
+            <label class="label" for="particle_size_mm" data-i18n="f.particle">Particle size</label>
+            <div class="unit-input"><input type="text" id="particle_size_mm" name="particle_size_mm" placeholder="0.3–0.8"><span class="unit">mm</span></div>
+          </div>
+          <div class="field">
+            <label class="label" for="bulk_density_g_cm3" data-i18n="f.density">Bulk density</label>
+            <div class="unit-input"><input type="text" inputmode="decimal" id="bulk_density_g_cm3" name="bulk_density_g_cm3" placeholder="1.2" data-num><span class="unit">g/cm³</span></div>
+          </div>
+          <div class="field">
+            <label class="label" for="moisture_pct" data-i18n="f.moisture">Moisture</label>
+            <div class="unit-input"><input type="text" inputmode="decimal" id="moisture_pct" name="moisture_pct" placeholder="0.5" data-num><span class="unit">%</span></div>
           </div>
         </div>
-      </div>
+        <p class="hint" data-i18n="h.density">Typical bulk density: salt ≈ 1.2 · sugar ≈ 0.85 · rice ≈ 0.8 · flour ≈ 0.55 g/cm³.</p>
+      </section>
 
-      <!-- Secondary (Master) Bag Specs -->
-      <div class="spec-table-wrapper">
-        <h3>Secondary (Master) Bag Specifications</h3>
-        <!-- Desktop table -->
-        <table class="spec-table desktop-table">
-          <thead>
-            <tr>
-              <th>Bag No.</th>
-              <th>Combination</th>
-              <th>Bag Size (L&times;W&times;H)</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Bag-1</td>
-              <td><input type="text" id="mb1_combination" placeholder="e.g. 500g × 50 pcs"></td>
-              <td><input type="text" id="mb1_size" placeholder="H is gusset, if no then H=0"></td>
-              <td><input type="text" id="mb1_notes" placeholder="PP woven bag or PE bag"></td>
-            </tr>
-            <tr>
-              <td>Bag-2</td>
-              <td><input type="text" id="mb2_combination" placeholder="e.g. 1000g × 24 pcs"></td>
-              <td><input type="text" id="mb2_size" placeholder="H is gusset, if no then H=0"></td>
-              <td><input type="text" id="mb2_notes" placeholder="PP woven bag or PE bag"></td>
-            </tr>
-            <tr>
-              <td>Bag-3 <span class="optional-tag">(if applicable)</span></td>
-              <td><input type="text" id="mb3_combination" placeholder="e.g. 2000g × 12 pcs or N/A"></td>
-              <td><input type="text" id="mb3_size" placeholder="H is gusset, if no then H=0"></td>
-              <td><input type="text" id="mb3_notes" placeholder="PP woven bag or PE bag"></td>
-            </tr>
-          </tbody>
-        </table>
-        <!-- Mobile card view -->
-        <div class="mobile-cards">
-          <div class="card-item">
-            <div class="card-title">Bag-1</div>
-            <div class="card-field"><span class="card-label">Combination</span><input type="text" id="mb1_combination_m" placeholder="e.g. 500g × 50 pcs"></div>
-            <div class="card-field"><span class="card-label">Bag Size (L×W×H)</span><input type="text" id="mb1_size_m" placeholder="H is gusset, if no then H=0"></div>
-            <div class="card-field"><span class="card-label">Notes</span><input type="text" id="mb1_notes_m" placeholder="PP woven bag or PE bag"></div>
+      <!-- STEP 2 · PACKAGING -->
+      <section class="panel step-panel" data-step="2" aria-labelledby="h-step-2" hidden>
+        <div class="section-header">
+          <h3 id="h-step-2" tabindex="-1" data-i18n="step.2">Packaging</h3>
+          <span class="section-num">02 / PACKAGING</span>
+        </div>
+
+        <div class="sub-header" style="margin-top:0" data-i18n="sub.pouches">Primary pouches</div>
+        <div class="fig-pouch">
+          <svg viewBox="0 0 280 112" aria-hidden="true">
+            <rect class="d-body" x="22" y="14" width="160" height="66" rx="12"/>
+            <rect class="d-seal" x="22" y="14" width="13" height="66"/>
+            <rect class="d-seal" x="169" y="14" width="13" height="66"/>
+            <path class="d-dim" d="M22 96 H182 M22 91 V101 M182 91 V101"/>
+            <text class="d-txt" x="102" y="109" text-anchor="middle">L</text>
+            <path class="d-dim" d="M8 14 V80 M3 14 H13 M3 80 H13"/>
+            <text class="d-txt" x="0" y="51">W</text>
+            <rect class="d-body" x="208" y="34" width="56" height="26" rx="13"/>
+            <path class="d-dim" d="M274 34 V60 M269 34 H279 M269 60 H279"/>
+            <text class="d-txt" x="236" y="80" text-anchor="middle">T</text>
+          </svg>
+          <p class="hint" data-i18n="h.pouches">Measure a filled pouch lying flat. Add one row for each pouch size you pack.</p>
+        </div>
+
+        <div id="variants"></div>
+        <button type="button" class="btn-add" id="add-variant" data-i18n="a.add">+ Add another pouch size</button>
+
+        <div class="field" style="margin-top:24px">
+          <label class="label" for="pouch_film" data-i18n="f.film">Pouch film</label>
+          <p class="hint" data-i18n="h.film">Laminate structure and total thickness, if known.</p>
+          <input type="text" id="pouch_film" name="pouch_film" data-i18n-ph="ph.film" placeholder="e.g. PET12/PE53, 65 µm">
+        </div>
+
+        <div class="sub-header" data-i18n="sub.master">Master bag</div>
+
+        <fieldset class="field" data-for="master_bag_material">
+          <legend><span data-i18n="f.material">Master bag type</span><span class="req">*</span></legend>
+          <div class="cards cols-3">
+            <label class="card"><input type="radio" name="master_bag_material" value="pe_film"><span class="card-body"><span class="nm" data-i18n="o.master_bag_material.pe_film">PE roll film</span><span class="mt" data-i18n="m.pe_film">Heat seal · up to 120 pouches/min</span></span></label>
+            <label class="card"><input type="radio" name="master_bag_material" value="pp_woven"><span class="card-body"><span class="nm" data-i18n="o.master_bag_material.pp_woven">PP woven bag</span><span class="mt" data-i18n="m.pp_woven">Sewing · up to 90 pouches/min</span></span></label>
+            <label class="card"><input type="radio" name="master_bag_material" value="not_sure"><span class="card-body"><span class="nm" data-i18n="o.not_sure">Not sure</span><span class="mt" data-i18n="m.advise">We will advise</span></span></label>
           </div>
-          <div class="card-item">
-            <div class="card-title">Bag-2</div>
-            <div class="card-field"><span class="card-label">Combination</span><input type="text" id="mb2_combination_m" placeholder="e.g. 1000g × 24 pcs"></div>
-            <div class="card-field"><span class="card-label">Bag Size (L×W×H)</span><input type="text" id="mb2_size_m" placeholder="H is gusset, if no then H=0"></div>
-            <div class="card-field"><span class="card-label">Notes</span><input type="text" id="mb2_notes_m" placeholder="PP woven bag or PE bag"></div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend data-i18n="f.arrangement">How pouches lie in the master bag</legend>
+          <div class="cards cols-3">
+            <label class="card"><input type="radio" name="arrangement" value="top_to_top"><span class="card-body">
+              <svg viewBox="0 0 200 64" aria-hidden="true">
+                <rect class="d-bag" x="2" y="2" width="196" height="60"/>
+                <rect class="d-body" x="10" y="16" width="62" height="32" rx="7"/><rect class="d-seal" x="10" y="16" width="7" height="32"/><rect class="d-seal" x="65" y="16" width="7" height="32"/>
+                <rect class="d-body" x="69" y="16" width="62" height="32" rx="7"/><rect class="d-seal" x="69" y="16" width="7" height="32"/><rect class="d-seal" x="124" y="16" width="7" height="32"/>
+                <rect class="d-body" x="128" y="16" width="62" height="32" rx="7"/><rect class="d-seal" x="128" y="16" width="7" height="32"/><rect class="d-seal" x="183" y="16" width="7" height="32"/>
+              </svg>
+              <span class="nm" data-i18n="o.arrangement.top_to_top">Top-to-top</span><span class="mt" data-i18n="m.top_to_top">Seal ends face each other</span></span></label>
+            <label class="card"><input type="radio" name="arrangement" value="side_to_side"><span class="card-body">
+              <svg viewBox="0 0 200 64" aria-hidden="true">
+                <rect class="d-bag" x="2" y="2" width="196" height="60"/>
+                <g><rect class="d-body" x="22" y="8" width="30" height="48" rx="6"/><rect class="d-seal" x="22" y="8" width="30" height="6"/><rect class="d-seal" x="22" y="50" width="30" height="6"/></g>
+                <g><rect class="d-body" x="61" y="8" width="30" height="48" rx="6"/><rect class="d-seal" x="61" y="8" width="30" height="6"/><rect class="d-seal" x="61" y="50" width="30" height="6"/></g>
+                <g><rect class="d-body" x="100" y="8" width="30" height="48" rx="6"/><rect class="d-seal" x="100" y="8" width="30" height="6"/><rect class="d-seal" x="100" y="50" width="30" height="6"/></g>
+                <g><rect class="d-body" x="139" y="8" width="30" height="48" rx="6"/><rect class="d-seal" x="139" y="8" width="30" height="6"/><rect class="d-seal" x="139" y="50" width="30" height="6"/></g>
+              </svg>
+              <span class="nm" data-i18n="o.arrangement.side_to_side">Side-to-side</span><span class="mt" data-i18n="m.side_to_side">Long sides touch</span></span></label>
+            <label class="card plain"><input type="radio" name="arrangement" value="not_sure"><span class="card-body"><span class="nm" data-i18n="o.not_sure">Not sure</span><span class="mt" data-i18n="m.advise">We will advise</span></span></label>
           </div>
-          <div class="card-item">
-            <div class="card-title">Bag-3 <span class="optional-tag">(if applicable)</span></div>
-            <div class="card-field"><span class="card-label">Combination</span><input type="text" id="mb3_combination_m" placeholder="e.g. 2000g × 12 pcs or N/A"></div>
-            <div class="card-field"><span class="card-label">Bag Size (L×W×H)</span><input type="text" id="mb3_size_m" placeholder="H is gusset, if no then H=0"></div>
-            <div class="card-field"><span class="card-label">Notes</span><input type="text" id="mb3_notes_m" placeholder="PP woven bag or PE bag"></div>
+        </fieldset>
+
+        <div class="field">
+          <label class="label" for="existing_master_bag" data-i18n="f.existing">Existing master bag size</label>
+          <p class="hint" data-i18n="h.existing">Only if you already use one — otherwise we size it for you.</p>
+          <input type="text" id="existing_master_bag" name="existing_master_bag" data-i18n-ph="ph.existing" placeholder="e.g. 600 × 400 mm, no gusset">
+        </div>
+
+        <div class="match" id="match" aria-live="polite"></div>
+      </section>
+
+      <!-- STEP 3 · LINE & SITE -->
+      <section class="panel step-panel" data-step="3" aria-labelledby="h-step-3" hidden>
+        <div class="section-header">
+          <h3 id="h-step-3" tabindex="-1" data-i18n="step.3">Line &amp; site</h3>
+          <span class="section-num">03 / LINE</span>
+        </div>
+
+        <div class="field">
+          <label class="label" for="pain_points" data-i18n="f.pain">What should this line solve for you?</label>
+          <p class="hint" data-i18n="h.pain">Current problems, labour, speed, bag quality — in your own words, any language.</p>
+          <textarea id="pain_points" name="pain_points" rows="4"></textarea>
+        </div>
+
+        <fieldset class="field" data-for="scope">
+          <legend><span data-i18n="f.scope">What do you need from us?</span><span class="req">*</span></legend>
+          <p class="hint" data-i18n="h.multi">Select all that apply.</p>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="scope" value="primary_packing"><span data-i18n="o.scope.primary_packing">Primary packing (VFFS + weigher)</span></label>
+            <label class="chip"><input type="checkbox" name="scope" value="secondary_bib"><span data-i18n="o.scope.secondary_bib">Secondary BIB packing</span></label>
+            <label class="chip"><input type="checkbox" name="scope" value="conveying"><span data-i18n="o.scope.conveying">Conveying &amp; pouch turning</span></label>
+            <label class="chip"><input type="checkbox" name="scope" value="inspection"><span data-i18n="o.scope.inspection">Checkweigher / metal detector</span></label>
+            <label class="chip"><input type="checkbox" name="scope" value="palletizing"><span data-i18n="o.scope.palletizing">Palletizing</span></label>
+            <label class="chip"><input type="checkbox" name="scope" value="turnkey"><span data-i18n="o.scope.turnkey">Complete turnkey line</span></label>
+          </div>
+        </fieldset>
+
+        <div class="row row-2">
+          <div class="field">
+            <label class="label" for="capacity_value" data-i18n="f.capacity">Target capacity</label>
+            <div class="combo">
+              <input type="text" inputmode="decimal" id="capacity_value" name="capacity_value" placeholder="6" data-num>
+              <select name="capacity_unit" aria-label="Unit">
+                <option value="t_per_hour" data-i18n="o.capacity_unit.t_per_hour">t/h</option>
+                <option value="t_per_day" data-i18n="o.capacity_unit.t_per_day">t/day</option>
+                <option value="pouches_per_min" data-i18n="o.capacity_unit.pouches_per_min">pouches/min</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label" for="weighing_accuracy" data-i18n="f.accuracy">Weighing accuracy</label>
+            <input type="text" id="weighing_accuracy" name="weighing_accuracy" data-i18n-ph="ph.accuracy" placeholder="e.g. ±1 g or ±0.5 %">
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Part 3: Production & Process Parameters -->
-    <div class="form-section" id="step-3">
-      <h2 class="section-title">Production &amp; Process Parameters</h2>
-      <p class="section-desc">Please provide the production process requirements and performance parameters.</p>
+        <fieldset class="field" style="margin-top:24px">
+          <legend data-i18n="f.machine_material">Machine material</legend>
+          <div class="cards cols-2">
+            <label class="card"><input type="radio" name="machine_material" value="ss304_contact"><span class="card-body"><span class="nm" data-i18n="o.machine_material.ss304_contact">SS304 contact parts</span><span class="mt" data-i18n="m.ss304_contact">Powder-coated carbon-steel frame</span></span></label>
+            <label class="card"><input type="radio" name="machine_material" value="ss304_full"><span class="card-body"><span class="nm" data-i18n="o.machine_material.ss304_full">Full SS304</span><span class="mt" data-i18n="m.ss304_full">Food grade, easy wash-down</span></span></label>
+            <label class="card" id="opt-ss316"><input type="radio" name="machine_material" value="ss316_contact"><span class="card-body"><span class="badge" data-i18n="badge.rec" hidden>Recommended</span><span class="nm" data-i18n="o.machine_material.ss316_contact">SS316 contact parts</span><span class="mt" data-i18n="m.ss316_contact">SS304 frame — for salt and corrosive products</span></span></label>
+            <label class="card plain"><input type="radio" name="machine_material" value="not_sure"><span class="card-body"><span class="nm" data-i18n="o.not_sure">Not sure</span><span class="mt" data-i18n="m.advise">We will advise</span></span></label>
+          </div>
+        </fieldset>
 
-      <div class="form-group">
-        <label>Solution Description <span class="required">*</span></label>
-        <div class="hint">What are the pain points you are currently facing? Briefly describe what equipment you need us to provide, what functions to achieve, or what problems to solve.</div>
-        <textarea id="solutionDescription" placeholder="Please describe your requirements, pain points, desired equipment and functions..." required></textarea>
-      </div>
+        <fieldset class="field">
+          <legend data-i18n="f.method">Current packing method</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="current_method" value="manual"><span data-i18n="o.current_method.manual">Manual</span></label>
+            <label class="chip"><input type="radio" name="current_method" value="semi_auto"><span data-i18n="o.current_method.semi_auto">Semi-automatic</span></label>
+            <label class="chip"><input type="radio" name="current_method" value="automatic"><span data-i18n="o.current_method.automatic">Automatic (upgrading)</span></label>
+            <label class="chip"><input type="radio" name="current_method" value="new_project"><span data-i18n="o.current_method.new_project">New project</span></label>
+          </div>
+        </fieldset>
 
-      <div class="form-group">
-        <label>Primary Packaging Speed (pouches/min/set)</label>
-        <div class="hint">e.g. 45-55</div>
-        <input type="text" id="primarySpeed" placeholder="e.g. 45-55">
-      </div>
+        <div class="sub-header" data-i18n="sub.site">Site utilities</div>
 
-      <div class="form-group">
-        <label>Primary Metering / Weighing Accuracy</label>
-        <div class="hint">e.g. &plusmn;2% @2&sigma;</div>
-        <input type="text" id="weighingAccuracy" placeholder="e.g. ±2% @2σ">
-      </div>
-
-      <div class="form-group">
-        <label>Secondary Packaging Speed (pouches/min/set)</label>
-        <div class="hint">e.g. 90-110</div>
-        <input type="text" id="secondarySpeed" placeholder="e.g. 90-110">
-      </div>
-
-      <div class="form-group">
-        <label>Secondary Packaging / Counting Accuracy</label>
-        <div class="hint">e.g. 99% or 99.9% etc</div>
-        <input type="text" id="countingAccuracy" placeholder="e.g. 99% or 99.9% etc">
-      </div>
-
-      <div class="form-group">
-        <label>Stacking Patterns <span class="required">*</span></label>
-        <div class="hint">How primary bags stack inside the secondary bag</div>
-        <div class="radio-group">
-          <label><input type="radio" name="stackingPattern" value="Side to Side" required><span>Side to Side</span></label>
-          <label><input type="radio" name="stackingPattern" value="Top to Top"><span>Top to Top</span></label>
+        <div class="row row-3 stack-sm">
+          <div class="field">
+            <label class="label" for="voltage_v" data-i18n="f.voltage">Voltage</label>
+            <div class="unit-input"><input type="text" inputmode="numeric" id="voltage_v" name="voltage_v" list="voltages" placeholder="415" data-num><span class="unit">V</span></div>
+            <datalist id="voltages"><option value="380"><option value="400"><option value="415"><option value="440"><option value="480"><option value="220"></datalist>
+          </div>
+          <fieldset class="field">
+            <legend data-i18n="f.frequency">Frequency</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="frequency_hz" value="50"><span data-i18n="o.frequency_hz.50">50 Hz</span></label>
+              <label class="chip"><input type="radio" name="frequency_hz" value="60"><span data-i18n="o.frequency_hz.60">60 Hz</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="field">
+            <legend data-i18n="f.phase">Phase</legend>
+            <div class="chips">
+              <label class="chip"><input type="radio" name="phase" value="3"><span data-i18n="o.phase.3">3-phase</span></label>
+              <label class="chip"><input type="radio" name="phase" value="1"><span data-i18n="o.phase.1">1-phase</span></label>
+            </div>
+          </fieldset>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label>Sealing Type (Secondary Master Bag) <span class="required">*</span></label>
-        <div class="radio-group">
-          <label><input type="radio" name="sealingType" value="Heat Sealing" required><span>Heat Sealing</span></label>
-          <label><input type="radio" name="sealingType" value="Stitching"><span>Stitching</span></label>
+        <fieldset class="field" style="margin-top:24px">
+          <legend data-i18n="f.air">Compressed air</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="compressed_air" value="yes"><span data-i18n="o.compressed_air.yes">Available</span></label>
+            <label class="chip"><input type="radio" name="compressed_air" value="no"><span data-i18n="o.compressed_air.no">Not available</span></label>
+            <label class="chip"><input type="radio" name="compressed_air" value="not_sure"><span data-i18n="o.not_sure">Not sure</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label class="label" for="space" data-i18n="f.space">Available floor space</label>
+          <input type="text" id="space" name="space" data-i18n-ph="ph.space" placeholder="e.g. 20 × 8 m, ceiling 5 m">
         </div>
-      </div>
+      </section>
 
-      <div class="form-group">
-        <label>Machine Material Requirement <span class="required">*</span></label>
-        <div class="hint">Please select the material standard for the machine</div>
-        <div class="radio-group radio-group-vertical">
-          <label><input type="radio" name="machineMaterial" value="Contact parts SS304, frame carbon steel with powder coating" required><span>Contact parts SS304, frame carbon steel with powder coating</span></label>
-          <label><input type="radio" name="machineMaterial" value="Full SS304 stainless steel"><span>Full SS304 stainless steel</span></label>
-          <label><input type="radio" name="machineMaterial" value="Contact parts SS316, frame SS304 stainless steel"><span>Contact parts SS316, frame SS304 stainless steel</span></label>
+      <!-- STEP 4 · CONTACT -->
+      <section class="panel step-panel" data-step="4" aria-labelledby="h-step-4" hidden>
+        <div class="section-header">
+          <h3 id="h-step-4" tabindex="-1" data-i18n="step.4">Contact</h3>
+          <span class="section-num">04 / CONTACT</span>
         </div>
+        <p class="lede" data-i18n="h.contact">Where should we send your preliminary proposal?</p>
+
+        <div class="row row-2">
+          <div class="field">
+            <label class="label" for="name"><span data-i18n="f.name">Your name</span><span class="req">*</span></label>
+            <input type="text" id="name" name="name" autocomplete="name">
+          </div>
+          <div class="field">
+            <label class="label" for="company"><span data-i18n="f.company">Company</span><span class="req">*</span></label>
+            <input type="text" id="company" name="company" autocomplete="organization">
+          </div>
+        </div>
+        <div class="row row-2">
+          <div class="field">
+            <label class="label" for="country"><span data-i18n="f.country">Country</span><span class="req">*</span></label>
+            <input type="text" id="country" name="country" autocomplete="country-name" list="countries">
+            <datalist id="countries">
+              <option value="Bangladesh"><option value="Pakistan"><option value="Russia"><option value="Kazakhstan"><option value="Uzbekistan"><option value="Saudi Arabia"><option value="United Arab Emirates"><option value="Egypt"><option value="Nigeria"><option value="Kenya"><option value="South Africa"><option value="Australia"><option value="United States"><option value="India"><option value="Indonesia"><option value="Vietnam">
+            </datalist>
+          </div>
+          <div class="field">
+            <label class="label" for="role" data-i18n="f.role">Position</label>
+            <input type="text" id="role" name="role" autocomplete="organization-title" data-i18n-ph="ph.role" placeholder="e.g. Plant manager">
+          </div>
+        </div>
+        <div class="row row-2">
+          <div class="field" data-for="reach">
+            <label class="label" for="email" data-i18n="f.email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" inputmode="email">
+          </div>
+          <div class="field">
+            <label class="label" for="whatsapp" data-i18n="f.whatsapp">WhatsApp</label>
+            <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" placeholder="+880 …">
+          </div>
+        </div>
+        <p class="hint" data-i18n="h.reach">Email or WhatsApp — at least one.</p>
+
+        <fieldset class="field" style="margin-top:24px">
+          <legend data-i18n="f.timeline">When do you plan to start?</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="timeline" value="within_3m"><span data-i18n="o.timeline.within_3m">Within 3 months</span></label>
+            <label class="chip"><input type="radio" name="timeline" value="3_6m"><span data-i18n="o.timeline.3_6m">3–6 months</span></label>
+            <label class="chip"><input type="radio" name="timeline" value="6_12m"><span data-i18n="o.timeline.6_12m">6–12 months</span></label>
+            <label class="chip"><input type="radio" name="timeline" value="exploring"><span data-i18n="o.timeline.exploring">Exploring / budgeting</span></label>
+          </div>
+        </fieldset>
+
+        <div class="sub-header" data-i18n="sub.review">Review your answers</div>
+        <div class="review" id="review"></div>
+        <p class="privacy" data-i18n="n.privacy">Your details are used only to prepare your proposal.</p>
+      </section>
+    </form>
+
+    <!-- DONE -->
+    <section class="panel done-view" id="done" hidden aria-live="polite">
+      <div class="done-mark">✓</div>
+      <h3 id="done-title" tabindex="-1"></h3>
+      <p id="done-body"></p>
+      <div class="done-ref"><span data-i18n="ok.ref">Reference</span> · <b id="done-ref"></b></div>
+      <div class="done-actions">
+        <a class="btn btn-primary" id="done-wa" target="_blank" rel="noopener" hidden data-i18n="a.wa">Send via WhatsApp</a>
+        <a class="btn" id="done-mail" hidden data-i18n="a.mail">Send by email</a>
+        <button type="button" class="btn" id="done-pdf" data-i18n="a.pdf">Save as PDF</button>
       </div>
+      <div class="done-again"><button type="button" class="btn-text" id="done-new" data-i18n="a.new">Start a new questionnaire</button></div>
+    </section>
 
-      <div class="form-group">
-        <label>Palletizing Requirement</label>
-        <div class="hint">Leave blank or enter "-" if not required</div>
-        <textarea id="palletizing" placeholder="Describe palletizing requirements, or enter - if not required"></textarea>
+    <div class="nav" id="nav">
+      <button type="button" class="btn" id="btn-back" data-i18n="a.back">Back</button>
+      <span class="status" id="status" aria-live="polite"></span>
+      <button type="button" class="btn btn-primary" id="btn-next">Next</button>
+    </div>
+  </main>
+
+  <!-- ===================== ADMIN (index.html#admin) ===================== -->
+  <main id="admin" hidden>
+    <div class="title-section">
+      <div class="title-main">
+        <h2>Inquiry<br><span class="accent">Inbox</span></h2>
+        <p>Submissions from Google Sheet, this browser, or imported JSON. Copy any inquiry straight into Claude to draft the proposal and the follow-up.</p>
+      </div>
+      <div class="title-meta"><div><span class="version">SYS 003</span> / ADMIN</div></div>
+    </div>
+    <div class="panel">
+      <div class="admin-bar">
+        <input type="text" id="adm-endpoint" placeholder="Apps Script web-app URL" aria-label="Apps Script web-app URL">
+        <input type="password" id="adm-token" placeholder="Admin token" aria-label="Admin token">
+        <button type="button" class="btn btn-primary" id="adm-load">Load sheet</button>
+      </div>
+      <div class="admin-tools">
+        <label class="btn">Import JSON<input type="file" id="adm-import" accept=".json,application/json" multiple hidden></label>
+        <button type="button" class="btn" id="adm-export-json">Export JSON</button>
+        <button type="button" class="btn" id="adm-export-csv">Export CSV</button>
+        <span class="status" id="adm-status"></span>
+      </div>
+      <div id="adm-list"></div>
+    </div>
+  </main>
+
+  <div id="print-sheet"></div>
+
+  <footer class="footer">
+    <span>© 景 (Leo) · BIB Line Questionnaire</span>
+    <a href="https://github.com/yangcong2828/bib-calculator">BIB Solution Calculator →</a>
+  </footer>
+</div>
+
+<template id="tpl-variant">
+  <div class="variant">
+    <div class="variant-head">
+      <span class="tag"><span data-i18n="c.pouch">Pouch</span> <span class="vn">1</span></span>
+      <button type="button" class="btn-text v-remove" data-i18n="a.remove">Remove</button>
+    </div>
+    <div class="row row-2">
+      <div class="field">
+        <label class="label"><span data-i18n="f.weight">Weight</span><span class="req">*</span></label>
+        <div class="unit-input"><input type="text" inputmode="decimal" data-k="weight_g" placeholder="500"><span class="unit">g</span></div>
+      </div>
+      <div class="field">
+        <label class="label"><span data-i18n="f.count">Pouches per master bag</span><span class="req">*</span></label>
+        <div class="unit-input"><input type="text" inputmode="numeric" data-k="pouches_per_bag" placeholder="50"><span class="unit">pcs</span></div>
       </div>
     </div>
-
-    <!-- Success Page -->
-    <div class="success-page" id="success-page">
-      <div class="success-icon">&#10003;</div>
-      <h2>Questionnaire Submitted Successfully!</h2>
-      <p>Thank you for completing the questionnaire. Your response has been recorded.</p>
-      <button class="btn btn-primary" onclick="downloadJSON()">Download Response (JSON)</button>
+    <div class="row row-3">
+      <div class="field">
+        <label class="label" data-i18n="f.length">Length L</label>
+        <div class="unit-input"><input type="text" inputmode="decimal" data-k="length_mm" placeholder="220"><span class="unit">mm</span></div>
+      </div>
+      <div class="field">
+        <label class="label" data-i18n="f.width">Width W</label>
+        <div class="unit-input"><input type="text" inputmode="decimal" data-k="width_mm" placeholder="130"><span class="unit">mm</span></div>
+      </div>
+      <div class="field">
+        <label class="label" data-i18n="f.thickness">Thickness T</label>
+        <div class="unit-input"><input type="text" inputmode="decimal" data-k="thickness_mm" placeholder="55"><span class="unit">mm</span></div>
+      </div>
     </div>
-
-    <!-- Navigation Buttons -->
-    <div class="form-actions" id="form-actions">
-      <button class="btn btn-secondary" id="btn-prev" onclick="prevStep()" disabled>&#8592; Previous</button>
-      <button class="btn btn-primary" id="btn-next" onclick="nextStep()">Next &#8594;</button>
-      <button class="btn btn-success" id="btn-submit" onclick="submitForm()" style="display:none">Submit &#10003;</button>
+    <div class="row row-2">
+      <div class="field">
+        <label class="label" data-i18n="f.perlayer">Pouches per layer</label>
+        <div class="unit-input"><input type="text" inputmode="numeric" data-k="per_layer" data-i18n-ph="ph.ifknown" placeholder="if known"><span class="unit">pcs</span></div>
+      </div>
     </div>
+    <div class="preview" aria-live="polite"></div>
   </div>
+</template>
 
-  <script src="app.js"></script>
+<script>
+// core.js — the data contract shared by the form (app.js), the admin page and
+// the Apps Script backend docs. Everything a person or an AI reads downstream
+// (JSON, Markdown brief, follow-up list, engineering estimate) is built here,
+// always in English with fixed enum codes, whatever language the form was in.
+(function (root) {
+  const SCHEMA = 'bib-questionnaire/v2';
+
+  // Enum code -> English label. Codes never change; labels may.
+  const ENUMS = {
+    category: {
+      salt: 'Salt', sugar: 'Sugar', rice: 'Rice', seeds: 'Seeds',
+      detergent: 'Detergent powder', flour: 'Flour', other: 'Other',
+    },
+    form: { granule: 'Granule', crystal: 'Crystal', powder: 'Powder', flake: 'Flake', other: 'Other' },
+    traits: {
+      free_flowing: 'Free-flowing', dusty: 'Dusty', sticky: 'Sticky / caking',
+      hygroscopic: 'Hygroscopic', corrosive: 'Corrosive', fragile: 'Fragile',
+    },
+    master_bag_material: { pe_film: 'PE roll film (heat seal)', pp_woven: 'PP woven bag (sewing)', not_sure: 'Not sure' },
+    arrangement: { top_to_top: 'Top-to-top', side_to_side: 'Side-to-side', not_sure: 'Not sure' },
+    scope: {
+      primary_packing: 'Primary packing (VFFS + weigher)', secondary_bib: 'Secondary BIB packing',
+      conveying: 'Conveying & pouch turning', inspection: 'Checkweigher / metal detector',
+      palletizing: 'Palletizing', turnkey: 'Complete turnkey line',
+    },
+    capacity_unit: { pouches_per_min: 'pouches/min', t_per_hour: 't/h', t_per_day: 't/day' },
+    machine_material: {
+      ss304_contact: 'SS304 contact parts, powder-coated carbon-steel frame',
+      ss304_full: 'Full SS304', ss316_contact: 'SS316 contact parts, SS304 frame', not_sure: 'Not sure',
+    },
+    current_method: { manual: 'Manual', semi_auto: 'Semi-automatic', automatic: 'Automatic (upgrading)', new_project: 'New project' },
+    frequency_hz: { 50: '50 Hz', 60: '60 Hz', not_sure: 'Not sure' },
+    phase: { 3: '3-phase', 1: '1-phase' },
+    compressed_air: { yes: 'Available', no: 'Not available', not_sure: 'Not sure' },
+    timeline: { within_3m: 'Within 3 months', '3_6m': '3–6 months', '6_12m': '6–12 months', exploring: 'Exploring / budgeting' },
+  };
+
+  // Mirrors bib-calculator (calculate / recommendMachine) so estimates match.
+  const MACHINES = {
+    pe_film: {
+      model: 'ZR-VBIB-120', name: 'Vertical roll-film BIB machine', seal: 'Heat seal',
+      max_pouches_per_min: 120, max_bags_per_min: null, bag_height_allowance_mm: 100,
+    },
+    pp_woven: {
+      model: 'ZR-WBIB-90', name: 'Woven-bag BIB machine', seal: 'Thread sewing',
+      max_pouches_per_min: 90, max_bags_per_min: 6, bag_height_allowance_mm: 50,
+    },
+  };
+  const TOP_OVERLAP_MM = 18;          // calculator default seal overlap, top-to-top
+  const TOP_OVERLAP_MAX_RATIO = 0.4;  // capped at 40 % of pouch length
+  const SIDE_OVERLAP_RATIO = 0.1;     // side-to-side: crimp fins overlap ≈ 0.1 × width
+  const HOURS_PER_DAY = 16;           // t/day targets assume two 8 h shifts
+
+  const round = (v, d = 0) => Math.round(v * 10 ** d) / 10 ** d;
+  const label = (group, v) => (v == null ? null : (ENUMS[group] && ENUMS[group][v]) || String(v));
+
+  function newId(date = new Date()) {
+    const ymd = date.toISOString().slice(2, 10).replace(/-/g, '');
+    const rand = Math.random().toString(36).slice(2, 6).toUpperCase().padEnd(4, '0');
+    return `BIB-${ymd}-${rand}`;
+  }
+
+  function targetPouchesPerMin(cap, weightG) {
+    if (!cap || !cap.value) return null;
+    if (cap.unit === 'pouches_per_min') return cap.value;
+    if (!weightG) return null;
+    const tPerHour = cap.unit === 't_per_day' ? cap.value / HOURS_PER_DAY : cap.value;
+    return (tPerHour * 1e6) / weightG / 60;
+  }
+
+  // Preliminary engineering figures. Each value appears only when every input
+  // it depends on is present, so an absent key always means "not enough data".
+  function derive(s) {
+    const mat = MACHINES[s.packaging.master_bag_material] || null;
+    const arr = s.packaging.arrangement;
+    const variants = s.pouches.map((p, i) => {
+      const d = { pouch: i + 1 };
+      const count = p.pouches_per_bag;
+      if (p.weight_g && count) d.master_bag_weight_kg = round((p.weight_g * count) / 1000, 2);
+
+      const stackable = p.length_mm && p.width_mm && p.thickness_mm && p.per_layer && count
+        && (arr === 'top_to_top' || arr === 'side_to_side');
+      if (stackable) {
+        const n = Math.min(p.per_layer, count);
+        const layers = Math.ceil(count / n);
+        const top = arr === 'top_to_top';
+        const A = n * (top ? p.length_mm : p.width_mm);
+        const B = top ? p.width_mm : p.length_mm;
+        const H = layers * p.thickness_mm;
+        const ov = top ? Math.min(TOP_OVERLAP_MM, TOP_OVERLAP_MAX_RATIO * p.length_mm) : SIDE_OVERLAP_RATIO * p.width_mm;
+        const A1 = Math.round(A - (n - 1) * ov);
+        d.layers = layers;
+        d.stack_mm = { length: A1, width: B, height: H };
+        if (mat) d.empty_bag_mm = { length: A1, width: B, height: Math.round(1.1 * H + B + mat.bag_height_allowance_mm) };
+      }
+
+      if (mat && count) {
+        const ppm = mat.max_bags_per_min ? Math.min(mat.max_pouches_per_min, mat.max_bags_per_min * count) : mat.max_pouches_per_min;
+        d.max_pouches_per_min = round(ppm, 1);
+        d.max_bags_per_min = round(ppm / count, 2);
+        if (p.weight_g) d.max_t_per_hour = round((ppm * 60 * p.weight_g) / 1e6, 2);
+        const target = targetPouchesPerMin(s.line.target_capacity, p.weight_g);
+        if (target) {
+          d.target_pouches_per_min = round(target, 1);
+          d.bib_machines_needed = Math.ceil(target / ppm - 1e-9);
+        }
+      } else {
+        const target = targetPouchesPerMin(s.line.target_capacity, p.weight_g);
+        if (target) d.target_pouches_per_min = round(target, 1);
+      }
+      return d;
+    });
+    return {
+      basis: 'bib-calculator formulas; top-to-top seal overlap 18 mm; t/day assumes 16 h/day. Preliminary — engineer to confirm.',
+      machine: mat ? { model: mat.model, name: mat.name, seal: mat.seal, max_pouches_per_min: mat.max_pouches_per_min } : null,
+      variants,
+    };
+  }
+
+  // Inputs that matter for a proposal but were left blank or "not sure".
+  // This list is what turns into the follow-up message to the customer.
+  function unknowns(s) {
+    const out = [];
+    const miss = (cond, field, text) => { if (cond) out.push({ field, label: text }); };
+    const blank = v => v == null || v === '' || v === 'not_sure';
+    miss(blank(s.product.particle_size_mm), 'product.particle_size_mm', 'Particle size');
+    miss(blank(s.product.bulk_density_g_cm3), 'product.bulk_density_g_cm3', 'Bulk density');
+    miss(blank(s.product.moisture_pct), 'product.moisture_pct', 'Moisture content');
+    s.pouches.forEach((p, i) => {
+      const tag = s.pouches.length > 1 ? `Pouch ${i + 1}: ` : '';
+      miss(!(p.length_mm && p.width_mm && p.thickness_mm), `pouches[${i}].dimensions`, `${tag}filled pouch size (L × W × T)`);
+      miss(!p.per_layer, `pouches[${i}].per_layer`, `${tag}pouches per layer in the master bag`);
+    });
+    miss(blank(s.packaging.pouch_film), 'packaging.pouch_film', 'Pouch film structure / thickness');
+    miss(blank(s.packaging.master_bag_material), 'packaging.master_bag_material', 'Master bag material (PE film or PP woven)');
+    miss(blank(s.packaging.arrangement), 'packaging.arrangement', 'Stacking arrangement (top-to-top or side-to-side)');
+    miss(!s.line.target_capacity, 'line.target_capacity', 'Target capacity');
+    miss(blank(s.line.machine_material), 'line.machine_material', 'Machine material standard');
+    miss(blank(s.site.voltage_v), 'site.voltage_v', 'Supply voltage');
+    miss(blank(s.site.frequency_hz), 'site.frequency_hz', 'Supply frequency (50/60 Hz)');
+    miss(blank(s.site.compressed_air), 'site.compressed_air', 'Compressed air availability');
+    miss(blank(s.site.space), 'site.space', 'Available floor space');
+    miss(blank(s.project.timeline), 'project.timeline', 'Project timeline');
+    return out;
+  }
+
+  // Human- and LLM-readable brief. English labels, customer's free text verbatim.
+  function toMarkdown(s) {
+    const v = (x, unit = '') => (x == null || x === '' ? '—' : `${x}${unit ? ' ' + unit : ''}`);
+    const list = (group, arr) => (arr && arr.length ? arr.map(x => label(group, x)).join(', ') : '—');
+    const mm = d => (d ? `${d.length} × ${d.width} × ${d.height} mm` : '—');
+    const c = s.contact, p = s.product, k = s.packaging, l = s.line, site = s.site;
+    const L = [];
+
+    L.push(`# BIB inquiry ${s.id || '(draft)'}`);
+    L.push(`Submitted: ${s.submitted_at || '—'} · Form language: ${s.form_language}${s.source ? ` · Source: ${s.source}` : ''}`);
+    L.push('', '## Customer');
+    L.push(`- Company: ${v(c.company)}`);
+    L.push(`- Contact: ${v(c.name)}${c.role ? ` (${c.role})` : ''}`);
+    L.push(`- Country: ${v(c.country)}`);
+    L.push(`- Email: ${v(c.email)} · WhatsApp: ${v(c.whatsapp)}`);
+
+    L.push('', '## Product');
+    L.push(`- Category: ${v(label('category', p.category))}${p.description ? ` — ${p.description}` : ''}`);
+    L.push(`- Form: ${v(label('form', p.form))} · Traits: ${list('traits', p.traits)}`);
+    L.push(`- Particle size: ${v(p.particle_size_mm, 'mm')} · Bulk density: ${v(p.bulk_density_g_cm3, 'g/cm³')} · Moisture: ${v(p.moisture_pct, '%')}`);
+
+    L.push('', '## Packaging');
+    L.push('| # | Pouch weight | Filled pouch L × W × T | Pouches / master bag | Per layer | Master bag weight |');
+    L.push('|---|---|---|---|---|---|');
+    s.pouches.forEach((x, i) => {
+      const dv = s.derived && s.derived.variants[i];
+      const dims = x.length_mm && x.width_mm && x.thickness_mm ? `${x.length_mm} × ${x.width_mm} × ${x.thickness_mm} mm` : '—';
+      L.push(`| ${i + 1} | ${v(x.weight_g, 'g')} | ${dims} | ${v(x.pouches_per_bag)} | ${v(x.per_layer)} | ${dv && dv.master_bag_weight_kg ? dv.master_bag_weight_kg + ' kg' : '—'} |`);
+    });
+    L.push(`- Pouch film: ${v(k.pouch_film)}`);
+    L.push(`- Master bag: ${v(label('master_bag_material', k.master_bag_material))} · Arrangement: ${v(label('arrangement', k.arrangement))}`);
+    L.push(`- Existing master bag size: ${v(k.existing_master_bag)}`);
+
+    L.push('', '## Line & site');
+    L.push(`- Scope: ${list('scope', l.scope)}`);
+    L.push(`- Target capacity: ${l.target_capacity ? `${l.target_capacity.value} ${label('capacity_unit', l.target_capacity.unit)}` : '—'}`);
+    L.push(`- Weighing accuracy: ${v(l.weighing_accuracy)}`);
+    L.push(`- Machine material: ${v(label('machine_material', l.machine_material))}`);
+    L.push(`- Current packing method: ${v(label('current_method', l.current_method))}`);
+    L.push(`- Power: ${v(site.voltage_v, 'V')} · ${v(label('frequency_hz', site.frequency_hz))} · ${v(label('phase', site.phase))} · Compressed air: ${v(label('compressed_air', site.compressed_air))}`);
+    L.push(`- Available space: ${v(site.space)}`);
+    L.push(`- Timeline: ${v(label('timeline', s.project.timeline))}`);
+
+    L.push('', "## In the customer's words");
+    L.push(l.pain_points ? l.pain_points.split('\n').map(x => `> ${x}`).join('\n') : '—');
+
+    if (s.derived) {
+      const d = s.derived;
+      L.push('', '## Preliminary engineering (derived)');
+      L.push(`_${d.basis}_`);
+      L.push(`- Machine match: ${d.machine ? `${d.machine.model} — ${d.machine.name}, ${d.machine.seal}, up to ${d.machine.max_pouches_per_min} pouches/min` : '— (master bag material unknown)'}`);
+      d.variants.forEach(x => {
+        const parts = [];
+        if (x.stack_mm) parts.push(`stack ${mm(x.stack_mm)} in ${x.layers} layers`);
+        if (x.empty_bag_mm) parts.push(`empty bag ≈ ${mm(x.empty_bag_mm)}`);
+        if (x.max_bags_per_min != null) parts.push(`max ${x.max_bags_per_min} bags/min${x.max_t_per_hour != null ? ` (${x.max_t_per_hour} t/h)` : ''}`);
+        if (x.target_pouches_per_min != null) parts.push(`target ≈ ${x.target_pouches_per_min} pouches/min${x.bib_machines_needed ? ` → ${x.bib_machines_needed} BIB machine(s)` : ''}`);
+        L.push(`- Pouch ${x.pouch}: ${parts.length ? parts.join('; ') : 'not enough data'}`);
+      });
+    }
+
+    const u = s.unknowns || unknowns(s);
+    L.push('', '## To confirm with customer');
+    L.push(u.length ? u.map(x => `- ${x.label}`).join('\n') : '- Nothing — all key inputs provided.');
+    return L.join('\n');
+  }
+
+  // Prompt for Claude: turns one inquiry into a proposal outline + follow-up message.
+  function aiPrompt(s, md) {
+    return [
+      "You are the sales-engineering assistant of Leo, a Bag-in-Bag (BIB) secondary packaging line specialist.",
+      `Below is one customer inquiry from the BIB questionnaire (schema ${SCHEMA}): a Markdown brief, then the raw JSON.`,
+      '',
+      'Do three things:',
+      "1. Summarise the customer's need in three lines.",
+      '2. Propose a line configuration (primary packing, BIB machine model and quantity, conveying, inspection, palletizing) using the derived engineering figures. Flag every figure that rests on a missing or estimated input.',
+      `3. Turn the "To confirm with customer" list into a short, friendly WhatsApp follow-up in the customer's form language (${s.form_language}).`,
+      'Never invent specifications the customer did not give.',
+      '',
+      md,
+      '',
+      '```json',
+      JSON.stringify(s, null, 2),
+      '```',
+    ].join('\n');
+  }
+
+  root.BIBCore = { SCHEMA, ENUMS, MACHINES, label, newId, derive, unknowns, toMarkdown, aiPrompt };
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>
+(function () {
+  'use strict';
+
+  // ======== Config — see README.md › Setup ========
+  const CONFIG = {
+    endpoint: '',   // Google Apps Script web-app URL. Empty: answers stay in the browser and the customer sends them by WhatsApp / email.
+    whatsapp: '',   // Your WhatsApp number, digits only with country code, e.g. '8613800000000'. Empty hides the button.
+    email: '',      // Your inbox for the "Send by email" fallback. Empty hides the button.
+  };
+
+  const Core = window.BIBCore;
+  const MAX_VARIANTS = 4;
+  const KEY = { draft: 'bibq.v2.draft', sent: 'bibq.v2.sent', inbox: 'bibq.v2.inbox', lang: 'bibq.lang', admin: 'bibq.admin' };
+  const store = {
+    get(k, fallback) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; } catch (_) { return fallback; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) { /* private mode */ } },
+    del(k) { try { localStorage.removeItem(k); } catch (_) { /* private mode */ } },
+  };
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  // ======== i18n ========
+  // English lives in the markup (read once at start-up); RU and ZH override by key.
+  const I18N = {
+    ru: {
+      'brand.name': 'Leo',
+      'title': 'Пакет-в-пакете<br><span class="accent">Опросный лист</span>',
+      'lead': 'Четыре коротких шага, около 5 минут. Обязательны только поля со знаком <span class="req">*</span> — если не уверены в значении, оставьте поле пустым, мы уточним его вместе с вами.',
+      'step.1': 'Продукт', 'step.2': 'Упаковка', 'step.3': 'Линия и цех', 'step.4': 'Контакты',
+      'f.category': 'Категория продукта',
+      'o.category.salt': 'Соль', 'o.category.sugar': 'Сахар', 'o.category.rice': 'Рис', 'o.category.seeds': 'Семена',
+      'o.category.detergent': 'Стиральный порошок', 'o.category.flour': 'Мука', 'o.category.other': 'Другое',
+      'f.description': 'Название и описание продукта',
+      'ph.description': 'напр. соль йодированная, сухие кристаллы',
+      'f.form': 'Форма продукта',
+      'o.form.granule': 'Гранулы', 'o.form.crystal': 'Кристаллы', 'o.form.powder': 'Порошок', 'o.form.flake': 'Хлопья', 'o.form.other': 'Другое',
+      'f.traits': 'Свойства', 'h.multi': 'Можно выбрать несколько.',
+      'o.traits.free_flowing': 'Сыпучий', 'o.traits.dusty': 'Пылящий', 'o.traits.sticky': 'Липкий, слёживается',
+      'o.traits.hygroscopic': 'Гигроскопичный', 'o.traits.corrosive': 'Коррозионный', 'o.traits.fragile': 'Хрупкий',
+      'f.particle': 'Размер частиц', 'f.density': 'Насыпная плотность', 'f.moisture': 'Влажность',
+      'h.density': 'Ориентиры насыпной плотности: соль ≈ 1,2 · сахар ≈ 0,85 · рис ≈ 0,8 · мука ≈ 0,55 г/см³.',
+      'sub.pouches': 'Первичные пакеты',
+      'h.pouches': 'Измерьте заполненный пакет, лежащий плашмя. Для каждого размера пакета — отдельная строка.',
+      'c.pouch': 'Пакет', 'a.remove': 'Удалить',
+      'f.weight': 'Масса', 'f.count': 'Пакетов в мешке', 'f.length': 'Длина L', 'f.width': 'Ширина W', 'f.thickness': 'Толщина T',
+      'f.perlayer': 'Пакетов в слое', 'ph.ifknown': 'если известно',
+      'a.add': '+ Добавить размер пакета',
+      'f.film': 'Плёнка пакета', 'h.film': 'Структура ламината и общая толщина, если известны.', 'ph.film': 'напр. PET12/PE53, 65 мкм',
+      'sub.master': 'Транспортный мешок',
+      'f.material': 'Тип мешка',
+      'o.master_bag_material.pe_film': 'Рулонная ПЭ-плёнка', 'm.pe_film': 'Термосварка · до 120 пакетов/мин',
+      'o.master_bag_material.pp_woven': 'Мешок из ПП-ткани', 'm.pp_woven': 'Зашивка нитью · до 90 пакетов/мин',
+      'o.not_sure': 'Не знаю', 'm.advise': 'Мы подскажем',
+      'f.arrangement': 'Как пакеты лежат в мешке',
+      'o.arrangement.top_to_top': 'Торец к торцу', 'm.top_to_top': 'Швы пакетов обращены друг к другу',
+      'o.arrangement.side_to_side': 'Бок к боку', 'm.side_to_side': 'Пакеты касаются длинными сторонами',
+      'f.existing': 'Размер текущего мешка', 'h.existing': 'Только если мешок уже есть — иначе мы рассчитаем его сами.',
+      'ph.existing': 'напр. 600 × 400 мм, без фальца',
+      'f.pain': 'Какую задачу должна решить линия?',
+      'h.pain': 'Текущие проблемы, персонал, скорость, качество упаковки — своими словами, на любом языке.',
+      'f.scope': 'Что вам нужно от нас?',
+      'o.scope.primary_packing': 'Первичная фасовка (VFFS + дозатор)', 'o.scope.secondary_bib': 'Вторичная упаковка BIB',
+      'o.scope.conveying': 'Транспортёры и разворот пакетов', 'o.scope.inspection': 'Контрольные весы / металлодетектор',
+      'o.scope.palletizing': 'Паллетирование', 'o.scope.turnkey': 'Линия «под ключ»',
+      'f.capacity': 'Требуемая производительность',
+      'o.capacity_unit.t_per_hour': 'т/ч', 'o.capacity_unit.t_per_day': 'т/сутки', 'o.capacity_unit.pouches_per_min': 'пакетов/мин',
+      'f.accuracy': 'Точность дозирования', 'ph.accuracy': 'напр. ±1 г или ±0,5 %',
+      'f.machine_material': 'Материал машины',
+      'o.machine_material.ss304_contact': 'Контактные части SS304', 'm.ss304_contact': 'Рама из углеродистой стали с порошковой окраской',
+      'o.machine_material.ss304_full': 'Полностью SS304', 'm.ss304_full': 'Пищевое исполнение, легко моется',
+      'o.machine_material.ss316_contact': 'Контактные части SS316', 'm.ss316_contact': 'Рама SS304 — для соли и коррозионных продуктов',
+      'badge.rec': 'Рекомендуем',
+      'f.method': 'Как фасуете сейчас',
+      'o.current_method.manual': 'Вручную', 'o.current_method.semi_auto': 'Полуавтомат',
+      'o.current_method.automatic': 'Автомат (модернизация)', 'o.current_method.new_project': 'Новый проект',
+      'sub.site': 'Энергоносители', 'f.voltage': 'Напряжение', 'f.frequency': 'Частота', 'f.phase': 'Фазы',
+      'o.frequency_hz.50': '50 Гц', 'o.frequency_hz.60': '60 Гц', 'o.phase.3': '3 фазы', 'o.phase.1': '1 фаза',
+      'f.air': 'Сжатый воздух', 'o.compressed_air.yes': 'Есть', 'o.compressed_air.no': 'Нет',
+      'f.space': 'Свободная площадь', 'ph.space': 'напр. 20 × 8 м, потолок 5 м',
+      'h.contact': 'Куда отправить предварительное предложение?',
+      'f.name': 'Ваше имя', 'f.company': 'Компания', 'f.country': 'Страна', 'f.role': 'Должность', 'ph.role': 'напр. директор завода',
+      'f.email': 'Email', 'f.whatsapp': 'WhatsApp', 'h.reach': 'Email или WhatsApp — хотя бы одно.',
+      'f.timeline': 'Когда планируете запуск?',
+      'o.timeline.within_3m': 'В течение 3 месяцев', 'o.timeline.3_6m': '3–6 месяцев', 'o.timeline.6_12m': '6–12 месяцев',
+      'o.timeline.exploring': 'Изучаем / планируем бюджет',
+      'sub.review': 'Проверьте ответы', 'n.privacy': 'Ваши данные используются только для подготовки предложения.',
+      'a.back': 'Назад', 'a.submit': 'Отправить', 'a.sending': 'Отправка…', 'a.edit': 'Изменить', 'next.to': 'Далее: {step}',
+      's.saved': 'Черновик сохранён на этом устройстве',
+      'ok.ref': 'Номер заявки', 'ok.title': 'Получено',
+      'ok.body': 'Спасибо, {name}! Мы изучим вашу задачу и пришлём предварительное предложение.',
+      'manual.title': 'Остался один шаг',
+      'manual.body': 'Ответы готовы. Отправьте их нам через WhatsApp или по email — так мы их получим.',
+      'a.wa': 'Отправить в WhatsApp', 'a.mail': 'Отправить по email', 'a.pdf': 'Сохранить PDF', 'a.new': 'Заполнить новый опрос',
+      'err.required': 'Обязательное поле', 'err.number': 'Введите число больше 0', 'err.integer': 'Введите целое число больше 0',
+      'err.reach': 'Укажите email или WhatsApp', 'err.email': 'Проверьте адрес email', 'err.pick': 'Выберите хотя бы один вариант',
+      'err.fix': 'Проверьте отмеченные поля.', 'err.send': 'Не удалось отправить. Отправьте ответы через WhatsApp или email ниже.',
+      'match.k': 'Предварительный подбор машины', 'match.none': 'Выберите тип мешка — покажем подходящую машину.',
+      'match.note': 'Предварительная оценка — инженер уточнит.',
+      'pv.weight': '≈ {kg} кг в мешке', 'pv.bag': 'пустой мешок ≈ {l} × {w} × {h} мм', 'pv.speed': 'до {bpm} мешков/мин',
+      'pv.need': 'цель {ppm} пакетов/мин → машин BIB: {n}',
+      'r.dims': 'L × W × T', 'r.pcs': 'шт.',
+    },
+    zh: {
+      'brand.name': '景',
+      'title': '袋中袋<br>产线<span class="accent">需求问卷</span>',
+      'lead': '四个简短步骤，约 5 分钟。只有标 <span class="req">*</span> 的为必填——不确定的数值可以留空，我们会和您一起确认。',
+      'step.1': '产品', 'step.2': '包装', 'step.3': '产线与现场', 'step.4': '联系方式',
+      'f.category': '产品类别',
+      'o.category.salt': '盐', 'o.category.sugar': '糖', 'o.category.rice': '大米', 'o.category.seeds': '种子',
+      'o.category.detergent': '洗衣粉', 'o.category.flour': '面粉', 'o.category.other': '其他',
+      'f.description': '产品名称与描述', 'ph.description': '例：精制加碘盐，干燥晶体',
+      'f.form': '物料形态',
+      'o.form.granule': '颗粒', 'o.form.crystal': '晶体', 'o.form.powder': '粉末', 'o.form.flake': '片状', 'o.form.other': '其他',
+      'f.traits': '物料特性', 'h.multi': '可多选。',
+      'o.traits.free_flowing': '流动性好', 'o.traits.dusty': '易起粉尘', 'o.traits.sticky': '易粘结 / 结块',
+      'o.traits.hygroscopic': '易吸潮', 'o.traits.corrosive': '有腐蚀性', 'o.traits.fragile': '易碎',
+      'f.particle': '粒径', 'f.density': '堆积密度', 'f.moisture': '含水率',
+      'h.density': '堆积密度参考：盐 ≈ 1.2 · 糖 ≈ 0.85 · 大米 ≈ 0.8 · 面粉 ≈ 0.55 g/cm³。',
+      'sub.pouches': '小袋（一次包装）',
+      'h.pouches': '测量平放的满袋尺寸。每种小袋规格各填一行。',
+      'c.pouch': '小袋', 'a.remove': '删除',
+      'f.weight': '重量', 'f.count': '每大袋小袋数', 'f.length': '长 L', 'f.width': '宽 W', 'f.thickness': '厚 T',
+      'f.perlayer': '每层小袋数', 'ph.ifknown': '如已知',
+      'a.add': '+ 添加另一种规格',
+      'f.film': '小袋膜材', 'h.film': '复合结构与总厚度（如已知）。', 'ph.film': '例：PET12/PE53，65 µm',
+      'sub.master': '外包装大袋',
+      'f.material': '大袋类型',
+      'o.master_bag_material.pe_film': 'PE卷膜袋', 'm.pe_film': '热合封口 · 最高 120 包/分',
+      'o.master_bag_material.pp_woven': 'PP编织袋', 'm.pp_woven': '缝线封口 · 最高 90 包/分',
+      'o.not_sure': '不确定', 'm.advise': '由我们建议',
+      'f.arrangement': '小袋在大袋中的排列',
+      'o.arrangement.top_to_top': '头对头', 'm.top_to_top': '封口端相对',
+      'o.arrangement.side_to_side': '肩靠肩', 'm.side_to_side': '长边相靠',
+      'f.existing': '现有大袋尺寸', 'h.existing': '仅在已有大袋时填写，否则由我们计算。', 'ph.existing': '例：600 × 400 mm，无折边',
+      'f.pain': '这条产线要为您解决什么问题？',
+      'h.pain': '现有痛点、人工、速度、包装质量——用您自己的话，任何语言均可。',
+      'f.scope': '需要我们提供什么？',
+      'o.scope.primary_packing': '一次包装（立式包装机 + 称重）', 'o.scope.secondary_bib': '二次袋中袋包装',
+      'o.scope.conveying': '输送与理袋', 'o.scope.inspection': '复检秤 / 金属检测',
+      'o.scope.palletizing': '码垛', 'o.scope.turnkey': '整线交钥匙',
+      'f.capacity': '目标产能',
+      'o.capacity_unit.t_per_hour': '吨/时', 'o.capacity_unit.t_per_day': '吨/天', 'o.capacity_unit.pouches_per_min': '包/分',
+      'f.accuracy': '称重精度', 'ph.accuracy': '例：±1 g 或 ±0.5%',
+      'f.machine_material': '设备材质',
+      'o.machine_material.ss304_contact': '接触件 SS304', 'm.ss304_contact': '碳钢喷塑机架',
+      'o.machine_material.ss304_full': '全 SS304 不锈钢', 'm.ss304_full': '食品级，易清洗',
+      'o.machine_material.ss316_contact': '接触件 SS316', 'm.ss316_contact': 'SS304 机架——适合盐及腐蚀性物料',
+      'badge.rec': '推荐',
+      'f.method': '当前包装方式',
+      'o.current_method.manual': '人工', 'o.current_method.semi_auto': '半自动',
+      'o.current_method.automatic': '自动（升级）', 'o.current_method.new_project': '新项目',
+      'sub.site': '现场公用条件', 'f.voltage': '电压', 'f.frequency': '频率', 'f.phase': '相数',
+      'o.phase.3': '三相', 'o.phase.1': '单相',
+      'f.air': '压缩空气', 'o.compressed_air.yes': '有', 'o.compressed_air.no': '无',
+      'f.space': '可用场地', 'ph.space': '例：20 × 8 m，层高 5 m',
+      'h.contact': '初步方案发送给谁？',
+      'f.name': '您的姓名', 'f.company': '公司', 'f.country': '国家', 'f.role': '职位', 'ph.role': '例：厂长',
+      'f.email': '邮箱', 'f.whatsapp': 'WhatsApp', 'h.reach': '邮箱或 WhatsApp 至少填一个。',
+      'f.timeline': '计划何时启动？',
+      'o.timeline.within_3m': '3 个月内', 'o.timeline.3_6m': '3–6 个月', 'o.timeline.6_12m': '6–12 个月',
+      'o.timeline.exploring': '了解中 / 做预算',
+      'sub.review': '核对您的回答', 'n.privacy': '您的信息仅用于准备方案。',
+      'a.back': '上一步', 'a.submit': '提交', 'a.sending': '提交中…', 'a.edit': '修改', 'next.to': '下一步：{step}',
+      's.saved': '草稿已保存在本机',
+      'ok.ref': '编号', 'ok.title': '已收到',
+      'ok.body': '谢谢您，{name}。我们会评估您的产线需求，并回复初步方案。',
+      'manual.title': '还差一步',
+      'manual.body': '您的回答已整理好，请通过 WhatsApp 或邮件发送给我们，我们才能收到。',
+      'a.wa': '通过 WhatsApp 发送', 'a.mail': '通过邮件发送', 'a.pdf': '保存为 PDF', 'a.new': '填写新问卷',
+      'err.required': '必填', 'err.number': '请输入大于 0 的数字', 'err.integer': '请输入大于 0 的整数',
+      'err.reach': '请填写邮箱或 WhatsApp', 'err.email': '请检查邮箱格式', 'err.pick': '请至少选择一项',
+      'err.fix': '请检查标出的字段。', 'err.send': '提交失败，请用下方 WhatsApp 或邮件发送。',
+      'match.k': '初步机型匹配', 'match.none': '选择大袋类型后，这里显示匹配机型。',
+      'match.note': '初步估算，工程师将确认。',
+      'pv.weight': '每大袋 ≈ {kg} kg', 'pv.bag': '空袋 ≈ {l} × {w} × {h} mm', 'pv.speed': '最高 {bpm} 袋/分',
+      'pv.need': '目标 {ppm} 包/分 → 需 {n} 台 BIB',
+      'r.dims': '长 × 宽 × 厚', 'r.pcs': '包',
+    },
+  };
+  // English strings that exist only in script (everything else is read from the markup).
+  const JS_EN = {
+    'a.submit': 'Submit', 'a.sending': 'Sending…', 'a.edit': 'Edit', 'next.to': 'Next: {step}',
+    's.saved': 'Draft saved on this device',
+    'ok.title': 'Received', 'ok.body': 'Thank you, {name}. We will review your line and come back with a preliminary proposal.',
+    'manual.title': 'One last step', 'manual.body': 'Your answers are ready. Send them to us on WhatsApp or by email so we receive them.',
+    'err.required': 'This field is required', 'err.number': 'Enter a number greater than 0', 'err.integer': 'Enter a whole number greater than 0',
+    'err.reach': 'Enter an email or a WhatsApp number', 'err.email': 'Check this email address', 'err.pick': 'Select at least one option',
+    'err.fix': 'Please check the highlighted fields.', 'err.send': 'Could not send. Please use WhatsApp or email below.',
+    'match.k': 'Preliminary machine match', 'match.none': 'Choose a master bag type to see the matching machine.',
+    'match.note': 'Preliminary estimate — our engineer will confirm.',
+    'pv.weight': '≈ {kg} kg per master bag', 'pv.bag': 'empty bag ≈ {l} × {w} × {h} mm', 'pv.speed': 'up to {bpm} bags/min',
+    'pv.need': 'target {ppm} pouches/min → {n} BIB machine(s)',
+    'r.dims': 'L × W × T', 'r.pcs': 'pcs',
+  };
+  const EN = {};
+  let lang = 'en';
+
+  function captureEnglish(root) {
+    $$('[data-i18n]', root).forEach(el => { if (!(el.dataset.i18n in EN)) EN[el.dataset.i18n] = el.innerHTML.trim(); });
+    $$('[data-i18n-ph]', root).forEach(el => { if (!(el.dataset.i18nPh in EN)) EN[el.dataset.i18nPh] = el.getAttribute('placeholder'); });
+  }
+  const has = key => (I18N[lang] && key in I18N[lang]) || key in JS_EN || key in EN;
+  function t(key, vars) {
+    let s = (I18N[lang] && I18N[lang][key]) ?? JS_EN[key] ?? EN[key] ?? key;
+    if (vars) s = s.replace(/\{(\w+)\}/g, (_, k) => (vars[k] ?? ''));
+    return s;
+  }
+  const plain = html => { const d = document.createElement('div'); d.innerHTML = html; return d.textContent; };
+  function applyI18n(root = document) {
+    $$('[data-i18n]', root).forEach(el => { el.innerHTML = t(el.dataset.i18n); });
+    $$('[data-i18n-ph]', root).forEach(el => { el.setAttribute('placeholder', t(el.dataset.i18nPh)); });
+  }
+  function setLang(next) {
+    lang = I18N[next] || next === 'en' ? next : 'en';
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+    $$('.lang-toggle button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    applyI18n();
+    store.set(KEY.lang, lang);
+    if (!$('#app').hidden) { refreshNav(); refreshDerived(); if (step === 4) renderReview(); }
+  }
+  function initialLang() {
+    const q = new URLSearchParams(location.search).get('lang');
+    if (q && (q === 'en' || I18N[q])) return q;
+    const saved = store.get(KEY.lang, null);
+    if (saved) return saved;
+    const nav = (navigator.language || 'en').toLowerCase();
+    return nav.startsWith('ru') ? 'ru' : nav.startsWith('zh') ? 'zh' : 'en';
+  }
+
+  // ======== Reading & writing the form ========
+  const F = $('#form');
+  const SOURCE = new URLSearchParams(location.search).get('src') || null;
+  const parseNum = v => {
+    if (v == null) return null;
+    const s = String(v).trim().replace(',', '.').replace(/\s/g, '');
+    if (!s) return null;
+    const n = Number(s);
+    return Number.isFinite(n) ? n : NaN;
+  };
+  const finite = n => (Number.isFinite(n) ? n : null);
+  const text = n => { const el = F.elements[n]; const v = el && el.value != null ? el.value.trim() : ''; return v || null; };
+  const num = n => finite(parseNum(text(n)));
+  const radio = n => { const el = F.querySelector(`input[name="${n}"]:checked`); return el ? el.value : null; };
+  const checks = n => $$(`input[name="${n}"]:checked`, F).map(el => el.value);
+  const numCode = v => (v != null && /^\d+$/.test(v) ? Number(v) : v);
+  const vInput = (card, k) => $(`[data-k="${k}"]`, card);
+  const vNum = (card, k) => parseNum(vInput(card, k).value);
+
+  function collect() {
+    const capValue = num('capacity_value');
+    return {
+      schema: Core.SCHEMA,
+      id: null,
+      submitted_at: null,
+      form_language: lang,
+      source: SOURCE,
+      contact: {
+        name: text('name'), company: text('company'), country: text('country'),
+        role: text('role'), email: text('email'), whatsapp: text('whatsapp'),
+      },
+      product: {
+        category: radio('category'), description: text('description'), form: radio('form'), traits: checks('traits'),
+        particle_size_mm: text('particle_size_mm'), bulk_density_g_cm3: num('bulk_density_g_cm3'), moisture_pct: num('moisture_pct'),
+      },
+      pouches: $$('.variant', variantsEl).map(card => ({
+        weight_g: finite(vNum(card, 'weight_g')),
+        length_mm: finite(vNum(card, 'length_mm')),
+        width_mm: finite(vNum(card, 'width_mm')),
+        thickness_mm: finite(vNum(card, 'thickness_mm')),
+        pouches_per_bag: finite(vNum(card, 'pouches_per_bag')),
+        per_layer: finite(vNum(card, 'per_layer')),
+      })),
+      packaging: {
+        pouch_film: text('pouch_film'), master_bag_material: radio('master_bag_material'),
+        arrangement: radio('arrangement'), existing_master_bag: text('existing_master_bag'),
+      },
+      line: {
+        pain_points: text('pain_points'), scope: checks('scope'),
+        target_capacity: capValue ? { value: capValue, unit: F.elements.capacity_unit.value } : null,
+        weighing_accuracy: text('weighing_accuracy'), machine_material: radio('machine_material'), current_method: radio('current_method'),
+      },
+      site: {
+        voltage_v: num('voltage_v'), frequency_hz: numCode(radio('frequency_hz')), phase: numCode(radio('phase')),
+        compressed_air: radio('compressed_air'), space: text('space'),
+      },
+      project: { timeline: radio('timeline') },
+    };
+  }
+
+  function restore(s) {
+    const setText = (n, v) => { const el = F.elements[n]; if (el && v != null) el.value = v; };
+    const setRadio = (n, v) => { if (v == null) return; const el = F.querySelector(`input[name="${n}"][value="${v}"]`); if (el) el.checked = true; };
+    const setChecks = (n, arr) => (arr || []).forEach(v => setRadio(n, v));
+    const c = s.contact || {}, p = s.product || {}, k = s.packaging || {}, l = s.line || {}, site = s.site || {};
+    ['name', 'company', 'country', 'role', 'email', 'whatsapp'].forEach(n => setText(n, c[n]));
+    setRadio('category', p.category); setText('description', p.description); setRadio('form', p.form); setChecks('traits', p.traits);
+    setText('particle_size_mm', p.particle_size_mm); setText('bulk_density_g_cm3', p.bulk_density_g_cm3); setText('moisture_pct', p.moisture_pct);
+    setText('pouch_film', k.pouch_film); setRadio('master_bag_material', k.master_bag_material);
+    setRadio('arrangement', k.arrangement); setText('existing_master_bag', k.existing_master_bag);
+    setText('pain_points', l.pain_points); setChecks('scope', l.scope);
+    if (l.target_capacity) { setText('capacity_value', l.target_capacity.value); F.elements.capacity_unit.value = l.target_capacity.unit; }
+    setText('weighing_accuracy', l.weighing_accuracy); setRadio('machine_material', l.machine_material); setRadio('current_method', l.current_method);
+    setText('voltage_v', site.voltage_v); setRadio('frequency_hz', site.frequency_hz); setRadio('phase', site.phase);
+    setRadio('compressed_air', site.compressed_air); setText('space', site.space);
+    setRadio('timeline', (s.project || {}).timeline);
+    variantsEl.innerHTML = '';
+    const list = s.pouches && s.pouches.length ? s.pouches : [{}];
+    list.slice(0, MAX_VARIANTS).forEach(v => addVariant(v));
+  }
+
+  // ======== Pouch variants ========
+  const variantsEl = $('#variants');
+  const tpl = $('#tpl-variant');
+  function addVariant(values) {
+    const node = tpl.content.firstElementChild.cloneNode(true);
+    applyI18n(node);
+    if (values) Object.entries(values).forEach(([k, v]) => { const el = vInput(node, k); if (el && v != null) el.value = v; });
+    variantsEl.appendChild(node);
+    renumberVariants();
+    return node;
+  }
+  function renumberVariants() {
+    const cards = $$('.variant', variantsEl);
+    cards.forEach((card, i) => {
+      $('.vn', card).textContent = i + 1;
+      $('.v-remove', card).hidden = cards.length === 1;
+      $$('[data-k]', card).forEach(inp => {
+        inp.name = `pouches[${i}][${inp.dataset.k}]`;
+        inp.id = `p${i}_${inp.dataset.k}`;
+        if (!('example' in inp.dataset)) inp.dataset.example = inp.getAttribute('placeholder') || '';
+        if (!inp.dataset.i18nPh) inp.setAttribute('placeholder', i === 0 ? inp.dataset.example : '');
+        const lab = inp.closest('.field').querySelector('label');
+        if (lab) lab.htmlFor = inp.id;
+      });
+    });
+    $('#add-variant').hidden = cards.length >= MAX_VARIANTS;
+  }
+  $('#add-variant').addEventListener('click', () => {
+    const node = addVariant();
+    vInput(node, 'weight_g').focus();
+    saveDraftSoon();
+  });
+  variantsEl.addEventListener('click', e => {
+    const btn = e.target.closest('.v-remove');
+    if (!btn) return;
+    btn.closest('.variant').remove();
+    renumberVariants();
+    refreshDerived();
+    saveDraftSoon();
+  });
+
+  // ======== Live engineering preview ========
+  function refreshDerived() {
+    const s = collect();
+    const d = Core.derive(s);
+    $$('.variant', variantsEl).forEach((card, i) => {
+      const x = d.variants[i] || {};
+      const parts = [];
+      if (x.master_bag_weight_kg != null) parts.push(t('pv.weight', { kg: `<b>${x.master_bag_weight_kg}</b>` }));
+      if (x.empty_bag_mm) parts.push(t('pv.bag', { l: x.empty_bag_mm.length, w: x.empty_bag_mm.width, h: x.empty_bag_mm.height }));
+      if (x.max_bags_per_min != null) parts.push(t('pv.speed', { bpm: x.max_bags_per_min }));
+      if (x.bib_machines_needed) parts.push(t('pv.need', { ppm: x.target_pouches_per_min, n: `<b>${x.bib_machines_needed}</b>` }));
+      $('.preview', card).innerHTML = parts.map(p => `<span>${p}</span>`).join('');
+    });
+    const m = d.machine;
+    const mat = s.packaging.master_bag_material;
+    $('#match').innerHTML = m
+      ? `<div class="k">${t('match.k')}</div><div class="model">${m.model}</div>
+         <div class="v">${t('o.master_bag_material.' + mat)} · ${t('m.' + mat)}</div><div class="note">${t('match.note')}</div>`
+      : `<div class="k">${t('match.k')}</div><div class="v">${t('match.none')}</div>`;
+    const corrosive = s.product.traits.includes('corrosive') || s.product.category === 'salt';
+    $('#opt-ss316 .badge').hidden = !corrosive;
+  }
+
+  // ======== Steps ========
+  const TOTAL = 4;
+  let step = 1, maxStep = 1;
+  const panels = $$('.step-panel', F);
+  const stepButtons = $$('#steps button');
+
+  function show(n, { focus = true } = {}) {
+    step = n;
+    maxStep = Math.max(maxStep, n);
+    panels.forEach(p => { p.hidden = Number(p.dataset.step) !== n; });
+    if (n === 4) renderReview();
+    refreshNav();
+    saveDraftSoon();
+    if (focus) {
+      window.scrollTo({ top: $('#steps').offsetTop - 16, behavior: 'smooth' });
+      $(`#h-step-${n}`).focus({ preventScroll: true });
+    }
+  }
+  function refreshNav() {
+    stepButtons.forEach(b => {
+      const n = Number(b.dataset.go);
+      b.classList.toggle('done', n <= maxStep && n !== step);
+      if (n === step) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    });
+    $('#btn-back').style.visibility = step === 1 ? 'hidden' : 'visible';
+    $('#btn-next').textContent = step === TOTAL ? t('a.submit') : plain(t('next.to', { step: t(`step.${step + 1}`) }));
+  }
+  stepButtons.forEach(b => b.addEventListener('click', () => {
+    const n = Number(b.dataset.go);
+    if (n === step || n > maxStep) return;
+    if (n > step && !validate(step)) return;
+    show(n);
+  }));
+  $('#btn-back').addEventListener('click', () => step > 1 && show(step - 1));
+  $('#btn-next').addEventListener('click', () => {
+    if (!validate(step)) return;
+    if (step < TOTAL) show(step + 1); else submit();
+  });
+
+  // ======== Validation ========
+  function clearErrors(root) {
+    $$('.invalid', root).forEach(f => f.classList.remove('invalid'));
+    $$('.error', root).forEach(e => e.remove());
+    $$('[aria-invalid]', root).forEach(e => e.removeAttribute('aria-invalid'));
+  }
+  function flag(fieldEl, key) {
+    if (!fieldEl || fieldEl.classList.contains('invalid')) return;
+    fieldEl.classList.add('invalid');
+    const p = document.createElement('p');
+    p.className = 'error';
+    p.id = 'err-' + Math.random().toString(36).slice(2, 8);
+    p.textContent = t(key);
+    fieldEl.appendChild(p);
+    $$('input, select, textarea', fieldEl).forEach(i => { i.setAttribute('aria-invalid', 'true'); i.setAttribute('aria-describedby', p.id); });
+  }
+  const fieldOf = el => el.closest('.field');
+  const group = name => F.querySelector(`[data-for="${name}"]`);
+
+  function validate(n) {
+    const panel = panels[n - 1];
+    clearErrors(panel);
+    const bad = [];
+    const need = (ok, fieldEl, key) => { if (!ok) { flag(fieldEl, key); bad.push(fieldEl); } };
+    const optionalNumber = el => { const v = parseNum(el.value); need(v === null || v > 0, fieldOf(el), 'err.number'); };
+
+    if (n === 1) {
+      need(radio('category'), group('category'), 'err.required');
+      $$('[data-num]', panel).forEach(optionalNumber);
+    }
+    if (n === 2) {
+      $$('.variant', variantsEl).forEach(card => {
+        const w = vNum(card, 'weight_g');
+        need(w > 0, fieldOf(vInput(card, 'weight_g')), w === null ? 'err.required' : 'err.number');
+        const c = vNum(card, 'pouches_per_bag');
+        need(Number.isInteger(c) && c > 0, fieldOf(vInput(card, 'pouches_per_bag')), c === null ? 'err.required' : 'err.integer');
+        ['length_mm', 'width_mm', 'thickness_mm'].forEach(k => optionalNumber(vInput(card, k)));
+        const pl = vNum(card, 'per_layer');
+        need(pl === null || (Number.isInteger(pl) && pl > 0), fieldOf(vInput(card, 'per_layer')), 'err.integer');
+      });
+      need(radio('master_bag_material'), group('master_bag_material'), 'err.required');
+    }
+    if (n === 3) {
+      need(checks('scope').length > 0, group('scope'), 'err.pick');
+      $$('[data-num]', panel).forEach(optionalNumber);
+    }
+    if (n === 4) {
+      ['name', 'company', 'country'].forEach(k => need(text(k), fieldOf(F.elements[k]), 'err.required'));
+      const email = text('email'), wa = text('whatsapp');
+      if (!email && !wa) need(false, group('reach'), 'err.reach');
+      else if (email) need(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), fieldOf(F.elements.email), 'err.email');
+    }
+
+    if (bad.length) {
+      const first = bad[0];
+      first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const input = $('input:not([type=hidden]), select, textarea', first);
+      if (input) input.focus({ preventScroll: true });
+      toast(t('err.fix'));
+    }
+    return bad.length === 0;
+  }
+  F.addEventListener('input', e => {
+    const f = fieldOf(e.target);
+    if (f && f.classList.contains('invalid')) {
+      f.classList.remove('invalid');
+      $$('.error', f).forEach(x => x.remove());
+      $$('[aria-invalid]', f).forEach(x => x.removeAttribute('aria-invalid'));
+    }
+  });
+
+  // ======== Review ========
+  const enumT = (group, v) => {
+    if (v == null) return null;
+    const key = `o.${group}.${v}`;
+    return plain(has(key) ? t(key) : t(`o.${v}`));
+  };
+  const multiT = (group, arr) => (arr && arr.length ? arr.map(v => enumT(group, v)).join(', ') : null);
+  const unit = (v, u) => (v == null || v === '' ? null : `${v} ${u}`);
+
+  function reviewHTML(s) {
+    const p = s.product, k = s.packaging, l = s.line, site = s.site, c = s.contact;
+    const pouchRows = s.pouches.map((x, i) => {
+      const dims = x.length_mm && x.width_mm && x.thickness_mm ? `${t('r.dims')} ${x.length_mm} × ${x.width_mm} × ${x.thickness_mm} mm` : null;
+      const val = [unit(x.weight_g, 'g'), dims, x.pouches_per_bag ? `${plain(t('f.count'))}: ${x.pouches_per_bag}` : null,
+        x.per_layer ? `${plain(t('f.perlayer'))}: ${x.per_layer}` : null].filter(Boolean).join(' · ');
+      return [`${plain(t('c.pouch'))} ${i + 1}`, val];
+    });
+    const power = [unit(site.voltage_v, 'V'), enumT('frequency_hz', site.frequency_hz), enumT('phase', site.phase)].filter(Boolean).join(' · ') || null;
+    const sections = [
+      [1, [
+        ['f.category', enumT('category', p.category)], ['f.description', p.description], ['f.form', enumT('form', p.form)],
+        ['f.traits', multiT('traits', p.traits)], ['f.particle', unit(p.particle_size_mm, 'mm')],
+        ['f.density', unit(p.bulk_density_g_cm3, 'g/cm³')], ['f.moisture', unit(p.moisture_pct, '%')],
+      ]],
+      [2, [
+        ...pouchRows, ['f.film', k.pouch_film], ['f.material', enumT('master_bag_material', k.master_bag_material)],
+        ['f.arrangement', enumT('arrangement', k.arrangement)], ['f.existing', k.existing_master_bag],
+      ]],
+      [3, [
+        ['f.pain', l.pain_points], ['f.scope', multiT('scope', l.scope)],
+        ['f.capacity', l.target_capacity ? `${l.target_capacity.value} ${enumT('capacity_unit', l.target_capacity.unit)}` : null],
+        ['f.accuracy', l.weighing_accuracy], ['f.machine_material', enumT('machine_material', l.machine_material)],
+        ['f.method', enumT('current_method', l.current_method)], ['sub.site', power],
+        ['f.air', enumT('compressed_air', site.compressed_air)], ['f.space', site.space],
+      ]],
+      [4, [
+        ['f.name', c.name], ['f.company', c.company], ['f.country', c.country], ['f.role', c.role],
+        ['f.email', c.email], ['f.whatsapp', c.whatsapp], ['f.timeline', enumT('timeline', s.project.timeline)],
+      ]],
+    ];
+    return sections.map(([n, rows]) => `
+      <section>
+        <div class="rh"><h4>${String(n).padStart(2, '0')} · ${esc(plain(t('step.' + n)))}</h4>
+          <button type="button" class="btn-text" data-edit="${n}">${esc(t('a.edit'))}</button></div>
+        <dl>${rows.map(([lab, val]) => {
+          const name = has(lab) ? plain(t(lab)) : lab;
+          return `<dt>${esc(name)}</dt><dd${val ? '' : ' class="none"'}>${val ? esc(val) : '—'}</dd>`;
+        }).join('')}</dl>
+      </section>`).join('');
+  }
+  function renderReview() { $('#review').innerHTML = reviewHTML(collect()); }
+  $('#review').addEventListener('click', e => {
+    const b = e.target.closest('[data-edit]');
+    if (b) show(Number(b.dataset.edit));
+  });
+
+  // ======== Draft autosave ========
+  let saveTimer = null;
+  function saveDraftSoon() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => {
+      store.set(KEY.draft, { step, maxStep, data: collect() });
+      $('#status').textContent = t('s.saved');
+    }, 400);
+  }
+  const onEdit = () => { refreshDerived(); if (step === TOTAL) renderReview(); saveDraftSoon(); };
+  F.addEventListener('input', onEdit);
+  F.addEventListener('change', onEdit);
+
+  // ======== Submit ========
+  async function submit() {
+    for (let n = 1; n <= TOTAL; n++) {
+      if (!validate(n)) { if (n !== step) { show(n); validate(n); } return; }
+    }
+    const btn = $('#btn-next');
+    btn.disabled = true;
+    btn.textContent = t('a.sending');
+
+    const s = collect();
+    s.id = Core.newId();
+    s.submitted_at = new Date().toISOString();
+    s.derived = Core.derive(s);
+    s.unknowns = Core.unknowns(s);
+    const md = Core.toMarkdown(s);
+
+    const sent = store.get(KEY.sent, []);
+    sent.push(s);
+    store.set(KEY.sent, sent);
+
+    let delivered = false;
+    if (CONFIG.endpoint) {
+      try {
+        // text/plain keeps this a "simple" request, so Apps Script needs no CORS preflight.
+        await fetch(CONFIG.endpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ type: 'bib-questionnaire', website: F.elements.website.value, submission: s, brief_md: md }),
+        });
+        delivered = true;
+      } catch (_) {
+        toast(t('err.send'));
+      }
+    }
+    store.del(KEY.draft);
+    btn.disabled = false;
+    showDone(s, md, delivered);
+  }
+
+  function showDone(s, md, delivered) {
+    F.hidden = true;
+    $('#nav').hidden = true;
+    $('#steps').hidden = true;
+    $('#done').hidden = false;
+    $('#done-title').textContent = delivered ? t('ok.title') : t('manual.title');
+    $('#done-body').textContent = delivered ? t('ok.body', { name: s.contact.name }) : t('manual.body');
+    $('#done-ref').textContent = s.id;
+
+    const shortMd = md.length > 3000 ? md.slice(0, 3000) + '\n…' : md;
+    const wa = $('#done-wa'), mail = $('#done-mail');
+    wa.hidden = !CONFIG.whatsapp;
+    if (CONFIG.whatsapp) wa.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(shortMd)}`;
+    mail.hidden = !CONFIG.email;
+    if (CONFIG.email) {
+      const body = md.length > 1600 ? md.slice(0, 1600) + '\n…' : md;
+      mail.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(`BIB inquiry ${s.id} · ${s.contact.company}`)}&body=${encodeURIComponent(body)}`;
+    }
+    wa.classList.toggle('btn-primary', !delivered);
+    $('#print-sheet').innerHTML = `<h2>${esc(plain(t('title')))}</h2>
+      <div class="ref">${esc(t('ok.ref'))} · ${esc(s.id)} · ${esc(s.submitted_at.slice(0, 10))}</div>
+      <div class="review">${reviewHTML(s)}</div>`;
+    $('#done-title').focus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  $('#done-pdf').addEventListener('click', () => window.print());
+  $('#done-new').addEventListener('click', () => {
+    F.reset();
+    restore({});
+    F.hidden = false;
+    $('#nav').hidden = false;
+    $('#steps').hidden = false;
+    $('#done').hidden = true;
+    maxStep = 1;
+    refreshDerived();
+    show(1);
+  });
+
+  // ======== Toast ========
+  let toastTimer = null;
+  function toast(msg) {
+    let el = $('.toast');
+    if (!el) { el = document.createElement('div'); el.className = 'toast'; el.setAttribute('role', 'status'); document.body.appendChild(el); }
+    el.textContent = msg;
+    el.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { el.hidden = true; }, 3200);
+  }
+
+  // ======== Admin view (index.html#admin) ========
+  const Admin = (() => {
+    let remote = [];
+    const cfg = store.get(KEY.admin, {});
+    const status = msg => { $('#adm-status').textContent = msg; };
+    $('#adm-endpoint').value = cfg.endpoint || CONFIG.endpoint;
+    $('#adm-token').value = cfg.token || '';
+
+    function all() {
+      const byId = new Map();
+      [...store.get(KEY.sent, []), ...store.get(KEY.inbox, []), ...remote].forEach(s => { if (s && s.id) byId.set(s.id, s); });
+      return [...byId.values()].sort((a, b) => String(b.submitted_at).localeCompare(String(a.submitted_at)));
+    }
+    function render() {
+      const list = all();
+      const el = $('#adm-list');
+      if (!list.length) {
+        el.innerHTML = '<div class="empty">No inquiries yet. Load the Google Sheet, or import JSON files.</div>';
+        return;
+      }
+      el.innerHTML = list.map((s, i) => {
+        const c = s.contact || {}, p = s.product || {};
+        const sizes = (s.pouches || []).map(x => `${x.weight_g ?? '?'} g × ${x.pouches_per_bag ?? '?'}`).join(', ');
+        const todo = (s.unknowns || []).length;
+        return `<article class="inq">
+          <div class="inq-head">
+            <div>
+              <h4>${esc(c.company || 'Unknown company')} · ${esc(c.country || '—')}</h4>
+              <div class="meta">${esc(s.id)} · ${esc(String(s.submitted_at || '').slice(0, 16).replace('T', ' '))} · ${esc(Core.label('category', p.category) || '—')} · ${esc(sizes)} · ${esc(s.form_language || '')}${todo ? ` · <span class="todo">${todo} to confirm</span>` : ''}</div>
+            </div>
+            <div class="acts">
+              <button type="button" class="btn btn-primary" data-act="claude" data-i="${i}">Copy for Claude</button>
+              <button type="button" class="btn" data-act="brief" data-i="${i}">Brief</button>
+              <button type="button" class="btn" data-act="json" data-i="${i}">JSON</button>
+            </div>
+          </div>
+          <pre hidden></pre>
+        </article>`;
+      }).join('');
+    }
+    async function copy(textValue) {
+      try { await navigator.clipboard.writeText(textValue); status('Copied — paste into Claude.'); }
+      catch (_) { status('Clipboard blocked — use Brief and copy manually.'); }
+    }
+    function download(name, content, type) {
+      const url = URL.createObjectURL(new Blob([content], { type }));
+      const a = document.createElement('a');
+      a.href = url; a.download = name; a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+    $('#adm-list').addEventListener('click', e => {
+      const b = e.target.closest('[data-act]');
+      if (!b) return;
+      const s = all()[Number(b.dataset.i)];
+      const md = Core.toMarkdown(s);
+      if (b.dataset.act === 'claude') copy(Core.aiPrompt(s, md));
+      if (b.dataset.act === 'json') download(`${s.id}.json`, JSON.stringify(s, null, 2), 'application/json');
+      if (b.dataset.act === 'brief') {
+        const pre = b.closest('.inq').querySelector('pre');
+        pre.textContent = md;
+        pre.hidden = !pre.hidden;
+      }
+    });
+    $('#adm-load').addEventListener('click', async () => {
+      const endpoint = $('#adm-endpoint').value.trim(), token = $('#adm-token').value;
+      if (!endpoint || !token) { status('Enter the web-app URL and admin token.'); return; }
+      store.set(KEY.admin, { endpoint, token });
+      status('Loading…');
+      try {
+        const res = await fetch(`${endpoint}?token=${encodeURIComponent(token)}`);
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.error || 'failed');
+        remote = data.submissions || [];
+        status(`Loaded ${remote.length} from sheet.`);
+        render();
+      } catch (err) {
+        status(`Could not load: ${err.message}`);
+      }
+    });
+    $('#adm-import').addEventListener('change', async e => {
+      const inbox = store.get(KEY.inbox, []);
+      let added = 0;
+      for (const file of e.target.files) {
+        try {
+          const data = JSON.parse(await file.text());
+          const items = Array.isArray(data) ? data : data.submission ? [data.submission] : [data];
+          items.filter(x => x && x.schema === Core.SCHEMA && x.id).forEach(x => { inbox.push(x); added++; });
+        } catch (_) { /* skip unreadable file */ }
+      }
+      store.set(KEY.inbox, inbox);
+      e.target.value = '';
+      status(`Imported ${added} inquir${added === 1 ? 'y' : 'ies'}.`);
+      render();
+    });
+    $('#adm-export-json').addEventListener('click', () => {
+      download(`BIB_inquiries_${new Date().toISOString().slice(0, 10)}.json`, JSON.stringify(all(), null, 2), 'application/json');
+    });
+    $('#adm-export-csv').addEventListener('click', () => {
+      const cols = ['id', 'submitted_at', 'company', 'name', 'country', 'email', 'whatsapp', 'category', 'pouches', 'master_bag', 'scope', 'capacity', 'timeline', 'to_confirm', 'form_language'];
+      const cell = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+      const rows = all().map(s => {
+        const c = s.contact || {}, cap = s.line && s.line.target_capacity;
+        return [s.id, s.submitted_at, c.company, c.name, c.country, c.email, c.whatsapp, s.product && s.product.category,
+          (s.pouches || []).map(x => `${x.weight_g} g x ${x.pouches_per_bag}`).join('; '),
+          s.packaging && s.packaging.master_bag_material, ((s.line && s.line.scope) || []).join(', '),
+          cap ? `${cap.value} ${cap.unit}` : '', s.project && s.project.timeline, (s.unknowns || []).length, s.form_language].map(cell).join(',');
+      });
+      download(`BIB_inquiries_${new Date().toISOString().slice(0, 10)}.csv`, '﻿' + [cols.join(','), ...rows].join('\n'), 'text/csv');
+    });
+    return { render };
+  })();
+
+  // ======== Boot ========
+  function route() {
+    const admin = location.hash === '#admin';
+    $('#app').hidden = admin;
+    $('#admin').hidden = !admin;
+    if (admin) Admin.render();
+  }
+  window.addEventListener('hashchange', route);
+  $$('.lang-toggle button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+
+  captureEnglish(document);
+  captureEnglish(tpl.content);
+  const draft = store.get(KEY.draft, null);
+  restore(draft && draft.data ? draft.data : {});
+  maxStep = draft ? Math.min(TOTAL, draft.maxStep || 1) : 1;
+  setLang(initialLang());
+  refreshDerived();
+  show(draft ? Math.min(TOTAL, draft.step || 1) : 1, { focus: false });
+  route();
+})();
+</script>
 </body>
 </html>
