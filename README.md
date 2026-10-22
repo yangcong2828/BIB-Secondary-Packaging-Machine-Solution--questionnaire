@@ -3,7 +3,7 @@
 > A customer questionnaire for Bag-in-Bag (BIB) secondary packaging lines — friendly for customers, structured for AI.
 > 客户填得轻松，AI 读得精准的袋中袋产线需求问卷。
 
-**Live / 在线问卷**: `https://yangcong2828.github.io/BIB-Secondary-Packaging-Machine-Solution--questionnaire/` (enable GitHub Pages: Settings → Pages → `main` / root)
+**Live / 在线问卷**: https://yangcong2828.github.io/BIB-Secondary-Packaging-Machine-Solution--questionnaire/ (GitHub Pages, deployed from `main`)
 **Inbox / 后台**: same URL + `#admin`
 **Sister tool / 姊妹工具**: [BIB Solution Calculator](https://github.com/yangcong2828/bib-calculator)
 
@@ -26,7 +26,7 @@ Four steps, about five minutes. Only what blocks a first proposal is required; e
 - **Live engineering preview / 实时工程预览** — master bag weight, empty bag size and machine match, using the same formulas as the calculator.
 - **Never loses work / 不丢草稿** — autosaves on the device; reopening the link resumes where the customer stopped.
 - **Source tracking / 来源追踪** — add `?src=dhaka-expo` to a link; it is saved with the inquiry.
-- **Delivery / 回传** — posts to your Google Sheet and emails you the brief. Without a backend, the customer sends it via WhatsApp / email.
+- **Delivery / 回传** — posts to your Google Sheet and emails you the brief; the page says "Received" only after the backend confirms it. Without a backend, the customer sends it via WhatsApp / email, or as a PDF if neither is configured.
 
 ---
 
@@ -66,7 +66,7 @@ const CONFIG = {
 3. **Deploy → New deployment → Web app** · Execute as **Me** · Who has access **Anyone** → Deploy → authorise.
 4. Copy the `/exec` URL into `CONFIG.endpoint`, commit, push.
 
-Each submission appends one row to the `Submissions` sheet and emails the Markdown brief to the script owner (you). The `json` column holds the full record.
+Each submission appends one row to the `Submissions` sheet and emails the Markdown brief to the script owner (you). The `json` column holds the full record. A repeated inquiry ID is ignored, so retries never create duplicate rows.
 
 ```js
 // Apps Script — bound to your Google Sheet
@@ -83,11 +83,15 @@ function doPost(e) {
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
-    sheet_().appendRow([new Date(), s.id, c.company, c.name, c.country, c.email || '', c.whatsapp || '',
+    const sh = sheet_();
+    if (sh.getLastRow() > 1 && sh.getRange(2, 2, sh.getLastRow() - 1, 1).createTextFinder(s.id).matchEntireCell(true).findNext()) {
+      return out_({ ok: true, id: s.id, duplicate: true });     // a retry of an inquiry we already stored
+    }
+    sh.appendRow([new Date(), s.id, c.company, c.name, c.country, c.email || '', c.whatsapp || '',
       s.product.category, s.pouches.map(p => `${p.weight_g} g × ${p.pouches_per_bag}`).join('; '),
       s.packaging.master_bag_material, (s.line.scope || []).join(', '), cap ? `${cap.value} ${cap.unit}` : '',
       s.project.timeline || '', (s.unknowns || []).length, s.form_language, s.source || '',
-      body.brief_md || '', JSON.stringify(s)]);
+      body.brief_md || '', JSON.stringify(s)].map(asText_));
   } finally {
     lock.releaseLock();
   }
@@ -105,6 +109,11 @@ function doGet(e) {
   const col = HEADERS.indexOf('json');
   const submissions = rows.map(r => { try { return JSON.parse(r[col]); } catch (_) { return null; } }).filter(Boolean);
   return out_({ ok: true, submissions });
+}
+
+// Sheets treats text starting with = + - @ as a formula ("+880 1711…" would break, "=IMPORTXML(…)" would run).
+function asText_(v) {
+  return typeof v === 'string' && /^[=+\-@]/.test(v) ? "'" + v : v;
 }
 
 function sheet_() {

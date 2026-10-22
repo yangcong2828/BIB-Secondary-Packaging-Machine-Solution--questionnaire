@@ -702,7 +702,7 @@
           </div>
           <div class="field">
             <label class="label" for="moisture_pct" data-i18n="f.moisture">Moisture</label>
-            <div class="unit-input"><input type="text" inputmode="decimal" id="moisture_pct" name="moisture_pct" placeholder="0.5" data-num><span class="unit">%</span></div>
+            <div class="unit-input"><input type="text" inputmode="decimal" id="moisture_pct" name="moisture_pct" placeholder="0.5" data-num data-min="0"><span class="unit">%</span></div>
           </div>
         </div>
         <p class="hint" data-i18n="h.density">Typical bulk density: salt ≈ 1.2 · sugar ≈ 0.85 · rice ≈ 0.8 · flour ≈ 0.55 g/cm³.</p>
@@ -1155,7 +1155,7 @@
       return d;
     });
     return {
-      basis: 'bib-calculator formulas; top-to-top seal overlap 18 mm; t/day assumes 16 h/day. Preliminary — engineer to confirm.',
+      basis: 'bib-calculator formulas; top-to-top seal overlap 18 mm; t/day assumes 16 h/day; target capacity is applied to each pouch size on its own. Preliminary — engineer to confirm.',
       machine: mat ? { model: mat.model, name: mat.name, seal: mat.seal, max_pouches_per_min: mat.max_pouches_per_min } : null,
       variants,
     };
@@ -1372,8 +1372,9 @@
       'ok.body': 'Спасибо, {name}! Мы изучим вашу задачу и пришлём предварительное предложение.',
       'manual.title': 'Остался один шаг',
       'manual.body': 'Ответы готовы. Отправьте их нам через WhatsApp или по email — так мы их получим.',
+      'manual.pdf': 'Ответы готовы. Сохраните их в PDF и отправьте тому, кто прислал вам эту ссылку.',
       'a.wa': 'Отправить в WhatsApp', 'a.mail': 'Отправить по email', 'a.pdf': 'Сохранить PDF', 'a.new': 'Заполнить новый опрос',
-      'err.required': 'Обязательное поле', 'err.number': 'Введите число больше 0', 'err.integer': 'Введите целое число больше 0',
+      'err.required': 'Обязательное поле', 'err.number': 'Введите число больше 0', 'err.nonneg': 'Введите число (0 или больше)', 'err.integer': 'Введите целое число больше 0',
       'err.reach': 'Укажите email или WhatsApp', 'err.email': 'Проверьте адрес email', 'err.pick': 'Выберите хотя бы один вариант',
       'err.fix': 'Проверьте отмеченные поля.', 'err.send': 'Не удалось отправить. Отправьте ответы через WhatsApp или email ниже.',
       'match.k': 'Предварительный подбор машины', 'match.none': 'Выберите тип мешка — покажем подходящую машину.',
@@ -1448,8 +1449,9 @@
       'ok.body': '谢谢您，{name}。我们会评估您的产线需求，并回复初步方案。',
       'manual.title': '还差一步',
       'manual.body': '您的回答已整理好，请通过 WhatsApp 或邮件发送给我们，我们才能收到。',
+      'manual.pdf': '您的回答已整理好，请保存为 PDF，发给向您发送此链接的人。',
       'a.wa': '通过 WhatsApp 发送', 'a.mail': '通过邮件发送', 'a.pdf': '保存为 PDF', 'a.new': '填写新问卷',
-      'err.required': '必填', 'err.number': '请输入大于 0 的数字', 'err.integer': '请输入大于 0 的整数',
+      'err.required': '必填', 'err.number': '请输入大于 0 的数字', 'err.nonneg': '请输入数字（0 或以上）', 'err.integer': '请输入大于 0 的整数',
       'err.reach': '请填写邮箱或 WhatsApp', 'err.email': '请检查邮箱格式', 'err.pick': '请至少选择一项',
       'err.fix': '请检查标出的字段。', 'err.send': '提交失败，请用下方 WhatsApp 或邮件发送。',
       'match.k': '初步机型匹配', 'match.none': '选择大袋类型后，这里显示匹配机型。',
@@ -1465,7 +1467,8 @@
     's.saved': 'Draft saved on this device',
     'ok.title': 'Received', 'ok.body': 'Thank you, {name}. We will review your line and come back with a preliminary proposal.',
     'manual.title': 'One last step', 'manual.body': 'Your answers are ready. Send them to us on WhatsApp or by email so we receive them.',
-    'err.required': 'This field is required', 'err.number': 'Enter a number greater than 0', 'err.integer': 'Enter a whole number greater than 0',
+    'manual.pdf': 'Your answers are ready. Save them as a PDF and send it to the person who shared this link with you.',
+    'err.required': 'This field is required', 'err.number': 'Enter a number greater than 0', 'err.nonneg': 'Enter a number (0 or more)', 'err.integer': 'Enter a whole number greater than 0',
     'err.reach': 'Enter an email or a WhatsApp number', 'err.email': 'Check this email address', 'err.pick': 'Select at least one option',
     'err.fix': 'Please check the highlighted fields.', 'err.send': 'Could not send. Please use WhatsApp or email below.',
     'match.k': 'Preliminary machine match', 'match.none': 'Choose a master bag type to see the matching machine.',
@@ -1514,8 +1517,11 @@
   const SOURCE = new URLSearchParams(location.search).get('src') || null;
   const parseNum = v => {
     if (v == null) return null;
-    const s = String(v).trim().replace(',', '.').replace(/\s/g, '');
+    let s = String(v).trim().replace(/[\s\u00a0]/g, '');
     if (!s) return null;
+    // "1,000" is a thousands separator in EN/ZH; Russian writes decimals with a comma ("1,2").
+    if (lang !== 'ru' && /^\d{1,3}(,\d{3})+(\.\d+)?$/.test(s)) s = s.replace(/,/g, '');
+    else s = s.replace(',', '.');
     const n = Number(s);
     return Number.isFinite(n) ? n : NaN;
   };
@@ -1660,13 +1666,13 @@
   const panels = $$('.step-panel', F);
   const stepButtons = $$('#steps button');
 
-  function show(n, { focus = true } = {}) {
+  function show(n, { focus = true, save = true } = {}) {
     step = n;
     maxStep = Math.max(maxStep, n);
     panels.forEach(p => { p.hidden = Number(p.dataset.step) !== n; });
     if (n === 4) renderReview();
     refreshNav();
-    saveDraftSoon();
+    if (save) saveDraftSoon();
     if (focus) {
       window.scrollTo({ top: $('#steps').offsetTop - 16, behavior: 'smooth' });
       $(`#h-step-${n}`).focus({ preventScroll: true });
@@ -1717,7 +1723,10 @@
     clearErrors(panel);
     const bad = [];
     const need = (ok, fieldEl, key) => { if (!ok) { flag(fieldEl, key); bad.push(fieldEl); } };
-    const optionalNumber = el => { const v = parseNum(el.value); need(v === null || v > 0, fieldOf(el), 'err.number'); };
+    const optionalNumber = el => {
+      const v = parseNum(el.value);
+      need(v === null || (el.dataset.min === '0' ? v >= 0 : v > 0), fieldOf(el), el.dataset.min === '0' ? 'err.nonneg' : 'err.number');
+    };
 
     if (n === 1) {
       need(radio('category'), group('category'), 'err.required');
@@ -1853,24 +1862,27 @@
     sent.push(s);
     store.set(KEY.sent, sent);
 
-    let delivered = false;
-    if (CONFIG.endpoint) {
-      try {
-        // text/plain keeps this a "simple" request, so Apps Script needs no CORS preflight.
-        await fetch(CONFIG.endpoint, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ type: 'bib-questionnaire', website: F.elements.website.value, submission: s, brief_md: md }),
-        });
-        delivered = true;
-      } catch (_) {
-        toast(t('err.send'));
-      }
-    }
+    const delivered = CONFIG.endpoint
+      ? await deliver({ type: 'bib-questionnaire', website: F.elements.website.value, submission: s, brief_md: md })
+      : false;
+    if (CONFIG.endpoint && !delivered) toast(t('err.send'));
+    clearTimeout(saveTimer);
     store.del(KEY.draft);
     btn.disabled = false;
     showDone(s, md, delivered);
+  }
+
+  // true only when the backend confirms it stored the inquiry.
+  async function deliver(payload) {
+    const req = { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) };
+    let res;
+    try {
+      res = await fetch(CONFIG.endpoint, req); // text/plain: no CORS preflight; Apps Script replies with CORS headers
+    } catch (_) {
+      // Reply unreadable (CORS or network). Resend blind; the backend ignores a repeated id.
+      try { await fetch(CONFIG.endpoint, { ...req, mode: 'no-cors' }); return true; } catch (__) { return false; }
+    }
+    try { return (await res.json()).ok === true; } catch (_) { return false; }
   }
 
   function showDone(s, md, delivered) {
@@ -1879,7 +1891,8 @@
     $('#steps').hidden = true;
     $('#done').hidden = false;
     $('#done-title').textContent = delivered ? t('ok.title') : t('manual.title');
-    $('#done-body').textContent = delivered ? t('ok.body', { name: s.contact.name }) : t('manual.body');
+    const channel = CONFIG.whatsapp || CONFIG.email;
+    $('#done-body').textContent = delivered ? t('ok.body', { name: s.contact.name }) : t(channel ? 'manual.body' : 'manual.pdf');
     $('#done-ref').textContent = s.id;
 
     const shortMd = md.length > 3000 ? md.slice(0, 3000) + '\n…' : md;
@@ -1892,7 +1905,9 @@
       mail.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(`BIB inquiry ${s.id} · ${s.contact.company}`)}&body=${encodeURIComponent(body)}`;
     }
     wa.classList.toggle('btn-primary', !delivered);
-    $('#print-sheet').innerHTML = `<h2>${esc(plain(t('title')))}</h2>
+    // With no WhatsApp/email configured, PDF is the only way out, so make it the primary action.
+    $('#done-pdf').classList.toggle('btn-primary', !delivered && !channel);
+    $('#print-sheet').innerHTML = `<h2>${esc(plain(t('title').replace(/<br\s*\/?>/gi, ' ')))}</h2>
       <div class="ref">${esc(t('ok.ref'))} · ${esc(s.id)} · ${esc(s.submitted_at.slice(0, 10))}</div>
       <div class="review">${reviewHTML(s)}</div>`;
     $('#done-title').focus();
@@ -2021,7 +2036,7 @@
     });
     $('#adm-export-csv').addEventListener('click', () => {
       const cols = ['id', 'submitted_at', 'company', 'name', 'country', 'email', 'whatsapp', 'category', 'pouches', 'master_bag', 'scope', 'capacity', 'timeline', 'to_confirm', 'form_language'];
-      const cell = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+      const cell = v => { const x = String(v ?? ''); return `"${(/^[=+\-@]/.test(x) ? "'" : '') + x.replace(/"/g, '""')}"`; };
       const rows = all().map(s => {
         const c = s.contact || {}, cap = s.line && s.line.target_capacity;
         return [s.id, s.submitted_at, c.company, c.name, c.country, c.email, c.whatsapp, s.product && s.product.category,
@@ -2051,7 +2066,7 @@
   maxStep = draft ? Math.min(TOTAL, draft.maxStep || 1) : 1;
   setLang(initialLang());
   refreshDerived();
-  show(draft ? Math.min(TOTAL, draft.step || 1) : 1, { focus: false });
+  show(draft ? Math.min(TOTAL, draft.step || 1) : 1, { focus: false, save: false });
   route();
 })();
 </script>
